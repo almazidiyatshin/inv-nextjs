@@ -1,0 +1,36 @@
+body {
+	padding: 16px;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	max-width: 860px;
+}
+
+.chartContainer {
+	margin-top: 12px;
+}
+
+.card {
+	background-color: #faf0e6;
+	flex: 1;
+	min-width: 200px;
+	height: 100px;
+	padding: 16px;
+	border-radius: 8px;
+}
+
+.chartCard {
+	flex: 1;
+	min-width: 300px;
+	background-color: #faf0e6;
+	padding: 16px;
+	border-radius: 8px;
+}
+
+.title {
+	font-size: 24px;
+	margin: 0;
+}
