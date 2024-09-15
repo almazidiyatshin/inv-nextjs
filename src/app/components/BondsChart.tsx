@@ -28,9 +28,9 @@ export const BondsChart = ({ costs }: Props) => {
 					const labels = context.chart.data.labels;
 					if (labels && labels.length > 0) {
 						const label = labels[context.dataIndex] as string;
-						return `${label}: ${value.toFixed()}`;
+						return `${label}\n${value.toFixed() + '%'}`;
 					}
-					return `${value.toFixed()}`;
+					return `${value.toFixed() + '%'}`;
 				},
 				anchor: 'end' as const,
 				align: 'start' as const,

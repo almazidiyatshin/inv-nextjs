@@ -104,15 +104,36 @@ export default async function Page() {
 			<div className="container">
 				<div className="card">
 					<p className="title">Shares</p>
-					<p>{data.currentSharesCost.toFixed()}</p>
+					<p>
+						{data.currentSharesCost.toLocaleString('ru-RU', {
+							style: 'currency',
+							currency: 'RUB',
+							minimumFractionDigits: 0,
+							maximumFractionDigits: 0,
+						})}
+					</p>
 				</div>
 				<div className="card">
 					<p className="title">Bonds</p>
-					<p>{data.currentBondsCost.toFixed()}</p>
+					<p>
+						{data.currentBondsCost.toLocaleString('ru-RU', {
+							style: 'currency',
+							currency: 'RUB',
+							minimumFractionDigits: 0,
+							maximumFractionDigits: 0,
+						})}
+					</p>
 				</div>
 				<div className="card">
 					<p className="title">Gold</p>
-					<p>{data.currentGoldCost.toFixed()}</p>
+					<p>
+						{data.currentGoldCost.toLocaleString('ru-RU', {
+							style: 'currency',
+							currency: 'RUB',
+							minimumFractionDigits: 0,
+							maximumFractionDigits: 0,
+						})}
+					</p>
 				</div>
 			</div>
 
