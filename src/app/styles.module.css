@@ -1,0 +1,10 @@
+.commonContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	max-width: 860px;
+}
+
+.chartsContainer {
+	margin-top: 12px;
+}

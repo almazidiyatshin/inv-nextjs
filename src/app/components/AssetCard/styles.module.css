@@ -1,0 +1,25 @@
+.card {
+	background-color: #faf0e6;
+	flex: 1;
+	min-width: 200px;
+	height: 100px;
+	padding: 16px;
+	border-radius: 8px;
+}
+
+.title {
+	font-size: 24px;
+	margin: 0;
+}
+
+.value {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	width: max-content;
+}
+
+.icon {
+	margin-left: 8px;
+	color: #9f9992;
+}

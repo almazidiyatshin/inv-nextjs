@@ -5,13 +5,18 @@ import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Context } from 'chartjs-plugin-datalabels';
 
+import styles from './styles.module.css';
+
 ChartJS.register(ArcElement, Tooltip, ChartDataLabels);
 
-type Props = {
-	costs: number[];
+type TProps = {
+	title: string;
+	values: number[];
+	labels: string[];
+	colors: string[];
 };
 
-export const BondsChart = ({ costs }: Props) => {
+export const ChartCard = ({ title, values, labels, colors }: TProps) => {
 	const options = {
 		plugins: {
 			legend: {
@@ -39,17 +44,22 @@ export const BondsChart = ({ costs }: Props) => {
 	};
 
 	const data = {
-		labels: ['T Bonds', 'T LBonds'],
+		labels,
 		datasets: [
 			{
-				label: 'Cost',
-				data: costs,
-				backgroundColor: ['rgb(176, 224, 230)', 'rgb(135, 206, 235)'],
+				label: 'Part',
+				data: values,
+				backgroundColor: colors,
 				hoverOffset: 4,
 				borderWidth: 0,
 			},
 		],
 	};
 
-	return <Doughnut data={data} options={options} />;
+	return (
+		<div className={styles.chartCard}>
+			<p className={styles.title}>{title}</p>
+			<Doughnut data={data} options={options} />
+		</div>
+	);
 };

@@ -1,23 +1,18 @@
 import { EEtfIds, IPortfolioResponse } from '@/types/tInvest';
 import { getEtfData, getFloatCost } from '@/utils/tInvest';
 
-import './styles.css';
+import styles from './styles.module.css';
+import './global.css';
 import cn from 'classnames';
 
 import { IBM_Plex_Mono } from 'next/font/google';
-import { CommonChart } from './components/CommonChart';
-import { BondsChart } from './components/BondsChart';
+import { ChartCard } from './components/ChartCard';
+import { AssetCard } from './components/AssetCard';
+
 const inter = IBM_Plex_Mono({
 	weight: ['400', '600'],
 	subsets: ['latin'],
 });
-
-// const TAXES = 15;
-// const INFLATION = 9;
-// const EXPECTED_INCOME = 12;
-// const WEEKS_PER_YEAR = 52;
-// const AIM = 36000000;
-// const PERIOD = 25;
 
 const getData = async () => {
 	const request = await import('../app/api/list/route');
@@ -73,90 +68,70 @@ const getData = async () => {
 		getFloatCost(TGoldCurrentPriceInt, TGoldCurrentPriceNano) *
 		Number(TGoldsUnits);
 
-	// const middleIncome =
-	// 	(EXPECTED_INCOME / WEEKS_PER_YEAR + INFLATION / WEEKS_PER_YEAR) / 2 / 100;
-
-	// const aimWithInflation = AIM * (1 + INFLATION / 100) ** PERIOD;
-	// const aimWithTaxesAndInflation =
-	// 	aimWithInflation + aimWithInflation * (TAXES / 100);
-
-	// const middlePayment =
-	// 	aimWithTaxesAndInflation /
-	// 	(PERIOD * 52 * (1 + middleIncome) ** (PERIOD * 52));
-
 	return {
-		currentSharesCost: totalShareSum,
-		currentBondsCost: totalBondSum,
-		currentGoldCost: totalGoldSum,
-		currentTotalCost: totalShareSum + totalBondSum + totalGoldSum,
-		currentTBondsSum: totalTBondsSum,
-		currentTLocalBondsSum: totalTLocalBondsSum,
+		sharesSum: totalShareSum,
+		bondsSum: totalBondSum,
+		goldSum: totalGoldSum,
+		totalSum: totalShareSum + totalBondSum + totalGoldSum,
+		tBondsSum: totalTBondsSum,
+		tLocalBondsSum: totalTLocalBondsSum,
 	};
 };
 
 export default async function Page() {
 	const data = await getData();
 
+	const assetCards = [
+		{ title: 'Shares', value: data.sharesSum },
+		{ title: 'Bonds', value: data.bondsSum },
+		{ title: 'Gold', value: data.goldSum },
+	];
+
+	const chartCards = [
+		{
+			title: 'Common',
+			labels: ['Shares', 'Bonds', 'Gold'],
+			values: [
+				(data.sharesSum / data.totalSum) * 100,
+				(data.bondsSum / data.totalSum) * 100,
+				(data.goldSum / data.totalSum) * 100,
+			],
+			colors: [
+				'rgb(250, 128, 114)',
+				'rgb(135, 206, 250)',
+				'rgb(240, 230, 140)',
+			],
+		},
+		{
+			title: 'Bonds',
+			labels: ['TBonds', 'TLBonds'],
+			values: [
+				(data.tBondsSum / data.bondsSum) * 100,
+				(data.tLocalBondsSum / data.bondsSum) * 100,
+			],
+			colors: ['rgb(176, 224, 230)', 'rgb(135, 206, 235)'],
+		},
+	];
+
 	return (
 		<main className={inter.className}>
 			<h1>Dashboard</h1>
 
-			<div className="container">
-				<div className="card">
-					<p className="title">Shares</p>
-					<p>
-						{data.currentSharesCost.toLocaleString('ru-RU', {
-							style: 'currency',
-							currency: 'RUB',
-							minimumFractionDigits: 0,
-							maximumFractionDigits: 0,
-						})}
-					</p>
-				</div>
-				<div className="card">
-					<p className="title">Bonds</p>
-					<p>
-						{data.currentBondsCost.toLocaleString('ru-RU', {
-							style: 'currency',
-							currency: 'RUB',
-							minimumFractionDigits: 0,
-							maximumFractionDigits: 0,
-						})}
-					</p>
-				</div>
-				<div className="card">
-					<p className="title">Gold</p>
-					<p>
-						{data.currentGoldCost.toLocaleString('ru-RU', {
-							style: 'currency',
-							currency: 'RUB',
-							minimumFractionDigits: 0,
-							maximumFractionDigits: 0,
-						})}
-					</p>
-				</div>
+			<div className={styles.commonContainer}>
+				{assetCards.map(({ title, value }) => (
+					<AssetCard title={title} value={value} />
+				))}
 			</div>
 
-			<div className={cn('container', 'chartContainer')}>
-				<div className="chartCard">
-					<p className="title">Common</p>
-					<CommonChart
-						costs={[
-							(data.currentSharesCost / data.currentTotalCost) * 100,
-							(data.currentBondsCost / data.currentTotalCost) * 100,
-							(data.currentGoldCost / data.currentTotalCost) * 100,
-						]}
+			<div className={cn(styles.commonContainer, styles.chartsContainer)}>
+				{chartCards.map(({ title, labels, values, colors }) => (
+					<ChartCard
+						title={title}
+						labels={labels}
+						values={values}
+						colors={colors}
 					/>
-				</div>
-				<div className="chartCard">
-					<p className="title">Bonds</p>
-					<BondsChart
-						costs={[
-							(data.currentTBondsSum / data.currentBondsCost) * 100,
-							(data.currentTLocalBondsSum / data.currentBondsCost) * 100,
-						]}
-					/>
-				</div>
+				))}
 			</div>
 		</main>
 	);
