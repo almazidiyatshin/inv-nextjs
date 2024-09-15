@@ -6,6 +6,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Context } from 'chartjs-plugin-datalabels';
 
 import styles from './styles.module.css';
+import { Label } from '../Label';
 
 ChartJS.register(ArcElement, Tooltip, ChartDataLabels);
 
@@ -13,10 +14,10 @@ type TProps = {
 	title: string;
 	values: number[];
 	labels: string[];
-	colors: string[];
+	colorSchema: string[];
 };
 
-export const ChartCard = ({ title, values, labels, colors }: TProps) => {
+export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
 	const options = {
 		plugins: {
 			legend: {
@@ -49,7 +50,7 @@ export const ChartCard = ({ title, values, labels, colors }: TProps) => {
 			{
 				label: 'Part',
 				data: values,
-				backgroundColor: colors,
+				backgroundColor: colorSchema,
 				hoverOffset: 4,
 				borderWidth: 0,
 			},
@@ -58,6 +59,7 @@ export const ChartCard = ({ title, values, labels, colors }: TProps) => {
 
 	return (
 		<div className={styles.chartCard}>
+			<Label title="Chart" />
 			<p className={styles.title}>{title}</p>
 			<Doughnut data={data} options={options} />
 		</div>

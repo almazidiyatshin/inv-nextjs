@@ -1,6 +1,3 @@
-import { EEtfIds, IPortfolioResponse } from '@/types/tInvest';
-import { getEtfData, getFloatCost } from '@/utils/tInvest';
-
 import styles from './styles.module.css';
 import './global.css';
 import cn from 'classnames';
@@ -8,108 +5,59 @@ import cn from 'classnames';
 import { IBM_Plex_Mono } from 'next/font/google';
 import { ChartCard } from './components/ChartCard';
 import { AssetCard } from './components/AssetCard';
+import { getData } from '@/utils/getData';
 
 const inter = IBM_Plex_Mono({
 	weight: ['400', '600'],
 	subsets: ['latin'],
 });
 
-const getData = async () => {
-	const request = await import('../app/api/list/route');
-	const response: IPortfolioResponse = await (await request.POST()).json();
-
-	const {
-		currentPriceInt: TiMOEXCurrentPriceInt,
-		currentPriceNano: TiMOEXCurrentPriceNano,
-		units: TiMOEXUnits,
-	} = getEtfData(EEtfIds.TiMOEX, response);
-	const {
-		currentPriceInt: TRosTechCurrentPriceInt,
-		currentPriceNano: TRosTechCurrentPriceNano,
-		units: TRosTechUnits,
-	} = getEtfData(EEtfIds.TRosTech, response);
-	const {
-		currentPriceInt: TBondsCurrentPriceInt,
-		currentPriceNano: TBondsCurrentPriceNano,
-		units: TBondsUnits,
-	} = getEtfData(EEtfIds.TBonds, response);
-	const {
-		currentPriceInt: TLocalBondsCurrentPriceInt,
-		currentPriceNano: TLocalBondsCurrentPriceNano,
-		units: TLocalBondsUnits,
-	} = getEtfData(EEtfIds.TLocalBonds, response);
-	const {
-		currentPriceInt: TGoldCurrentPriceInt,
-		currentPriceNano: TGoldCurrentPriceNano,
-		units: TGoldsUnits,
-	} = getEtfData(EEtfIds.TGold, response);
-
-	const totalTRosTechSum =
-		getFloatCost(TRosTechCurrentPriceInt, TRosTechCurrentPriceNano) *
-		Number(TRosTechUnits);
-	const totalTiMoexSum =
-		getFloatCost(TiMOEXCurrentPriceInt, TiMOEXCurrentPriceNano) *
-		Number(TiMOEXUnits);
-	const totalTBondsSum =
-		getFloatCost(TBondsCurrentPriceInt, TBondsCurrentPriceNano) *
-		Number(TBondsUnits);
-	const totalTLocalBondsSum =
-		getFloatCost(TLocalBondsCurrentPriceInt, TLocalBondsCurrentPriceNano) *
-		Number(TLocalBondsUnits);
-	const totalShareSum =
-		getFloatCost(
-			response.totalAmountShares.units,
-			response.totalAmountShares.nano
-		) +
-		totalTiMoexSum +
-		totalTRosTechSum;
-	const totalBondSum = totalTBondsSum + totalTLocalBondsSum;
-	const totalGoldSum =
-		getFloatCost(TGoldCurrentPriceInt, TGoldCurrentPriceNano) *
-		Number(TGoldsUnits);
-
-	return {
-		sharesSum: totalShareSum,
-		bondsSum: totalBondSum,
-		goldSum: totalGoldSum,
-		totalSum: totalShareSum + totalBondSum + totalGoldSum,
-		tBondsSum: totalTBondsSum,
-		tLocalBondsSum: totalTLocalBondsSum,
-	};
-};
-
 export default async function Page() {
 	const data = await getData();
+	const {
+		sharesSum,
+		bondsSum,
+		goldSum,
+		totalSum,
+		tBondsSum,
+		tLocalBondsSum,
+		otherSharesSum,
+		tIMOEXSum,
+		tRosTechSum,
+	} = data;
 
 	const assetCards = [
-		{ title: 'Shares', value: data.sharesSum },
-		{ title: 'Bonds', value: data.bondsSum },
-		{ title: 'Gold', value: data.goldSum },
+		{ title: 'Shares', value: sharesSum },
+		{ title: 'Bonds', value: bondsSum },
+		{ title: 'Gold', value: goldSum },
 	];
 
 	const chartCards = [
 		{
-			title: 'Common',
+			title: 'All',
 			labels: ['Shares', 'Bonds', 'Gold'],
 			values: [
-				(data.sharesSum / data.totalSum) * 100,
-				(data.bondsSum / data.totalSum) * 100,
-				(data.goldSum / data.totalSum) * 100,
+				(sharesSum / totalSum) * 100,
+				(bondsSum / totalSum) * 100,
+				(goldSum / totalSum) * 100,
 			],
-			colors: [
-				'rgb(250, 128, 114)',
-				'rgb(135, 206, 250)',
-				'rgb(240, 230, 140)',
-			],
+			colorSchema: ['#FF8885', '#61C4FF', '#FFE585'],
 		},
 		{
 			title: 'Bonds',
-			labels: ['TBonds', 'TLBonds'],
+			labels: ['TBonds', 'TLocal'],
+			values: [(tBondsSum / bondsSum) * 100, (tLocalBondsSum / bondsSum) * 100],
+			colorSchema: ['#65AEFF', '#8EC4FF'],
+		},
+		{
+			title: 'Shares',
+			labels: ['Other shares', 'TiMOEX', 'TRosTech'],
 			values: [
-				(data.tBondsSum / data.bondsSum) * 100,
-				(data.tLocalBondsSum / data.bondsSum) * 100,
+				(otherSharesSum / sharesSum) * 100,
+				(tIMOEXSum / sharesSum) * 100,
+				(tRosTechSum / sharesSum) * 100,
 			],
-			colors: ['rgb(176, 224, 230)', 'rgb(135, 206, 235)'],
+			colorSchema: ['#FF8B85', '#FFC985', '#FF85E4'],
 		},
 	];
 
@@ -124,12 +72,12 @@ export default async function Page() {
 			</div>
 
 			<div className={cn(styles.commonContainer, styles.chartsContainer)}>
-				{chartCards.map(({ title, labels, values, colors }) => (
+				{chartCards.map(({ title, labels, values, colorSchema }) => (
 					<ChartCard
 						title={title}
 						labels={labels}
 						values={values}
-						colors={colors}
+						colorSchema={colorSchema}
 					/>
 				))}
 			</div>

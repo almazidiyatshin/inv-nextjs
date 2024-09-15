@@ -9,8 +9,8 @@ export const getEtfData = (etfId: string, response: IPortfolioResponse) => {
 	) as IPosition;
 
 	return {
-		currentPriceInt: etf.currentPrice.units,
-		currentPriceNano: etf.currentPrice.nano,
+		priceInt: etf.currentPrice.units,
+		priceNano: etf.currentPrice.nano,
 		units: etf.quantity.units,
 	};
 };

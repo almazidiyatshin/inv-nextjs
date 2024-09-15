@@ -2,7 +2,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 12px;
-	max-width: 860px;
+	max-width: 100%;
 }
 
 .chartsContainer {

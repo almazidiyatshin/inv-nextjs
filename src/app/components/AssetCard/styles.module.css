@@ -8,18 +8,46 @@
 }
 
 .title {
-	font-size: 24px;
-	margin: 0;
+	font-size: 28px;
+	margin: 6px 0 0 0;
 }
 
-.value {
+.valueContainer {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
 	width: max-content;
 }
 
+.value {
+	margin: 6px 0 0 0;
+}
+
 .icon {
-	margin-left: 8px;
-	color: #9f9992;
+	margin: 6px 0 0 8px;
+	color: #beb7ae;
+}
+
+.icon:hover {
+	color: #bda689;
+}
+
+.tooltip {
+	position: absolute;
+	background-color: black;
+	font-size: 12px;
+	width: max-content;
+	padding: 6px;
+	border-radius: 6px;
+	margin-top: -55px;
+	margin-left: 25px;
+	opacity: 0;
+	color: #faf0e6;
+	visibility: hidden;
+}
+
+.visible {
+	opacity: 0.8;
+	transition: opacity 0.25s ease-out, visibility 0.25s ease-out;
+	visibility: visible;
 }
