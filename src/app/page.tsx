@@ -67,13 +67,13 @@ export default async function Page() {
 			<h1>Dashboard</h1>
 
 			<div className={styles.commonContainer}>
-				{assetCards.map(({ title, value }) => (
+				{assetsConfig.map(({ title, value }) => (
 					<AssetCard title={title} value={value} />
 				))}
 			</div>
 
 			<div className={cn(styles.commonContainer, styles.chartsContainer)}>
-				{chartCards.map(({ title, labels, values, colorSchema }) => (
+				{chartsCongif.map(({ title, labels, values, colorSchema }) => (
 					<ChartCard
 						title={title}
 						labels={labels}
