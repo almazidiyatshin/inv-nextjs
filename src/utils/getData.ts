@@ -25,6 +25,10 @@ export const getData = async () => {
 	const totalTiMoexSum = calculateTotal(etfIds.T_IMOEX, etfData);
 	const totalTBondsSum = calculateTotal(etfIds.T_BONDS, etfData);
 	const totalTLocalBondsSum = calculateTotal(etfIds.T_LOCAL_BONDS, etfData);
+	const totalTPassiveIncomeSum = calculateTotal(
+		etfIds.T_PASSIVE_INCOME,
+		etfData
+	);
 
 	const totalOherShares = getFloatCost(
 		response.totalAmountShares.units,
@@ -32,7 +36,8 @@ export const getData = async () => {
 	);
 
 	const totalAllSharesSum = totalOherShares + totalTiMoexSum + totalTRosTechSum;
-	const totalBondsSum = totalTBondsSum + totalTLocalBondsSum;
+	const totalBondsSum =
+		totalTBondsSum + totalTLocalBondsSum + totalTPassiveIncomeSum;
 	const totalGoldSum = calculateTotal(etfIds.T_GOLD, etfData);
 
 	return {
@@ -42,6 +47,7 @@ export const getData = async () => {
 		totalSum: totalAllSharesSum + totalBondsSum + totalGoldSum,
 		tBondsSum: totalTBondsSum,
 		tLocalBondsSum: totalTLocalBondsSum,
+		tPassiveIncomeSum: totalTPassiveIncomeSum,
 		tIMOEXSum: totalTiMoexSum,
 		tRosTechSum: totalTRosTechSum,
 		otherSharesSum: totalOherShares,

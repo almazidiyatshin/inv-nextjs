@@ -21,6 +21,7 @@ export default async function Page() {
 		totalSum,
 		tBondsSum,
 		tLocalBondsSum,
+		tPassiveIncomeSum,
 		otherSharesSum,
 		tIMOEXSum,
 		tRosTechSum,
@@ -46,9 +47,13 @@ export default async function Page() {
 		},
 		{
 			title: 'Bonds',
-			labels: ['TBonds', 'TLocal'],
-			values: [(tBondsSum / bondsSum) * 100, (tLocalBondsSum / bondsSum) * 100],
-			colorSchema: ['#65AEFF', '#8EC4FF'],
+			labels: ['TBonds', 'TLocal', 'TPassiveIncome'],
+			values: [
+				(tBondsSum / bondsSum) * 100,
+				(tLocalBondsSum / bondsSum) * 100,
+				(tPassiveIncomeSum / bondsSum) * 100,
+			],
+			colorSchema: ['#65AEFF', '#8EC4FF', '#6899D3'],
 		},
 		{
 			title: 'Shares',

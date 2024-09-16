@@ -4,4 +4,5 @@ export const etfIds = {
 	T_LOCAL_BONDS: '89cdfd81-5021-45f8-b3ac-96dffc2e70a2',
 	T_ROS_TECH: '3783c7a7-4c20-49a8-8e28-f54229b414c8',
 	T_GOLD: '4c466956-d2ce-4a95-abb4-17947a65f18a',
+	T_PASSIVE_INCOME: '1d0e01e5-148c-40e5-bb8f-1bf2d8e03c1a',
 };
