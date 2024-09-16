@@ -15,7 +15,7 @@ const inter = IBM_Plex_Mono({
 export default async function Page() {
 	const data = await getData();
 	const {
-		sharesSum,
+		allSharesSum,
 		bondsSum,
 		goldSum,
 		totalSum,
@@ -26,18 +26,19 @@ export default async function Page() {
 		tRosTechSum,
 	} = data;
 
-	const assetCards = [
-		{ title: 'Shares', value: sharesSum },
+	const assetsConfig = [
+		{ title: 'All', value: totalSum },
+		{ title: 'Shares', value: allSharesSum },
 		{ title: 'Bonds', value: bondsSum },
 		{ title: 'Gold', value: goldSum },
 	];
 
-	const chartCards = [
+	const chartsCongif = [
 		{
 			title: 'All',
 			labels: ['Shares', 'Bonds', 'Gold'],
 			values: [
-				(sharesSum / totalSum) * 100,
+				(allSharesSum / totalSum) * 100,
 				(bondsSum / totalSum) * 100,
 				(goldSum / totalSum) * 100,
 			],
@@ -53,9 +54,9 @@ export default async function Page() {
 			title: 'Shares',
 			labels: ['Other shares', 'TiMOEX', 'TRosTech'],
 			values: [
-				(otherSharesSum / sharesSum) * 100,
-				(tIMOEXSum / sharesSum) * 100,
-				(tRosTechSum / sharesSum) * 100,
+				(otherSharesSum / allSharesSum) * 100,
+				(tIMOEXSum / allSharesSum) * 100,
+				(tRosTechSum / allSharesSum) * 100,
 			],
 			colorSchema: ['#FF8B85', '#FFC985', '#FF85E4'],
 		},

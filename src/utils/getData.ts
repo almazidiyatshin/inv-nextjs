@@ -31,15 +31,15 @@ export const getData = async () => {
 		response.totalAmountShares.nano
 	);
 
-	const totalSharesSum = totalOherShares + totalTiMoexSum + totalTRosTechSum;
+	const totalAllSharesSum = totalOherShares + totalTiMoexSum + totalTRosTechSum;
 	const totalBondsSum = totalTBondsSum + totalTLocalBondsSum;
 	const totalGoldSum = calculateTotal(etfIds.T_GOLD, etfData);
 
 	return {
-		sharesSum: totalSharesSum,
+		allSharesSum: totalAllSharesSum,
 		bondsSum: totalBondsSum,
 		goldSum: totalGoldSum,
-		totalSum: totalSharesSum + totalBondsSum + totalGoldSum,
+		totalSum: totalAllSharesSum + totalBondsSum + totalGoldSum,
 		tBondsSum: totalTBondsSum,
 		tLocalBondsSum: totalTLocalBondsSum,
 		tIMOEXSum: totalTiMoexSum,
