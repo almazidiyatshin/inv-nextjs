@@ -8,6 +8,7 @@ import { ChartsWidget } from './widgets/ChartsWidget';
 import { store } from '@/config/store';
 import { useEffect } from 'react';
 import { usePostPortfolioMutation } from '@/config/api/tInvestApi';
+import { Preloader } from './components/Preloader/Preloader';
 
 const InnerPage = () => {
 	const [getPortfolio, { data, isLoading }] = usePostPortfolioMutation();
@@ -17,11 +18,11 @@ const InnerPage = () => {
 	}, []);
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <Preloader />;
 	}
 
 	if (!data) {
-		return <div>Loading...</div>;
+		return <Preloader />;
 	}
 
 	return (
