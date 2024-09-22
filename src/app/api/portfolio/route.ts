@@ -22,6 +22,7 @@ export async function POST() {
 	if (!res.ok) throw new Error('Failed fetch response T-Invest');
 
 	const data: IPortfolioResponse = await res.json();
+	const { totalAmountShares, positions } = data;
 
-	return NextResponse.json(data);
+	return NextResponse.json({ totalAmountShares, positions });
 }

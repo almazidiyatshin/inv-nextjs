@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPortfolioResponse, TPostPortfolioData } from './types';
+import { TPortfolioResponse, TPostPortfolioData } from './types';
 import { getPortfolioData } from './utils/getPortfolioData';
 
 export const tInvestApi = createApi({
@@ -11,7 +11,7 @@ export const tInvestApi = createApi({
 				url: '/portfolio',
 				method: 'POST',
 			}),
-			transformResponse: (response: IPortfolioResponse) =>
+			transformResponse: (response: TPortfolioResponse) =>
 				getPortfolioData(response),
 		}),
 	}),

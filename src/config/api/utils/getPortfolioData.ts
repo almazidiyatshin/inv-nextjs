@@ -1,14 +1,14 @@
 import { getEtfData, getFloatCost } from './common';
 import { etfIds } from '@/constants/common';
 import { TEtfData } from '@/types/common';
-import { IPortfolioResponse } from '../types';
+import { TPortfolioResponse } from '../types';
 
 const calculateTotal = (etfId: string, etfData: { [id: string]: TEtfData }) => {
 	const { priceInt, priceNano, units } = etfData[etfId];
 	return getFloatCost(priceInt, priceNano) * Number(units);
 };
 
-export const getPortfolioData = (response: IPortfolioResponse) => {
+export const getPortfolioData = (response: TPortfolioResponse) => {
 	const etfData = Object.entries(etfIds).reduce<{ [id: string]: TEtfData }>(
 		(acc, [, id]) => {
 			const { priceInt, priceNano, units } = getEtfData(id, response);

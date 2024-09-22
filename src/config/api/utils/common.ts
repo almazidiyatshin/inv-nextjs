@@ -1,9 +1,9 @@
-import { IPortfolioResponse, IPosition } from '../types';
+import { IPosition, TPortfolioResponse } from '../types';
 
 export const getFloatCost = (int: string, nano: number) =>
 	Number(int) + nano / 1000000000;
 
-export const getEtfData = (etfId: string, response: IPortfolioResponse) => {
+export const getEtfData = (etfId: string, response: TPortfolioResponse) => {
 	const etf = response.positions.find(
 		(value) => etfId === value.instrumentUid
 	) as IPosition;

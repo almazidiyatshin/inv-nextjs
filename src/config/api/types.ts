@@ -37,6 +37,11 @@ export interface IPortfolioResponse {
 	virtualPositions: any[];
 }
 
+export type TPortfolioResponse = Pick<
+	IPortfolioResponse,
+	'positions' | 'totalAmountShares'
+>;
+
 export type TPostPortfolioData = {
 	allSharesSum: number;
 	allBondsSum: number;
