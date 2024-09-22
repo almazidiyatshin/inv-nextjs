@@ -1,0 +1,1 @@
+export { tInvestApi } from './tInvestApi';

@@ -1,10 +1,7 @@
-.commonContainer {
+.chartsContainer {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 12px;
 	max-width: 100%;
-}
-
-.chartsContainer {
 	margin-top: 12px;
 }

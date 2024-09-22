@@ -36,3 +36,17 @@ export interface IPortfolioResponse {
 	totalAmountPortfolio: ICurrencyAmount;
 	virtualPositions: any[];
 }
+
+export type TPostPortfolioData = {
+	allSharesSum: number;
+	allBondsSum: number;
+	goldSum: number;
+	totalSum: number;
+	tbruSum: number;
+	tlcbSum: number;
+	tpaySum: number;
+	tmosSum: number;
+	titrSum: number;
+	otherSharesSum: number;
+	goldUnits: string;
+};

@@ -1,92 +1,42 @@
-import styles from './styles.module.css';
+'use client';
+
+import { Provider } from 'react-redux';
 import './global.css';
-import cn from 'classnames';
 
-import { IBM_Plex_Mono } from 'next/font/google';
-import { ChartCard } from './components/ChartCard';
-import { AssetCard } from './components/AssetCard';
-import { getData } from '@/utils/getData';
+import { AssetsWidget } from './widgets/AssetsWIdget';
+import { ChartsWidget } from './widgets/ChartsWidget';
+import { store } from '@/config/store';
+import { useEffect } from 'react';
+import { usePostPortfolioMutation } from '@/config/api/tInvestApi';
 
-const inter = IBM_Plex_Mono({
-	weight: ['400', '600'],
-	subsets: ['latin'],
-});
+const InnerPage = () => {
+	const [getPortfolio, { data, isLoading }] = usePostPortfolioMutation();
 
-export default async function Page() {
-	const data = await getData();
-	const {
-		allSharesSum,
-		bondsSum,
-		goldSum,
-		totalSum,
-		tBondsSum,
-		tLocalBondsSum,
-		tPassiveIncomeSum,
-		otherSharesSum,
-		tIMOEXSum,
-		tRosTechSum,
-	} = data;
+	useEffect(() => {
+		getPortfolio();
+	}, []);
 
-	const assetsConfig = [
-		{ title: 'All', value: totalSum },
-		{ title: 'Shares', value: allSharesSum },
-		{ title: 'Bonds', value: bondsSum },
-		{ title: 'Gold', value: goldSum },
-	];
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
 
-	const chartsCongif = [
-		{
-			title: 'All',
-			labels: ['Shares', 'Bonds', 'Gold'],
-			values: [
-				(allSharesSum / totalSum) * 100,
-				(bondsSum / totalSum) * 100,
-				(goldSum / totalSum) * 100,
-			],
-			colorSchema: ['#FF8885', '#61C4FF', '#FFE585'],
-		},
-		{
-			title: 'Bonds',
-			labels: ['TBonds', 'TLocal', 'TPassiveIncome'],
-			values: [
-				(tBondsSum / bondsSum) * 100,
-				(tLocalBondsSum / bondsSum) * 100,
-				(tPassiveIncomeSum / bondsSum) * 100,
-			],
-			colorSchema: ['#65AEFF', '#8EC4FF', '#6899D3'],
-		},
-		{
-			title: 'Shares',
-			labels: ['Other shares', 'TiMOEX', 'TRosTech'],
-			values: [
-				(otherSharesSum / allSharesSum) * 100,
-				(tIMOEXSum / allSharesSum) * 100,
-				(tRosTechSum / allSharesSum) * 100,
-			],
-			colorSchema: ['#FF8B85', '#FFC985', '#FF85E4'],
-		},
-	];
+	if (!data) {
+		return <div>Loading...</div>;
+	}
 
 	return (
-		<main className={inter.className}>
+		<main>
 			<h1>Dashboard</h1>
-
-			<div className={styles.commonContainer}>
-				{assetsConfig.map(({ title, value }) => (
-					<AssetCard title={title} value={value} />
-				))}
-			</div>
-
-			<div className={cn(styles.commonContainer, styles.chartsContainer)}>
-				{chartsCongif.map(({ title, labels, values, colorSchema }) => (
-					<ChartCard
-						title={title}
-						labels={labels}
-						values={values}
-						colorSchema={colorSchema}
-					/>
-				))}
-			</div>
+			<AssetsWidget data={data} />
+			<ChartsWidget data={data} />
 		</main>
+	);
+};
+
+export default function Page() {
+	return (
+		<Provider store={store}>
+			<InnerPage />
+		</Provider>
 	);
 }

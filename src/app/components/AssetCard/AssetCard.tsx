@@ -1,44 +1,40 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { TbCopy as CopyIcon } from 'react-icons/tb';
 import styles from './styles.module.css';
-import { TbCopyPlus as CopyIcon } from 'react-icons/tb';
-import cn from 'classnames';
-import { Label } from '../Label';
 
 type TProps = {
 	title: string;
 	value: number;
+	prevValue?: number;
 };
 
-export const AssetCard = ({ title, value }: TProps) => {
-	const [isCopied, setIsCopied] = useState<boolean>(false);
+const COPY_TEXT = 'Click to copy';
+
+export const AssetCard = ({ title, value, prevValue }: TProps) => {
+	const [tooltipText, setTooltipText] = useState<string>(COPY_TEXT);
 
 	useEffect(() => {
-		let timerId: NodeJS.Timeout;
-
-		if (isCopied) {
-			timerId = setTimeout(() => setIsCopied(false), 1000);
-		}
+		const timerId = setTimeout(() => setTooltipText(COPY_TEXT), 2000);
 
 		return () => {
 			clearTimeout(timerId);
 		};
-	}, [isCopied]);
+	}, [tooltipText]);
 
 	return (
 		<div className={styles.card}>
-			<Label title="Indicator" />
 			<p className={styles.title}>{title}</p>
 			<div
-				className={styles.valueContainer}
+				className={styles.value}
 				onClick={() => {
 					const rawValue = value.toFixed();
 					navigator.clipboard.writeText(rawValue);
-					setIsCopied(true);
+					setTooltipText('Copied!');
 				}}
 			>
-				<p className={styles.value}>
+				<p>
 					{value.toLocaleString('ru-RU', {
 						style: 'currency',
 						currency: 'RUB',
@@ -46,11 +42,12 @@ export const AssetCard = ({ title, value }: TProps) => {
 						maximumFractionDigits: 0,
 					})}
 				</p>
-				<CopyIcon className={styles.icon} />
-				<div className={cn(styles.tooltip, { [styles.visible]: isCopied })}>
-					Copied!
+				<div className={styles.tooltip}>
+					{tooltipText}
+					{tooltipText === COPY_TEXT && <CopyIcon />}
 				</div>
 			</div>
+			{prevValue && <p>{prevValue} Last month (+20%)</p>}
 		</div>
 	);
 };

@@ -1,14 +1,11 @@
 'use client';
 
-import { ArcElement, Chart as ChartJS, Tooltip } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Context } from 'chartjs-plugin-datalabels';
+import { ArcElement, Chart as ChartJS, Tooltip, Legend } from 'chart.js';
 
 import styles from './styles.module.css';
-import { Label } from '../Label';
+import { Doughnut } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, ChartDataLabels);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 type TProps = {
 	title: string;
@@ -19,27 +16,10 @@ type TProps = {
 
 export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
 	const options = {
+		responsive: true,
 		plugins: {
 			legend: {
 				display: true,
-			},
-			datalabels: {
-				color: 'black',
-				borderRadius: 4,
-				font: {
-					size: 12,
-				},
-				padding: 16,
-				formatter: (value: number, context: Context) => {
-					const labels = context.chart.data.labels;
-					if (labels && labels.length > 0) {
-						const label = labels[context.dataIndex] as string;
-						return `${label}\n${value.toFixed() + '%'}`;
-					}
-					return `${value.toFixed() + '%'}`;
-				},
-				anchor: 'end' as const,
-				align: 'start' as const,
 			},
 		},
 	};
@@ -48,7 +28,7 @@ export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
 		labels,
 		datasets: [
 			{
-				label: 'Part',
+				label: 'Share',
 				data: values,
 				backgroundColor: colorSchema,
 				hoverOffset: 4,
@@ -59,9 +39,8 @@ export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
 
 	return (
 		<div className={styles.chartCard}>
-			<Label title="Chart" />
 			<p className={styles.title}>{title}</p>
-			<Doughnut data={data} options={options} />
+			<Doughnut data={data} options={options} className={styles.chart} />
 		</div>
 	);
 };
