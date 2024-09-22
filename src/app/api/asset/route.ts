@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 
-type TParams = { dateFrom: string; dateTo: string; instrumentId: string };
-
-export async function POST({ dateFrom, dateTo, instrumentId }: TParams) {
+export async function POST() {
 	const res = await fetch(
 		'https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.MarketDataService/GetCandles',
 		{
@@ -13,11 +11,10 @@ export async function POST({ dateFrom, dateTo, instrumentId }: TParams) {
 				Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
 			},
 			body: JSON.stringify({
-				from: dateFrom,
-				to: dateTo,
+				// from: '',
+				// to: '',
 				interval: 'CANDLE_INTERVAL_MONTH',
 				// instrumentId: 'TCS10A101X50',
-				instrumentId: instrumentId,
 				candleSourceType: 'CANDLE_SOURCE_UNSPECIFIED',
 				limit: 2,
 			}),
