@@ -55,3 +55,21 @@ export type TPostPortfolioData = {
 	otherSharesSum: number;
 	goldUnits: string;
 };
+
+type Candle = {
+	close: {
+		units: string;
+		nano: number;
+	};
+};
+
+export interface ICandlesResponse {
+	candles: Candle[];
+}
+
+export type TPostCandlesParams = {
+	from: string;
+	to: string;
+	instrumentId: string;
+	interval: string;
+};

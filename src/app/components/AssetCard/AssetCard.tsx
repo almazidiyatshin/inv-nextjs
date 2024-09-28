@@ -3,16 +3,20 @@
 import { useEffect, useState } from 'react';
 import { TbCopy as CopyIcon } from 'react-icons/tb';
 import styles from './styles.module.css';
+import { PrevValue } from './components/PrevValue';
+import { toRub } from '@/app/utils/toRub';
+import { EAssetIds } from '@/constants/common';
 
 type TProps = {
+	id: EAssetIds;
 	title: string;
 	value: number;
-	prevValue?: number;
+	count?: number;
 };
 
 const COPY_TEXT = 'Click to copy';
 
-export const AssetCard = ({ title, value, prevValue }: TProps) => {
+export const AssetCard = ({ id, title, value, count }: TProps) => {
 	const [tooltipText, setTooltipText] = useState<string>(COPY_TEXT);
 
 	useEffect(() => {
@@ -34,20 +38,13 @@ export const AssetCard = ({ title, value, prevValue }: TProps) => {
 					setTooltipText('Copied!');
 				}}
 			>
-				<p>
-					{value.toLocaleString('ru-RU', {
-						style: 'currency',
-						currency: 'RUB',
-						minimumFractionDigits: 0,
-						maximumFractionDigits: 0,
-					})}
-				</p>
+				<p>{toRub(value)}</p>
 				<div className={styles.tooltip}>
 					{tooltipText}
 					{tooltipText === COPY_TEXT && <CopyIcon />}
 				</div>
 			</div>
-			{prevValue && <p>{prevValue} Last month (+20%)</p>}
+			{count && <PrevValue id={id} value={value} count={count} />}
 		</div>
 	);
 };

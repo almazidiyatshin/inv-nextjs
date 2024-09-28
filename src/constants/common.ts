@@ -6,3 +6,16 @@ export const etfIds = {
 	TGLD: '4c466956-d2ce-4a95-abb4-17947a65f18a',
 	TPAY: '1d0e01e5-148c-40e5-bb8f-1bf2d8e03c1a',
 };
+
+export const candleIntervals = {
+	WEEK: 'CANDLE_INTERVAL_WEEK',
+	MONTH: 'CANDLE_INTERVAL_MONTH',
+	YEAR: 'CANDLE_INTERVAL_YEAR',
+};
+
+export enum EAssetIds {
+	ALL = 'all',
+	SHARES = 'shares',
+	BONDS = 'bonds',
+	GOLD = 'gold',
+}

@@ -1,6 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-export async function POST() {
+export async function POST(request: NextRequest) {
+	const { searchParams } = request.nextUrl;
+	const to = searchParams.get('to');
+	const from = searchParams.get('from');
+	const instrumentId = searchParams.get('instrumentId');
+	const interval = searchParams.get('interval');
+
 	const res = await fetch(
 		'https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.MarketDataService/GetCandles',
 		{
@@ -11,13 +17,14 @@ export async function POST() {
 				Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
 			},
 			body: JSON.stringify({
-				// from: '',
-				// to: '',
-				interval: 'CANDLE_INTERVAL_MONTH',
-				// instrumentId: 'TCS10A101X50',
+				from,
+				to,
+				instrumentId,
+				interval,
 				candleSourceType: 'CANDLE_SOURCE_UNSPECIFIED',
-				limit: 2,
+				limit: 13,
 			}),
+			cache: 'no-store',
 		}
 	);
 

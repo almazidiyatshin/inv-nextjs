@@ -1,10 +1,14 @@
 :root {
-	--primary-color: #5c67f7;
+	--primary-color: rgb(92, 103, 247);
 	--secondary-color: #f9f9fa;
 	--background-color: #f9fafc;
 	--card-background-color: #ffffff;
 	--primary-text-color: #212b37;
 	--secondary-text-color: #6e829f;
+	--success-background: rgb(33, 206, 158, 0.1);
+	--success: rgb(33, 206, 158);
+	--btn-bg-color: #f9f9fa;
+	--btn-bg-active-color: rgb(92, 103, 247, 0.1);
 }
 
 body {

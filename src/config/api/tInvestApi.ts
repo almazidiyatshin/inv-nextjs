@@ -1,6 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TPortfolioResponse, TPostPortfolioData } from './types';
-import { getPortfolioData } from './utils/getPortfolioData';
+import {
+	ICandlesResponse,
+	TPortfolioResponse,
+	TPostCandlesParams,
+	TPostPortfolioData,
+} from './types';
+import { getPreparedPortfolioData } from './utils/getPrearedPortfolioData';
+import { getPreparedCandlesData } from './utils/getPreparedCandlesData';
+import { etfIds } from '@/constants/common';
 
 export const tInvestApi = createApi({
 	reducerPath: 'tInvestApi',
@@ -12,9 +19,20 @@ export const tInvestApi = createApi({
 				method: 'POST',
 			}),
 			transformResponse: (response: TPortfolioResponse) =>
-				getPortfolioData(response),
+				getPreparedPortfolioData(response),
+		}),
+
+		postTgldCandles: builder.mutation<number, TPostCandlesParams>({
+			query: (params) => ({
+				url: '/candles',
+				method: 'POST',
+				params: { ...params, instrumentId: etfIds.TGLD },
+			}),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 	}),
 });
 
-export const { usePostPortfolioMutation } = tInvestApi;
+export const { usePostPortfolioMutation, usePostTgldCandlesMutation } =
+	tInvestApi;

@@ -8,7 +8,7 @@ const calculateTotal = (etfId: string, etfData: { [id: string]: TEtfData }) => {
 	return getFloatCost(priceInt, priceNano) * Number(units);
 };
 
-export const getPortfolioData = (response: TPortfolioResponse) => {
+export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 	const etfData = Object.entries(etfIds).reduce<{ [id: string]: TEtfData }>(
 		(acc, [, id]) => {
 			const { priceInt, priceNano, units } = getEtfData(id, response);

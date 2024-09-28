@@ -1,17 +1,26 @@
 'use client';
 
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import './global.css';
 
 import { AssetsWidget } from './widgets/AssetsWIdget';
 import { ChartsWidget } from './widgets/ChartsWidget';
 import { store } from '@/config/store';
 import { useEffect } from 'react';
-import { usePostPortfolioMutation } from '@/config/api/tInvestApi';
+import {
+	usePostTgldCandlesMutation,
+	usePostPortfolioMutation,
+} from '@/config/api/tInvestApi';
 import { Preloader } from './components/Preloader/Preloader';
+import { useGetCandleData } from './hooks/useGetCandleData';
+import { RootState } from '@/config/store/store';
 
 const InnerPage = () => {
-	const [getPortfolio, { data, isLoading }] = usePostPortfolioMutation();
+	const [getPortfolio, { data: portfolioData, isLoading: isPortfolioLoading }] =
+		usePostPortfolioMutation();
+
+	const isLoading = isPortfolioLoading;
+	const hasNoData = !portfolioData;
 
 	useEffect(() => {
 		getPortfolio();
@@ -21,15 +30,15 @@ const InnerPage = () => {
 		return <Preloader />;
 	}
 
-	if (!data) {
+	if (hasNoData) {
 		return <Preloader />;
 	}
 
 	return (
 		<main>
 			<h1>Dashboard</h1>
-			<AssetsWidget data={data} />
-			<ChartsWidget data={data} />
+			<AssetsWidget data={portfolioData} />
+			<ChartsWidget data={portfolioData} />
 		</main>
 	);
 };
