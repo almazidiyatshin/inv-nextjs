@@ -24,6 +24,11 @@
 	font-weight: 600;
 }
 
+.value__primary {
+	font-weight: 400;
+	font-size: 48px;
+}
+
 .value:hover {
 	color: var(--primary-color);
 }

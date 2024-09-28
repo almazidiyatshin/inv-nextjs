@@ -44,6 +44,11 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		tmosSum,
 		titrSum,
 		otherSharesSum,
-		goldUnits: etfData[etfIds.TGLD].units,
+		tgldCount: etfData[etfIds.TGLD].units,
+		tbruCount: etfData[etfIds.TBRU].units,
+		tlcbCount: etfData[etfIds.TLCB].units,
+		tpayCount: etfData[etfIds.TPAY].units,
+		tmosCount: etfData[etfIds.TMOS].units,
+		titrCount: etfData[etfIds.TITR].units,
 	};
 };

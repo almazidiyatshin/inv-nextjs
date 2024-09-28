@@ -4,31 +4,64 @@ import { AssetCard } from '@/app/components/AssetCard';
 import styles from './styles.module.css';
 import { TPostPortfolioData } from '@/config/api/types';
 import { memo } from 'react';
-import { EAssetIds } from '@/constants/common';
+import { EAssetIds, etfIds } from '@/constants/common';
 
 type TProps = {
 	data: TPostPortfolioData;
 };
 
 export const AssetsWidget = memo<TProps>(({ data }) => {
-	const { totalSum, allSharesSum, allBondsSum, goldSum, goldUnits } = data;
+	const {
+		totalSum,
+		allSharesSum,
+		allBondsSum,
+		goldSum,
+		tgldCount,
+		tbruCount,
+		tlcbCount,
+		tpayCount,
+		tmosCount,
+		titrCount,
+	} = data;
 
 	const assetsConfig = [
-		{ id: EAssetIds.ALL, title: 'All assets value', value: totalSum },
-		{ id: EAssetIds.SHARES, title: 'All shares value', value: allSharesSum },
-		{ id: EAssetIds.BONDS, title: 'All bonds value', value: allBondsSum },
+		{
+			id: EAssetIds.ALL,
+			title: 'All assets value',
+			value: totalSum,
+			isPrimary: true,
+		},
+		{
+			id: EAssetIds.SHARES,
+			title: 'All shares value',
+			value: allSharesSum,
+			counts: [
+				{ [etfIds.TMOS]: Number(tmosCount) },
+				{ [etfIds.TITR]: Number(titrCount) },
+			],
+		},
+		{
+			id: EAssetIds.BONDS,
+			title: 'All bonds value',
+			value: allBondsSum,
+			counts: [
+				{ [etfIds.TBRU]: Number(tbruCount) },
+				{ [etfIds.TLCB]: Number(tlcbCount) },
+				{ [etfIds.TPAY]: Number(tpayCount) },
+			],
+		},
 		{
 			id: EAssetIds.GOLD,
 			title: 'Gold value',
 			value: goldSum,
-			count: Number(goldUnits),
+			counts: [{ [etfIds.TGLD]: Number(tgldCount) }],
 		},
 	];
 
 	return (
 		<div className={styles.assetsContainer}>
-			{assetsConfig.map(({ id, title, value, count }) => (
-				<AssetCard id={id} key={id} title={title} value={value} count={count} />
+			{assetsConfig.map((config) => (
+				<AssetCard {...config} />
 			))}
 		</div>
 	);

@@ -6,17 +6,21 @@ import styles from './styles.module.css';
 import { PrevValue } from './components/PrevValue';
 import { toRub } from '@/app/utils/toRub';
 import { EAssetIds } from '@/constants/common';
+import cn from 'classnames';
 
 type TProps = {
 	id: EAssetIds;
 	title: string;
 	value: number;
-	count?: number;
+	counts?: {
+		[x: string]: number;
+	}[];
+	isPrimary: boolean;
 };
 
 const COPY_TEXT = 'Click to copy';
 
-export const AssetCard = ({ id, title, value, count }: TProps) => {
+export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
 	const [tooltipText, setTooltipText] = useState<string>(COPY_TEXT);
 
 	useEffect(() => {
@@ -31,7 +35,7 @@ export const AssetCard = ({ id, title, value, count }: TProps) => {
 		<div className={styles.card}>
 			<p className={styles.title}>{title}</p>
 			<div
-				className={styles.value}
+				className={cn(styles.value, { [styles.value__primary]: isPrimary })}
 				onClick={() => {
 					const rawValue = value.toFixed();
 					navigator.clipboard.writeText(rawValue);
@@ -44,7 +48,7 @@ export const AssetCard = ({ id, title, value, count }: TProps) => {
 					{tooltipText === COPY_TEXT && <CopyIcon />}
 				</div>
 			</div>
-			{count && <PrevValue id={id} value={value} count={count} />}
+			{counts && <PrevValue id={id} value={value} counts={counts} />}
 		</div>
 	);
 };

@@ -53,7 +53,12 @@ export type TPostPortfolioData = {
 	tmosSum: number;
 	titrSum: number;
 	otherSharesSum: number;
-	goldUnits: string;
+	tgldCount: string;
+	tbruCount: string;
+	tlcbCount: string;
+	tpayCount: string;
+	tmosCount: string;
+	titrCount: string;
 };
 
 type Candle = {

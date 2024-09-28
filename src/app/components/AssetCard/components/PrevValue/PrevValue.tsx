@@ -9,17 +9,26 @@ import {
 	setGoldFilters,
 	setSharesFilters,
 } from '@/config/store/slices/filtersSlice';
-import { candleIntervals, EAssetIds } from '@/constants/common';
+import { candleIntervals, EAssetIds, etfIds } from '@/constants/common';
 import cn from 'classnames';
 import { useGetCandleData } from '@/app/hooks/useGetCandleData';
 import { RootState } from '@/config/store/store';
-import { usePostTgldCandlesMutation } from '@/config/api/tInvestApi';
+import {
+	usePostTbruCandlesMutation,
+	usePostTgldCandlesMutation,
+	usePostTitrCandlesMutation,
+	usePostTlcbCandlesMutation,
+	usePostTmosCandlesMutation,
+	usePostTpayCandlesMutation,
+} from '@/config/api/tInvestApi';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
 
 type TProps = {
 	id: EAssetIds;
 	value: number;
-	count: number;
+	counts: {
+		[x: string]: number;
+	}[];
 };
 
 const texts = {
@@ -29,10 +38,17 @@ const texts = {
 };
 
 const fetchCallbacks = {
-	[EAssetIds.ALL]: () => {},
-	[EAssetIds.SHARES]: () => {},
-	[EAssetIds.BONDS]: () => {},
-	[EAssetIds.GOLD]: usePostTgldCandlesMutation,
+	[EAssetIds.ALL]: [{ id: '', fetch: () => {} }],
+	[EAssetIds.SHARES]: [
+		{ id: etfIds.TMOS, fetch: usePostTmosCandlesMutation },
+		{ id: etfIds.TITR, fetch: usePostTitrCandlesMutation },
+	],
+	[EAssetIds.BONDS]: [
+		{ id: etfIds.TBRU, fetch: usePostTbruCandlesMutation },
+		{ id: etfIds.TLCB, fetch: usePostTlcbCandlesMutation },
+		{ id: etfIds.TPAY, fetch: usePostTpayCandlesMutation },
+	],
+	[EAssetIds.GOLD]: [{ id: etfIds.TGLD, fetch: usePostTgldCandlesMutation }],
 };
 
 const dispatchCallbacks = {
@@ -42,11 +58,17 @@ const dispatchCallbacks = {
 	[EAssetIds.GOLD]: setGoldFilters,
 };
 
-export const PrevValue = ({ id, value, count }: TProps) => {
+export const PrevValue = ({ id, value, counts }: TProps) => {
 	const dispatch = useDispatch();
 	const filters = useSelector((state: RootState) => state.filters[id]);
 	const { data, isLoading } = useGetCandleData(filters, fetchCallbacks[id]);
-	const prevValue = data * count;
+
+	const prevValue = data.reduce((acc, { id, data: value }) => {
+		const countObject = counts.find((count) => count[id]);
+		const countValue = countObject ? countObject[id] : 0;
+
+		return acc + value * countValue;
+	}, 0);
 
 	const handleRangeClick = (interval: string) => () => {
 		dispatch(dispatchCallbacks[id]({ interval }));
