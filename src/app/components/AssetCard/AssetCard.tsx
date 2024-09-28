@@ -15,7 +15,7 @@ type TProps = {
 	counts?: {
 		[x: string]: number;
 	}[];
-	isPrimary: boolean;
+	isPrimary?: boolean;
 };
 
 const COPY_TEXT = 'Click to copy';
