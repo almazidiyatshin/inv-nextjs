@@ -6,7 +6,9 @@
 	--primary-text-color: #212b37;
 	--secondary-text-color: #6e829f;
 	--success-background: rgb(33, 206, 158, 0.1);
+	--negative-background: rgba(251, 66, 66, 0.1);
 	--success: rgb(33, 206, 158);
+	--negative: rgb(251, 66, 66);
 	--btn-bg-color: #f9f9fa;
 	--btn-bg-active-color: rgb(92, 103, 247, 0.1);
 }

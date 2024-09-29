@@ -4,7 +4,7 @@ import { AssetCard } from '@/app/components/AssetCard';
 import styles from './styles.module.css';
 import { TPostPortfolioData } from '@/config/api/types';
 import { memo } from 'react';
-import { EAssetIds, etfIds } from '@/constants/common';
+import { EAssetIds, etfIds, sharesIds } from '@/constants/common';
 
 type TProps = {
 	data: TPostPortfolioData;
@@ -22,6 +22,15 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		tpayCount,
 		tmosCount,
 		titrCount,
+		beluCount,
+		chmfCount,
+		lkohCount,
+		magnCount,
+		mgntCount,
+		nlmkCount,
+		novaCount,
+		rosnCount,
+		sberpCount,
 	} = data;
 
 	const assetsConfig = [
@@ -38,6 +47,15 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 			counts: [
 				{ [etfIds.TMOS]: Number(tmosCount) },
 				{ [etfIds.TITR]: Number(titrCount) },
+				{ [sharesIds.BELU]: Number(beluCount) },
+				{ [sharesIds.CHMF]: Number(chmfCount) },
+				{ [sharesIds.LKOH]: Number(lkohCount) },
+				{ [sharesIds.MAGN]: Number(magnCount) },
+				{ [sharesIds.MGNT]: Number(mgntCount) },
+				{ [sharesIds.NLMK]: Number(nlmkCount) },
+				// { [sharesIds.NOVA]: Number(novaCount) },
+				{ [sharesIds.ROSN]: Number(rosnCount) },
+				{ [sharesIds.SBERP]: Number(sberpCount) },
 			],
 		},
 		{
@@ -61,7 +79,7 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 	return (
 		<div className={styles.assetsContainer}>
 			{assetsConfig.map((config) => (
-				<AssetCard {...config} />
+				<AssetCard key={config.id} {...config} />
 			))}
 		</div>
 	);

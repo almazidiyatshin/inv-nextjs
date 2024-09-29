@@ -1,4 +1,4 @@
-export type TEtfData = {
+export type TAssetData = {
 	priceInt: string;
 	priceNano: number;
 	units: string;

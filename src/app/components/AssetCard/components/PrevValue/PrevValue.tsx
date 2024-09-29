@@ -9,7 +9,12 @@ import {
 	setGoldFilters,
 	setSharesFilters,
 } from '@/config/store/slices/filtersSlice';
-import { candleIntervals, EAssetIds, etfIds } from '@/constants/common';
+import {
+	candleIntervals,
+	EAssetIds,
+	etfIds,
+	sharesIds,
+} from '@/constants/common';
 import cn from 'classnames';
 import { useGetCandleData } from '@/app/hooks/useGetCandleData';
 import { RootState } from '@/config/store/store';
@@ -20,6 +25,15 @@ import {
 	usePostTlcbCandlesMutation,
 	usePostTmosCandlesMutation,
 	usePostTpayCandlesMutation,
+	usePostBeluCandlesMutation,
+	usePostChmfCandlesMutation,
+	usePostLkohCandlesMutation,
+	usePostMagnCandlesMutation,
+	usePostMgntCandlesMutation,
+	usePostNlmkCandlesMutation,
+	usePostNovaCandlesMutation,
+	usePostRosnCandlesMutation,
+	usePostSberpCandlesMutation,
 } from '@/config/api/tInvestApi';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
 
@@ -42,6 +56,15 @@ const fetchCallbacks = {
 	[EAssetIds.SHARES]: [
 		{ id: etfIds.TMOS, fetch: usePostTmosCandlesMutation },
 		{ id: etfIds.TITR, fetch: usePostTitrCandlesMutation },
+		{ id: sharesIds.BELU, fetch: usePostBeluCandlesMutation },
+		{ id: sharesIds.CHMF, fetch: usePostChmfCandlesMutation },
+		{ id: sharesIds.LKOH, fetch: usePostLkohCandlesMutation },
+		{ id: sharesIds.MAGN, fetch: usePostMagnCandlesMutation },
+		{ id: sharesIds.MGNT, fetch: usePostMgntCandlesMutation },
+		{ id: sharesIds.NLMK, fetch: usePostNlmkCandlesMutation },
+		// { id: sharesIds.NOVA, fetch: usePostNovaCandlesMutation },
+		{ id: sharesIds.ROSN, fetch: usePostRosnCandlesMutation },
+		{ id: sharesIds.SBERP, fetch: usePostSberpCandlesMutation },
 	],
 	[EAssetIds.BONDS]: [
 		{ id: etfIds.TBRU, fetch: usePostTbruCandlesMutation },
@@ -86,8 +109,12 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		<div className={styles.prevValue}>
 			<div className={styles.text}>
 				{`${toRub(prevValue)} ${texts[filters.interval]}`}
-				<div className={styles.badge}>
-					{(value > prevValue ? '+' : '-') +
+				<div
+					className={cn(styles.badge, {
+						[styles.badge__negative]: value < prevValue,
+					})}
+				>
+					{(value > prevValue ? '+' : '') +
 						(((value - prevValue) / prevValue) * 100).toFixed(0) +
 						'%'}
 				</div>

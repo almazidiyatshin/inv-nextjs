@@ -1,22 +1,32 @@
-import { getEtfData, getFloatCost } from './common';
-import { etfIds } from '@/constants/common';
-import { TEtfData } from '@/types/common';
+import { getAssetData, getFloatCost } from './common';
+import { etfIds, sharesIds } from '@/constants/common';
+import { TAssetData } from '@/types/common';
 import { TPortfolioResponse } from '../types';
 
-const calculateTotal = (etfId: string, etfData: { [id: string]: TEtfData }) => {
+const calculateTotal = (
+	etfId: string,
+	etfData: { [id: string]: TAssetData }
+) => {
 	const { priceInt, priceNano, units } = etfData[etfId];
 	return getFloatCost(priceInt, priceNano) * Number(units);
 };
 
 export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
-	const etfData = Object.entries(etfIds).reduce<{ [id: string]: TEtfData }>(
+	const etfData = Object.entries(etfIds).reduce<{ [id: string]: TAssetData }>(
 		(acc, [, id]) => {
-			const { priceInt, priceNano, units } = getEtfData(id, response);
+			const { priceInt, priceNano, units } = getAssetData(id, response);
 			acc[id] = { priceInt, priceNano, units };
 			return acc;
 		},
 		{}
 	);
+	const sharesData = Object.entries(sharesIds).reduce<{
+		[id: string]: TAssetData;
+	}>((acc, [, id]) => {
+		const { priceInt, priceNano, units } = getAssetData(id, response);
+		acc[id] = { priceInt, priceNano, units };
+		return acc;
+	}, {});
 
 	const titrSum = calculateTotal(etfIds.TITR, etfData);
 	const tmosSum = calculateTotal(etfIds.TMOS, etfData);
@@ -50,5 +60,14 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		tpayCount: etfData[etfIds.TPAY].units,
 		tmosCount: etfData[etfIds.TMOS].units,
 		titrCount: etfData[etfIds.TITR].units,
+		beluCount: sharesData[sharesIds.BELU].units,
+		chmfCount: sharesData[sharesIds.CHMF].units,
+		lkohCount: sharesData[sharesIds.LKOH].units,
+		magnCount: sharesData[sharesIds.MAGN].units,
+		mgntCount: sharesData[sharesIds.MGNT].units,
+		nlmkCount: sharesData[sharesIds.NLMK].units,
+		novaCount: sharesData[sharesIds.NOVA].units,
+		rosnCount: sharesData[sharesIds.ROSN].units,
+		sberpCount: sharesData[sharesIds.SBERP].units,
 	};
 };

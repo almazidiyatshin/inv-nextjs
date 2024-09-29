@@ -18,6 +18,11 @@
 	background-color: var(--success-background);
 }
 
+.badge__negative {
+	color: var(--negative);
+	background-color: var(--negative-background);
+}
+
 .btns {
 	display: flex;
 	gap: 4px;

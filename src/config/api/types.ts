@@ -59,6 +59,15 @@ export type TPostPortfolioData = {
 	tpayCount: string;
 	tmosCount: string;
 	titrCount: string;
+	beluCount: string;
+	chmfCount: string;
+	lkohCount: string;
+	magnCount: string;
+	mgntCount: string;
+	nlmkCount: string;
+	novaCount: string;
+	rosnCount: string;
+	sberpCount: string;
 };
 
 type Candle = {
