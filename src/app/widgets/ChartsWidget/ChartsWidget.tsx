@@ -2,8 +2,8 @@
 
 import { ChartCard } from '@/app/components/ChartCard';
 import styles from './styles.module.css';
-import { TPostPortfolioData } from '@/config/api/types';
 import { memo } from 'react';
+import { TPostPortfolioData } from '@/config/api';
 
 type TProps = {
 	data: TPostPortfolioData;
