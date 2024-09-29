@@ -1,5 +1,5 @@
-import { TPostCandlesParams } from '@/config/api/types';
-import { getDateRange } from '@/config/api/utils/getDateRange';
+import { TPostCandlesParams } from '@/config/api';
+import { getDateRange } from '@/config/api';
 import { candleIntervals } from '@/constants/common';
 import { useEffect } from 'react';
 

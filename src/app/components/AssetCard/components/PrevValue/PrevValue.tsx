@@ -34,7 +34,7 @@ import {
 	usePostNovaCandlesMutation,
 	usePostRosnCandlesMutation,
 	usePostSberpCandlesMutation,
-} from '@/config/api/tInvestApi';
+} from '@/config/api';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
 
 type TProps = {

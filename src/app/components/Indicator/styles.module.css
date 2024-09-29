@@ -1,0 +1,21 @@
+.indicator {
+	display: flex;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--secondary-text-color);
+	margin-left: 2px;
+}
+
+.value {
+	font-weight: 600;
+	font-size: 14px;
+	color: var(--secondary-text-color);
+	margin-left: 6px;
+}
+
+.icon {
+	color: var(--secondary-text-color);
+}

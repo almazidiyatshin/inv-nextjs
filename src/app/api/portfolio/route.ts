@@ -1,4 +1,4 @@
-import { IPortfolioResponse } from '@/config/api/types';
+import { IPortfolioResponse } from '@/config/api';
 import { NextResponse } from 'next/server';
 
 export async function POST() {

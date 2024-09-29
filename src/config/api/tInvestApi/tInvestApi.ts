@@ -5,9 +5,9 @@ import {
 	TPostCandlesParams,
 	TPostPortfolioData,
 } from './types';
+import { etfIds, sharesIds } from '@/constants/common';
 import { getPreparedPortfolioData } from './utils/getPrearedPortfolioData';
 import { getPreparedCandlesData } from './utils/getPreparedCandlesData';
-import { etfIds, sharesIds } from '@/constants/common';
 
 export const tInvestApi = createApi({
 	reducerPath: 'tInvestApi',

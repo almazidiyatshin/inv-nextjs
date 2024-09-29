@@ -31,3 +31,8 @@ export enum EAssetIds {
 	BONDS = 'bonds',
 	GOLD = 'gold',
 }
+
+export enum ERatesIds {
+	INFLATION = 'inflation',
+	KEY = 'key',
+}

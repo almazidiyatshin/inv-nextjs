@@ -2,7 +2,7 @@
 
 import { AssetCard } from '@/app/components/AssetCard';
 import styles from './styles.module.css';
-import { TPostPortfolioData } from '@/config/api/types';
+import { TPostPortfolioData } from '@/config/api';
 import { memo } from 'react';
 import { EAssetIds, etfIds, sharesIds } from '@/constants/common';
 

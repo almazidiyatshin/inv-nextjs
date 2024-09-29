@@ -1,4 +1,4 @@
-import { ICandlesResponse } from '../types';
+import { ICandlesResponse } from '../tInvestApi/types';
 import { getFloatCost } from './common';
 
 export const getPreparedCandlesData = (response: ICandlesResponse) => {

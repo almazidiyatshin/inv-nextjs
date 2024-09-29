@@ -1,7 +1,7 @@
 import { getAssetData, getFloatCost } from './common';
 import { etfIds, sharesIds } from '@/constants/common';
 import { TAssetData } from '@/types/common';
-import { TPortfolioResponse } from '../types';
+import { TPortfolioResponse } from '../tInvestApi/types';
 
 const calculateTotal = (
 	etfId: string,
