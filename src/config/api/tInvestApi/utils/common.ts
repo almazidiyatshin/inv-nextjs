@@ -1,4 +1,4 @@
-import { IPosition, TPortfolioResponse } from '../tInvestApi/types';
+import { IPosition, TPortfolioResponse } from '../types';
 
 export const getFloatCost = (int: string, nano: number) =>
 	Number(int) + nano / 1000000000;
