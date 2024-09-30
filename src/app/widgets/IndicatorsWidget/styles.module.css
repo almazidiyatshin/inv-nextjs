@@ -1,6 +1,6 @@
 .ratesContainer {
 	display: flex;
 	gap: 12px;
-	justify-content: end;
 	margin-bottom: 12px;
+	flex-wrap: wrap;
 }

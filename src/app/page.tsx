@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { usePostPortfolioMutation } from '@/config/api';
 import { Preloader } from './components/Preloader/Preloader';
 import { useGetIndicatorsQuery } from '@/config/api/cbApi/cbApi';
-import { IndicatorsWidget } from './widgets/IndicatorsWidget';
+import { Header } from './components/Header';
 
 const InnerPage = () => {
 	const [getPortfolio, { data: portfolioData, isLoading: isPortfolioLoading }] =
@@ -35,8 +35,7 @@ const InnerPage = () => {
 
 	return (
 		<main>
-			<h1>Dashboard</h1>
-			<IndicatorsWidget data={indicators} />
+			<Header indicators={indicators} />
 			<AssetsWidget data={portfolioData} />
 			<ChartsWidget data={portfolioData} />
 		</main>

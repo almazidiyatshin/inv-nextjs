@@ -12,8 +12,10 @@ export const Indicator = ({ title, value }: TProps) => {
 	return (
 		<div className={styles.indicator}>
 			<InfoIcon className={styles.icon} />
-			<p className={styles.title}>{`${title}:`}</p>
-			<p className={styles.value}>{value}</p>
+			<div className={styles.text}>
+				<p className={styles.title}>{`${title}:`}</p>
+				<p className={styles.value}>{value}</p>
+			</div>
 		</div>
 	);
 };
