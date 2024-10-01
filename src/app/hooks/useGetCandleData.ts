@@ -25,7 +25,7 @@ export const useGetCandleData = (
 				fetch({ from, to, interval: getInterval(filters.interval) });
 			});
 		}
-	}, [filters.interval, from, to, results]);
+	}, [filters.interval]);
 
 	return {
 		data: results.map(({ id, value: [, { data }] }) => ({ id, data })),
