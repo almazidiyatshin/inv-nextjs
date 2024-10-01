@@ -34,7 +34,8 @@ export interface IPortfolioResponse {
 	totalAmountOptions: ICurrencyAmount;
 	totalAmountSp: ICurrencyAmount;
 	totalAmountPortfolio: ICurrencyAmount;
-	virtualPositions: any[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	virtualPositions: any[]; // TODO fix any
 }
 
 export type TPortfolioResponse = Pick<

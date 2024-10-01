@@ -31,7 +31,7 @@ import {
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
-	usePostNovaCandlesMutation,
+	// usePostNovaCandlesMutation,
 	usePostRosnCandlesMutation,
 	usePostSberpCandlesMutation,
 } from '@/config/api';

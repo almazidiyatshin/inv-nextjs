@@ -9,13 +9,15 @@ const getInterval = (interval: string) => {
 
 export const useGetCandleData = (
 	filters: Pick<TPostCandlesParams, 'interval'>,
+	// TODO fix any
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	fetchCandles: { id: string; fetch: any }[]
 ): { data: { id: string; data: number }[]; isLoading: boolean } => {
 	const { from, to } = getDateRange(filters.interval);
 
 	const results = fetchCandles.map(({ id, fetch }) => ({ id, value: fetch() }));
 
-	const isLoading = results.some(({ value: [_, { isLoading }] }) => isLoading);
+	const isLoading = results.some(({ value: [, { isLoading }] }) => isLoading);
 
 	useEffect(() => {
 		if (filters.interval) {
@@ -23,10 +25,10 @@ export const useGetCandleData = (
 				fetch({ from, to, interval: getInterval(filters.interval) });
 			});
 		}
-	}, [filters.interval]);
+	}, [filters.interval, from, to, results]);
 
 	return {
-		data: results.map(({ id, value: [_, { data }] }) => ({ id, data })),
+		data: results.map(({ id, value: [, { data }] }) => ({ id, data })),
 		isLoading,
 	};
 };

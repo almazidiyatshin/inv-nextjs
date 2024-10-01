@@ -28,7 +28,7 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		magnCount,
 		mgntCount,
 		nlmkCount,
-		novaCount,
+		// novaCount,
 		rosnCount,
 		sberpCount,
 	} = data;
@@ -84,3 +84,5 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		</div>
 	);
 });
+
+AssetsWidget.displayName = 'AssetsWidget';

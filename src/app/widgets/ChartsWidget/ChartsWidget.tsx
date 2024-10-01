@@ -82,3 +82,5 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 		</div>
 	);
 });
+
+ChartsWidget.displayName = 'ChartsWidget';

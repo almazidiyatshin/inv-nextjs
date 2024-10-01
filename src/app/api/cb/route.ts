@@ -18,7 +18,7 @@ export async function GET() {
 			indicators.push({ value });
 		});
 
-		const [_, inflationRate, keyRate] = indicators;
+		const [, inflationRate, keyRate] = indicators;
 
 		return NextResponse.json([inflationRate.value, keyRate.value]);
 	} catch (error) {

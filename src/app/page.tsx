@@ -23,7 +23,7 @@ const InnerPage = () => {
 
 	useEffect(() => {
 		getPortfolio();
-	}, []);
+	}, [getPortfolio]);
 
 	if (isLoading) {
 		return <Preloader />;
