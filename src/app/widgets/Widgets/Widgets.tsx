@@ -28,10 +28,10 @@ export const WidgetsInner = () => {
 	}
 
 	return (
-		<main>
+		<>
 			<AssetsWidget data={portfolioData} />
 			<ChartsWidget data={portfolioData} />
-		</main>
+		</>
 	);
 };
 

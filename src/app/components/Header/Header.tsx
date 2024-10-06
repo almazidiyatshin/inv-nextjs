@@ -2,13 +2,24 @@ import { IndicatorsWidget } from '@/app/widgets/IndicatorsWidget';
 
 import styles from './styles.module.css';
 
-type TProps = {
-	indicators: string[];
-};
+export const Header = async () => {
+	let indicators = [];
 
-export const Header = ({ indicators }: TProps) => (
-	<div className={styles.header}>
-		<h1 className={styles.title}>Dashboard</h1>
-		{indicators.length > 1 && <IndicatorsWidget data={indicators} />}
-	</div>
-);
+	try {
+		const baseUrl = process.env.NEXT_PUBLIC_API_URL
+			? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+			: 'http://localhost:3000';
+		const res = await fetch(`${baseUrl}/api/indicators`);
+		indicators = await res.json();
+	} catch (e) {
+		console.error(e);
+		indicators = [];
+	}
+
+	return (
+		<div className={styles.header}>
+			<h1 className={styles.title}>Dashboard</h1>
+			{indicators.length > 1 && <IndicatorsWidget data={indicators} />}
+		</div>
+	);
+};
