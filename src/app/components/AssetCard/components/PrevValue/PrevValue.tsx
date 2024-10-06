@@ -93,6 +93,8 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		return acc + value * countValue;
 	}, 0);
 
+	const diff = value - prevValue;
+
 	const handleRangeClick = (interval: string) => () => {
 		dispatch(dispatchCallbacks[id]({ interval }));
 	};
@@ -108,15 +110,18 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 	return (
 		<div className={styles.prevValue}>
 			<div className={styles.text}>
-				{`${toRub(prevValue)} ${texts[filters.interval]}`}
+				<span
+					className={cn(styles.diff, {
+						[styles.diff__negative]: value < prevValue,
+					})}
+				>{`${diff > 0 ? '+' : ''}${toRub(diff)}`}</span>
+				{`to ${texts[filters.interval]}`}
 				<div
 					className={cn(styles.badge, {
 						[styles.badge__negative]: value < prevValue,
 					})}
 				>
-					{(value > prevValue ? '+' : '') +
-						(((value - prevValue) / prevValue) * 100).toFixed(0) +
-						'%'}
+					{(diff > 0 ? '+' : '') + ((diff / prevValue) * 100).toFixed(0) + '%'}
 				</div>
 			</div>
 

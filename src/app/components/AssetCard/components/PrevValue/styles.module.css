@@ -70,3 +70,11 @@
 		background-color: #e0e0e0;
 	}
 }
+
+.diff {
+	color: var(--success);
+}
+
+.diff__negative {
+	color: var(--negative);
+}

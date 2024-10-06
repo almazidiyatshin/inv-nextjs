@@ -1,51 +1,23 @@
-'use client';
-
-import { Provider } from 'react-redux';
+import { Header } from './components/Header';
 import './global.css';
 
-import { AssetsWidget } from './widgets/AssetsWIdget';
-import { ChartsWidget } from './widgets/ChartsWidget';
-import { store } from '@/config/store';
-import { useEffect } from 'react';
-import { usePostPortfolioMutation } from '@/config/api';
-import { Preloader } from './components/Preloader/Preloader';
-import { useGetIndicatorsQuery } from '@/config/api/cbApi/cbApi';
-import { Header } from './components/Header';
+import { Widgets } from './widgets/Widgets';
 
-const InnerPage = () => {
-	const [getPortfolio, { data: portfolioData, isLoading: isPortfolioLoading }] =
-		usePostPortfolioMutation();
-	const { data: indicators, isLoading: isIndicatorsLoading } =
-		useGetIndicatorsQuery();
+export default async function Page() {
+	let indicatorsData = [];
 
-	const isLoading = isPortfolioLoading || isIndicatorsLoading;
-	const hasNoData = !portfolioData || !indicators;
-
-	useEffect(() => {
-		getPortfolio();
-	}, [getPortfolio]);
-
-	if (isLoading) {
-		return <Preloader />;
-	}
-
-	if (hasNoData) {
-		return <Preloader />;
+	try {
+		const res = await fetch(`${process.env.VERCEL_URL}/api/indicators`);
+		indicatorsData = await res.json();
+	} catch (e) {
+		console.error(e);
+		indicatorsData = [];
 	}
 
 	return (
 		<main>
-			<Header indicators={indicators} />
-			<AssetsWidget data={portfolioData} />
-			<ChartsWidget data={portfolioData} />
+			<Header indicators={indicatorsData} />
+			<Widgets />
 		</main>
-	);
-};
-
-export default function Page() {
-	return (
-		<Provider store={store}>
-			<InnerPage />
-		</Provider>
 	);
 }

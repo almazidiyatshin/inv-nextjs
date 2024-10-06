@@ -19,7 +19,6 @@ export async function GET() {
 		});
 
 		const [, inflationRate, keyRate] = indicators;
-
 		return NextResponse.json([inflationRate.value, keyRate.value]);
 	} catch (error) {
 		console.error('Error fetching or parsing data:', error);

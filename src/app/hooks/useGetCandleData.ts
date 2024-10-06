@@ -14,9 +14,7 @@ export const useGetCandleData = (
 	fetchCandles: { id: string; fetch: any }[]
 ): { data: { id: string; data: number }[]; isLoading: boolean } => {
 	const { from, to } = getDateRange(filters.interval);
-
 	const results = fetchCandles.map(({ id, fetch }) => ({ id, value: fetch() }));
-
 	const isLoading = results.some(({ value: [, { isLoading }] }) => isLoading);
 
 	useEffect(() => {
@@ -25,6 +23,7 @@ export const useGetCandleData = (
 				fetch({ from, to, interval: getInterval(filters.interval) });
 			});
 		}
+		// eslint-disable-next-line
 	}, [filters.interval]);
 
 	return {

@@ -4,5 +4,3 @@ export * from './tInvestApi/utils/common';
 export * from './tInvestApi/utils/getDateRange';
 export * from './tInvestApi/utils/getPrearedPortfolioData';
 export * from './tInvestApi/utils/getPreparedCandlesData';
-export * from './cbApi/cbApi';
-export * from './cbApi/types';
