@@ -1,11 +1,10 @@
-import { TGetIndicatorsResponse } from '@/config/api';
 import { ERatesIds } from '@/constants/common';
 
 import styles from './styles.module.css';
 import { Indicator } from '@/app/components/Indicator';
 
 type TProps = {
-	data: TGetIndicatorsResponse;
+	data: string[];
 };
 
 export const IndicatorsWidget = ({ data }: TProps) => {
