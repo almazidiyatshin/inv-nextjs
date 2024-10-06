@@ -6,7 +6,7 @@ export const Header = async () => {
 	let indicators = [];
 
 	try {
-		const baseUrl = process.env.NEXT_PUBLIC_API_URL
+		const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 			? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
 			: 'http://localhost:3000';
 		const res = await fetch(`${baseUrl}/api/indicators`);
