@@ -7,8 +7,9 @@ export default async function Page() {
 	let indicatorsData = [];
 
 	try {
-		const res = await fetch(`https://${process.env.VERCEL_URL}/api/indicators`);
-		console.log({ process }, process.env.VERCEL_URL);
+		const res = await fetch(
+			`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/api/indicators`
+		);
 		indicatorsData = await res.json();
 	} catch (e) {
 		console.error(e);
