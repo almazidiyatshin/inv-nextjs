@@ -9,10 +9,10 @@ interface FilterState {
 }
 
 const initialState: FilterState = {
-	[EAssetIds.ALL]: { interval: candleIntervals.MONTH },
-	[EAssetIds.SHARES]: { interval: candleIntervals.MONTH },
-	[EAssetIds.BONDS]: { interval: candleIntervals.MONTH },
-	[EAssetIds.GOLD]: { interval: candleIntervals.MONTH },
+	[EAssetIds.ALL]: { interval: candleIntervals.YEAR },
+	[EAssetIds.SHARES]: { interval: candleIntervals.YEAR },
+	[EAssetIds.BONDS]: { interval: candleIntervals.YEAR },
+	[EAssetIds.GOLD]: { interval: candleIntervals.YEAR },
 };
 
 const filtersSlice = createSlice({
