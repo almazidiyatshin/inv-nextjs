@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { TbCopy as CopyIcon } from 'react-icons/tb';
+import { TbTrendingUp as TrendUpIcon } from 'react-icons/tb';
+import { TbTrendingDown as TrendDownIcon } from 'react-icons/tb';
 import styles from './styles.module.css';
 import { PrevValue } from './components/PrevValue';
 import { toRub } from '@/app/utils/toRub';
@@ -22,6 +24,7 @@ const COPY_TEXT = 'Click to copy';
 
 export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
 	const [tooltipText, setTooltipText] = useState<string>(COPY_TEXT);
+	const [trend, setTrend] = useState<'up' | 'down' | undefined>(undefined);
 
 	useEffect(() => {
 		const timerId = setTimeout(() => setTooltipText(COPY_TEXT), 2000);
@@ -33,7 +36,16 @@ export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
 
 	return (
 		<div className={styles.card}>
-			<p className={styles.title}>{title}</p>
+			<div className={styles.titleWrapper}>
+				<p className={styles.title}>{title}</p>
+				{!isPrimary &&
+					!!trend &&
+					(trend === 'up' ? (
+						<TrendUpIcon size={20} className={styles.trendUpIcon} />
+					) : (
+						<TrendDownIcon size={20} className={styles.trendDownIcon} />
+					))}
+			</div>
 			<div
 				className={cn(styles.value, { [styles.value__primary]: isPrimary })}
 				onClick={() => {
@@ -42,13 +54,17 @@ export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
 					setTooltipText('Copied!');
 				}}
 			>
+				{!isPrimary && (
+					<div className={styles.tooltip}>
+						{tooltipText}
+						{tooltipText === COPY_TEXT && <CopyIcon />}
+					</div>
+				)}
 				<p>{toRub(value)}</p>
-				<div className={styles.tooltip}>
-					{tooltipText}
-					{tooltipText === COPY_TEXT && <CopyIcon />}
-				</div>
 			</div>
-			{counts && <PrevValue id={id} value={value} counts={counts} />}
+			{counts && (
+				<PrevValue id={id} value={value} counts={counts} setTrend={setTrend} />
+			)}
 		</div>
 	);
 };

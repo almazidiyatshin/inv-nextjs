@@ -36,6 +36,7 @@ import {
 	usePostSberpCandlesMutation,
 } from '@/config/api';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
+import { useEffect } from 'react';
 
 type TProps = {
 	id: EAssetIds;
@@ -43,6 +44,7 @@ type TProps = {
 	counts: {
 		[x: string]: number;
 	}[];
+	setTrend: (value: 'up' | 'down') => void;
 };
 
 const texts = {
@@ -81,7 +83,7 @@ const dispatchCallbacks = {
 	[EAssetIds.GOLD]: setGoldFilters,
 };
 
-export const PrevValue = ({ id, value, counts }: TProps) => {
+export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
 	const dispatch = useDispatch();
 	const filters = useSelector((state: RootState) => state.filters[id]);
 	const { data, isLoading } = useGetCandleData(filters, fetchCallbacks[id]);
@@ -98,6 +100,10 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 	const handleRangeClick = (interval: string) => () => {
 		dispatch(dispatchCallbacks[id]({ interval }));
 	};
+
+	useEffect(() => {
+		setTrend(diff > 0 ? 'up' : 'down');
+	}, [diff, setTrend]);
 
 	if (!prevValue) {
 		return <PrevValueSkeleton />;
