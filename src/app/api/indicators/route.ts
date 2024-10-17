@@ -7,7 +7,9 @@ type TIndicatorData = {
 
 export async function GET() {
 	try {
-		const response = await fetch('https://cbr.ru', { cache: 'no-store' });
+		const response = await fetch('https://cbr.ru', {
+			cache: 'no-store',
+		});
 		const html = await response.text();
 
 		const $ = cheerio.load(html);

@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 
 export const Header = async () => {
 	let indicators = [];
-
 	try {
 		const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 			? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
