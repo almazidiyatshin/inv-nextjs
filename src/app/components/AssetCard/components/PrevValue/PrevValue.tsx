@@ -37,6 +37,7 @@ import {
 } from '@/config/api';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
 import { useEffect } from 'react';
+import { LineChart } from '../LineChart';
 
 type TProps = {
 	id: EAssetIds;
@@ -88,11 +89,22 @@ export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
 	const filters = useSelector((state: RootState) => state.filters[id]);
 	const { data, isLoading } = useGetCandleData(filters, fetchCallbacks[id]);
 
-	const prevValue = data.reduce((acc, { id, data: value }) => {
+	const lastPricesResult = data.reduce<{ [key: string]: number }>(
+		(acc, { data }) => {
+			for (const monthName of Object.keys(data?.lastPrices || {})) {
+				acc[monthName] = (acc[monthName] || 0) + data?.lastPrices[monthName];
+			}
+
+			return acc;
+		},
+		{}
+	);
+
+	const prevValue = data.reduce((acc, { id, data }) => {
 		const countObject = counts.find((count) => count[id]);
 		const countValue = countObject ? countObject[id] : 0;
 
-		return acc + value * countValue;
+		return acc + data?.lastPrice * countValue;
 	}, 0);
 
 	const diff = value - prevValue;
@@ -114,52 +126,58 @@ export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
 	}
 
 	return (
-		<div className={styles.prevValue}>
-			<div className={styles.text}>
-				<span
-					className={cn(styles.diff, {
-						[styles.diff__negative]: value < prevValue,
-					})}
-				>{`${diff > 0 ? '+' : ''}${toRub(diff)}`}</span>
-				{`to ${texts[filters.interval]}`}
-				<div
-					className={cn(styles.badge, {
-						[styles.badge__negative]: value < prevValue,
-					})}
-				>
-					{(diff > 0 ? '+' : '') + ((diff / prevValue) * 100).toFixed(0) + '%'}
+		<>
+			<div className={styles.prevValue}>
+				<div className={styles.text}>
+					<span
+						className={cn(styles.diff, {
+							[styles.diff__negative]: value < prevValue,
+						})}
+					>{`${diff > 0 ? '+' : ''}${toRub(diff)}`}</span>
+					{`to ${texts[filters.interval]}`}
+					<div
+						className={cn(styles.badge, {
+							[styles.badge__negative]: value < prevValue,
+						})}
+					>
+						{(diff > 0 ? '+' : '') +
+							((diff / prevValue) * 100).toFixed(0) +
+							'%'}
+					</div>
+				</div>
+
+				<div className={styles.btns}>
+					<button
+						className={cn(styles.btn, {
+							[styles.btn__active]: filters.interval === candleIntervals.WEEK,
+						})}
+						title="Week"
+						onClick={handleRangeClick(candleIntervals.WEEK)}
+					>
+						Week
+					</button>
+					<button
+						className={cn(styles.btn, {
+							[styles.btn__active]: filters.interval === candleIntervals.MONTH,
+						})}
+						title="Month"
+						onClick={handleRangeClick(candleIntervals.MONTH)}
+					>
+						Month
+					</button>
+					<button
+						className={cn(styles.btn, {
+							[styles.btn__active]: filters.interval === candleIntervals.YEAR,
+						})}
+						title="Year"
+						onClick={handleRangeClick(candleIntervals.YEAR)}
+					>
+						Year
+					</button>
 				</div>
 			</div>
 
-			<div className={styles.btns}>
-				<button
-					className={cn(styles.btn, {
-						[styles.btn__active]: filters.interval === candleIntervals.WEEK,
-					})}
-					title="Week"
-					onClick={handleRangeClick(candleIntervals.WEEK)}
-				>
-					Week
-				</button>
-				<button
-					className={cn(styles.btn, {
-						[styles.btn__active]: filters.interval === candleIntervals.MONTH,
-					})}
-					title="Month"
-					onClick={handleRangeClick(candleIntervals.MONTH)}
-				>
-					Month
-				</button>
-				<button
-					className={cn(styles.btn, {
-						[styles.btn__active]: filters.interval === candleIntervals.YEAR,
-					})}
-					title="Year"
-					onClick={handleRangeClick(candleIntervals.YEAR)}
-				>
-					Year
-				</button>
-			</div>
-		</div>
+			<LineChart data={lastPricesResult} />
+		</>
 	);
 };

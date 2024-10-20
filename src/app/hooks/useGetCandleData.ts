@@ -1,4 +1,4 @@
-import { TPostCandlesParams } from '@/config/api';
+import { TPostCandlesApiParams, TPostCandlesApiReturn } from '@/config/api';
 import { getDateRange } from '@/config/api';
 import { candleIntervals } from '@/constants/common';
 import { useEffect } from 'react';
@@ -8,11 +8,14 @@ const getInterval = (interval: string) => {
 };
 
 export const useGetCandleData = (
-	filters: Pick<TPostCandlesParams, 'interval'>,
+	filters: Pick<TPostCandlesApiParams, 'interval'>,
 	// TODO fix any
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	fetchCandles: { id: string; fetch: any }[]
-): { data: { id: string; data: number }[]; isLoading: boolean } => {
+): {
+	data: { id: string; data: TPostCandlesApiReturn }[];
+	isLoading: boolean;
+} => {
 	const { from, to } = getDateRange(filters.interval);
 	const results = fetchCandles.map(({ id, fetch }) => ({ id, value: fetch() }));
 	const isLoading = results.some(({ value: [, { isLoading }] }) => isLoading);

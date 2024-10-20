@@ -76,15 +76,20 @@ type Candle = {
 		units: string;
 		nano: number;
 	};
+	time: string;
 };
 
 export interface ICandlesResponse {
 	candles: Candle[];
 }
 
-export type TPostCandlesParams = {
+export type TPostCandlesApiParams = {
 	from: string;
 	to: string;
 	instrumentId: string;
 	interval: string;
+};
+export type TPostCandlesApiReturn = {
+	lastPrice: number;
+	lastPrices: { [key: string]: number };
 };

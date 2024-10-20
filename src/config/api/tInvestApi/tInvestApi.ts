@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
 	ICandlesResponse,
 	TPortfolioResponse,
-	TPostCandlesParams,
+	TPostCandlesApiReturn,
+	TPostCandlesApiParams,
 	TPostPortfolioData,
 } from './types';
 import { etfIds, sharesIds } from '@/constants/common';
@@ -22,154 +23,200 @@ export const tInvestApi = createApi({
 				getPreparedPortfolioData(response),
 		}),
 
-		postTgldCandles: builder.mutation<number, TPostCandlesParams>({
+		postTgldCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TGLD },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postTbruCandles: builder.mutation<number, TPostCandlesParams>({
+		postTbruCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TBRU },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postTlcbCandles: builder.mutation<number, TPostCandlesParams>({
+		postTlcbCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TLCB },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postTpayCandles: builder.mutation<number, TPostCandlesParams>({
+		postTpayCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TPAY },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postTmosCandles: builder.mutation<number, TPostCandlesParams>({
+		postTmosCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TMOS },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postTitrCandles: builder.mutation<number, TPostCandlesParams>({
+		postTitrCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TITR },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postBeluCandles: builder.mutation<number, TPostCandlesParams>({
+		postBeluCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.BELU },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postChmfCandles: builder.mutation<number, TPostCandlesParams>({
+		postChmfCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.CHMF },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postLkohCandles: builder.mutation<number, TPostCandlesParams>({
+		postLkohCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.LKOH },
+				meta: { interval: params.interval },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postMagnCandles: builder.mutation<number, TPostCandlesParams>({
+		postMagnCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.MAGN },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postMgntCandles: builder.mutation<number, TPostCandlesParams>({
+		postMgntCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.MGNT },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postNlmkCandles: builder.mutation<number, TPostCandlesParams>({
+		postNlmkCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.NLMK },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postNovaCandles: builder.mutation<number, TPostCandlesParams>({
+		postNovaCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.NOVA },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postRosnCandles: builder.mutation<number, TPostCandlesParams>({
+		postRosnCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.ROSN },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postSberpCandles: builder.mutation<number, TPostCandlesParams>({
+		postSberpCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
 			query: (params) => ({
 				url: '/candles',
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.SBERP },
 			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
 		}),
 	}),
 });

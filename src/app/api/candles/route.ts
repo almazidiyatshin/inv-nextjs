@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 				instrumentId,
 				interval,
 				candleSourceType: 'CANDLE_SOURCE_UNSPECIFIED',
-				limit: 13,
+				limit: 12,
 			}),
 			cache: 'no-store',
 		}
