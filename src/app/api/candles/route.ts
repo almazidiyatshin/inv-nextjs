@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 				candleSourceType: 'CANDLE_SOURCE_UNSPECIFIED',
 				limit: 12,
 			}),
-			cache: 'no-store',
+			cache: 'no-cache',
 		}
 	);
 
