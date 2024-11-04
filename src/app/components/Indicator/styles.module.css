@@ -7,17 +7,17 @@
 .title {
 	font-size: 14px;
 	font-weight: 400;
-	color: var(--secondary-text-color);
+	color: var(--secondary-text);
 }
 
 .value {
 	font-weight: 600;
 	font-size: 14px;
-	color: var(--secondary-text-color);
+	color: var(--secondary-text);
 }
 
 .icon {
-	color: var(--secondary-text-color);
+	color: var(--secondary-text);
 }
 
 .text {

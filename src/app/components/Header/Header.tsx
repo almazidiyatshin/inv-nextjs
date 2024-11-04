@@ -1,6 +1,7 @@
 import { IndicatorsWidget } from '@/app/widgets/IndicatorsWidget';
 
 import styles from './styles.module.css';
+import { ThemeToggleButton } from '@/app/components/ThemeToggleButton';
 
 export const Header = async () => {
 	let indicators = [];
@@ -16,9 +17,14 @@ export const Header = async () => {
 	}
 
 	return (
-		<div className={styles.header}>
-			<h1 className={styles.title}>Dashboard</h1>
-			{indicators.length > 1 && <IndicatorsWidget data={indicators} />}
+		<div>
+			<div className={styles.menu}>
+				<ThemeToggleButton />
+			</div>
+			<div className={styles.header}>
+				<h1 className={styles.title}>Dashboard</h1>
+				{indicators.length > 1 && <IndicatorsWidget data={indicators} />}
+			</div>
 		</div>
 	);
 };

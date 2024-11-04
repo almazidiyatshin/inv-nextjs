@@ -2,7 +2,7 @@
 	display: flex;
 	gap: 4px;
 	font-size: 14px;
-	color: var(--secondary-text-color);
+	color: var(--secondary-text);
 	margin-top: 12px;
 	justify-content: space-between;
 	align-items: center;
@@ -14,13 +14,13 @@
 	font-size: 12px;
 	font-weight: 600;
 	border-radius: 8px;
-	color: var(--success);
-	background-color: var(--success-background);
+	color: var(--success-text);
+	background-color: var(--success-bg);
 }
 
 .badge__negative {
-	color: var(--negative);
-	background-color: var(--negative-background);
+	color: var(--negative-text);
+	background-color: var(--negative-bg);
 }
 
 .btns {
@@ -30,20 +30,21 @@
 
 .btn {
 	cursor: pointer;
-	color: var(--primary-text-color);
+	color: var(--btn-text);
 	padding: 4px 8px;
 	border: 0;
-	background-color: var(--btn-bg-color);
+	background-color: var(--btn-bg);
 	border-radius: 4px;
 }
 
 .btn:hover {
-	color: var(--primary-color);
+	color: var(--btn-hover-text);
+	background-color: var(--btn-bg-hover);
 }
 
 .btn__active {
-	color: var(--primary-color);
-	background-color: var(--btn-bg-active-color);
+	color: var(--btn-text-active);
+	background-color: var(--btn-bg-active);
 }
 
 .text {
@@ -72,9 +73,9 @@
 }
 
 .diff {
-	color: var(--success);
+	color: var(--success-text);
 }
 
 .diff__negative {
-	color: var(--negative);
+	color: var(--negative-text);
 }

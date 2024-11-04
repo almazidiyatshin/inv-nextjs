@@ -4,6 +4,7 @@ import { ChartCard } from '@/app/components/ChartCard';
 import styles from './styles.module.css';
 import { memo } from 'react';
 import { TPostPortfolioData } from '@/config/api';
+import { chartColorSchema } from '@/constants/colors';
 
 type TProps = {
 	data: TPostPortfolioData;
@@ -44,7 +45,7 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 				`Gold (${goldPercent.toFixed(0)}%)`,
 			],
 			values: [allSharesPercent, allBondsPercent, goldPercent],
-			colorSchema: ['#FF8885', '#61C4FF', '#FFE585'],
+			colorSchema: chartColorSchema,
 		},
 		{
 			title: 'All bonds statistics',
@@ -54,7 +55,7 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 				`TPAY (${tpayPercent.toFixed(0)}%)`,
 			],
 			values: [tbruPercent, tlcbPercent, tpayPercent],
-			colorSchema: ['#65AEFF', '#8EC4FF', '#6899D3'],
+			colorSchema: chartColorSchema,
 		},
 		{
 			title: 'All shares statistics',
@@ -64,7 +65,7 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 				`TITR (${titrPercent.toFixed(0)}%)`,
 			],
 			values: [otherSharesPercent, tmosPercent, titrPercent],
-			colorSchema: ['#FF8B85', '#FFC985', '#FF85E4'],
+			colorSchema: chartColorSchema,
 		},
 	];
 

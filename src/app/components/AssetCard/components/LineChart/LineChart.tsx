@@ -11,6 +11,10 @@ import {
 	CategoryScale,
 } from 'chart.js';
 import styles from './styles.module.css';
+import {
+	lineChartPrimaryColorSchema,
+	lineChartSecondaryColorSchema,
+} from '@/constants/colors';
 
 ChartJS.register(
 	LinearScale,
@@ -35,8 +39,7 @@ export const LineChart = ({ data }: TProps) => {
 			{
 				data: Object.values(data),
 				fill: true,
-				borderColor: 'rgb(75, 192, 192)',
-				backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				...lineChartPrimaryColorSchema,
 			},
 		],
 	};
@@ -46,6 +49,17 @@ export const LineChart = ({ data }: TProps) => {
 		scales: {
 			y: {
 				beginAtZero: true,
+				grid: {
+					color: lineChartSecondaryColorSchema.gridColor,
+				},
+				ticks: {
+					color: lineChartSecondaryColorSchema.ticksColor,
+				},
+			},
+			x: {
+				ticks: {
+					color: lineChartSecondaryColorSchema.xTicksColor,
+				},
 			},
 		},
 		plugins: {
