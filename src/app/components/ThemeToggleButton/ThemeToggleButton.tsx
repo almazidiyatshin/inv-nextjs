@@ -7,8 +7,10 @@ import styles from './styles.module.css';
 import cn from 'classnames';
 
 export const ThemeToggleButton = () => {
-	const [theme, setTheme] = useState(
-		() => localStorage.getItem('theme') || 'light'
+	const [theme, setTheme] = useState(() =>
+		typeof window !== 'undefined'
+			? localStorage.getItem('theme') || 'light'
+			: 'light'
 	);
 	const isDarkTheme = theme === 'dark';
 
