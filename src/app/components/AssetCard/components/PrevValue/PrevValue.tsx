@@ -16,7 +16,6 @@ import {
 	sharesIds,
 } from '@/constants/common';
 import cn from 'classnames';
-import { useGetCandleData } from '@/app/hooks/useGetCandleData';
 import { RootState } from '@/config/store/store';
 import {
 	usePostTbruCandlesMutation,
@@ -27,7 +26,6 @@ import {
 	usePostTpayCandlesMutation,
 	usePostBeluCandlesMutation,
 	usePostChmfCandlesMutation,
-	usePostLkohCandlesMutation,
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
@@ -38,6 +36,7 @@ import {
 import { PrevValueSkeleton } from './PrevValueSkeleton';
 import { useEffect } from 'react';
 import { LineChart } from '../LineChart';
+import { useGetCandleData } from '@/app/hooks/useGetCandleData';
 
 type TProps = {
 	id: EAssetIds;
@@ -61,7 +60,6 @@ const fetchCallbacks = {
 		{ id: etfIds.TITR, fetch: usePostTitrCandlesMutation },
 		{ id: sharesIds.BELU, fetch: usePostBeluCandlesMutation },
 		{ id: sharesIds.CHMF, fetch: usePostChmfCandlesMutation },
-		{ id: sharesIds.LKOH, fetch: usePostLkohCandlesMutation },
 		{ id: sharesIds.MAGN, fetch: usePostMagnCandlesMutation },
 		{ id: sharesIds.MGNT, fetch: usePostMgntCandlesMutation },
 		{ id: sharesIds.NLMK, fetch: usePostNlmkCandlesMutation },

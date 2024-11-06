@@ -62,7 +62,6 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		titrCount: etfData[etfIds.TITR].units,
 		beluCount: sharesData[sharesIds.BELU].units,
 		chmfCount: sharesData[sharesIds.CHMF].units,
-		lkohCount: sharesData[sharesIds.LKOH].units,
 		magnCount: sharesData[sharesIds.MAGN].units,
 		mgntCount: sharesData[sharesIds.MGNT].units,
 		nlmkCount: sharesData[sharesIds.NLMK].units,

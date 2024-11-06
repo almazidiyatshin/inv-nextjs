@@ -8,7 +8,6 @@ export const etfIds = {
 };
 
 export const sharesIds = {
-	LKOH: '02cfdf61-6298-4c0f-a9ca-9cabc82afaf3',
 	NOVA: '0bb57118-e605-480f-ac30-5e27cddb0c8e',
 	NLMK: '161eb0d0-aaac-4451-b374-f5d0eeb1b508',
 	MAGN: '7132b1c9-ee26-4464-b5b5-1046264b61d9',
