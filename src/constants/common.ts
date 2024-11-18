@@ -5,6 +5,7 @@ export const etfIds = {
 	TITR: '3783c7a7-4c20-49a8-8e28-f54229b414c8',
 	TGLD: '4c466956-d2ce-4a95-abb4-17947a65f18a',
 	TPAY: '1d0e01e5-148c-40e5-bb8f-1bf2d8e03c1a',
+	LQDT: 'ade12bc5-07d9-44fe-b27a-1543e05bacfd',
 };
 
 export const sharesIds = {

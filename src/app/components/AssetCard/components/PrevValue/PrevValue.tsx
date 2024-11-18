@@ -32,6 +32,7 @@ import {
 	// usePostNovaCandlesMutation,
 	usePostRosnCandlesMutation,
 	usePostSberpCandlesMutation,
+	usePostLqdtCandlesMutation,
 } from '@/config/api';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
 import { useEffect } from 'react';
@@ -71,6 +72,7 @@ const fetchCallbacks = {
 		{ id: etfIds.TBRU, fetch: usePostTbruCandlesMutation },
 		{ id: etfIds.TLCB, fetch: usePostTlcbCandlesMutation },
 		{ id: etfIds.TPAY, fetch: usePostTpayCandlesMutation },
+		{ id: etfIds.LQDT, fetch: usePostLqdtCandlesMutation },
 	],
 	[EAssetIds.GOLD]: [{ id: etfIds.TGLD, fetch: usePostTgldCandlesMutation }],
 };

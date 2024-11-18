@@ -1,4 +1,4 @@
-export const chartColorSchema = ['#a19bf2', '#c2bbf2', '#e0def5'];
+export const chartColorSchema = ['#a19bf2', '#c2bbf2', '#e0def5', '#f1f0fa'];
 
 export const lineChartPrimaryColorSchema = {
 	borderColor: '#6241D9',

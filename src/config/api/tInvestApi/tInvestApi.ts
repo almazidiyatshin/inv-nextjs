@@ -101,6 +101,19 @@ export const tInvestApi = createApi({
 				getPreparedCandlesData(response, arg.interval),
 		}),
 
+		postLqdtCandles: builder.mutation<
+			TPostCandlesApiReturn,
+			TPostCandlesApiParams
+		>({
+			query: (params) => ({
+				url: '/candles',
+				method: 'POST',
+				params: { ...params, instrumentId: etfIds.LQDT },
+			}),
+			transformResponse: (response: ICandlesResponse, _, arg) =>
+				getPreparedCandlesData(response, arg.interval),
+		}),
+
 		postBeluCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
@@ -223,4 +236,5 @@ export const {
 	usePostNovaCandlesMutation,
 	usePostRosnCandlesMutation,
 	usePostSberpCandlesMutation,
+	usePostLqdtCandlesMutation,
 } = tInvestApi;
