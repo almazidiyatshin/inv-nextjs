@@ -10,14 +10,14 @@ export const getDateRange = (interval: string) => {
 	switch (interval) {
 		case candleIntervals.MONTH:
 			const lastMonth = new Date();
-			lastMonth.setMonth(today.getMonth() - 1);
+			lastMonth.setMonth(today.getMonth() - 2);
 			to = formatDateToISO(today);
 			from = formatDateToISO(lastMonth);
 			break;
 
 		case candleIntervals.WEEK:
 			const lastWeek = new Date();
-			lastWeek.setDate(today.getDate() - 7);
+			lastWeek.setDate(today.getDate() - 8);
 			to = formatDateToISO(today);
 			from = formatDateToISO(lastWeek);
 			break;
