@@ -179,19 +179,6 @@ export const tInvestApi = createApi({
 				getPreparedCandlesData(response, arg.interval),
 		}),
 
-		postNovaCandles: builder.mutation<
-			TPostCandlesApiReturn,
-			TPostCandlesApiParams
-		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: sharesIds.NOVA },
-			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
-		}),
-
 		postRosnCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
@@ -233,7 +220,6 @@ export const {
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
-	usePostNovaCandlesMutation,
 	usePostRosnCandlesMutation,
 	usePostSberpCandlesMutation,
 	usePostLqdtCandlesMutation,

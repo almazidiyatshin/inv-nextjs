@@ -9,7 +9,6 @@ export const etfIds = {
 };
 
 export const sharesIds = {
-	NOVA: '0bb57118-e605-480f-ac30-5e27cddb0c8e',
 	NLMK: '161eb0d0-aaac-4451-b374-f5d0eeb1b508',
 	MAGN: '7132b1c9-ee26-4464-b5b5-1046264b61d9',
 	BELU: '974077c4-d893-4058-9314-8f1b64a444b8',
@@ -36,3 +35,5 @@ export enum ERatesIds {
 	INFLATION = 'inflation',
 	KEY = 'key',
 }
+
+export const LS_LOCALE_KEY = 'dashboard:localeValue';
