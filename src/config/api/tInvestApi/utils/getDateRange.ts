@@ -17,7 +17,7 @@ export const getDateRange = (interval: string) => {
 
 		case candleIntervals.WEEK:
 			const lastWeek = new Date();
-			lastWeek.setDate(today.getDate() - 8);
+			lastWeek.setDate(today.getDate() - 9);
 			to = formatDateToISO(today);
 			from = formatDateToISO(lastWeek);
 			break;
