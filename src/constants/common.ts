@@ -15,7 +15,6 @@ export const sharesIds = {
 	SBERP: 'c190ff1f-1447-4227-b543-316332699ca5',
 	MGNT: 'ca845f68-6c43-44bc-b584-330d2a1e5eb7',
 	CHMF: 'fa6aae10-b8d5-48c8-bbfd-d320d925d096',
-	ROSN: 'fd417230-19cf-4e7b-9623-f7c9ca18ec6b',
 };
 
 export const candleIntervals = {

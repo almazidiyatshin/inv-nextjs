@@ -68,7 +68,6 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		magnCount: sharesData[sharesIds.MAGN].units,
 		mgntCount: sharesData[sharesIds.MGNT].units,
 		nlmkCount: sharesData[sharesIds.NLMK].units,
-		rosnCount: sharesData[sharesIds.ROSN].units,
 		sberpCount: sharesData[sharesIds.SBERP].units,
 	};
 };

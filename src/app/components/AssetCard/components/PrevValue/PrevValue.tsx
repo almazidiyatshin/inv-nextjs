@@ -29,7 +29,6 @@ import {
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
-	usePostRosnCandlesMutation,
 	usePostSberpCandlesMutation,
 	usePostLqdtCandlesMutation,
 } from '@/config/api';
@@ -63,7 +62,6 @@ const fetchCallbacks = {
 		{ id: sharesIds.MAGN, fetch: usePostMagnCandlesMutation },
 		{ id: sharesIds.MGNT, fetch: usePostMgntCandlesMutation },
 		{ id: sharesIds.NLMK, fetch: usePostNlmkCandlesMutation },
-		{ id: sharesIds.ROSN, fetch: usePostRosnCandlesMutation },
 		{ id: sharesIds.SBERP, fetch: usePostSberpCandlesMutation },
 	],
 	[EAssetIds.BONDS]: [
