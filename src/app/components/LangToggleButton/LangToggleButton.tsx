@@ -42,6 +42,8 @@ export const LangToggleButton = () => {
 		return null;
 	}
 
+	console.log({ currentLocale });
+
 	return (
 		<div className={styles.btnGroup}>
 			{locales.map((locale) => {
