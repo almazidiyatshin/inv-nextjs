@@ -15,6 +15,9 @@ export const LangToggleButton = () => {
 
 	const handleChangeLocale = useCallback(
 		(locale: string) => {
+			setCurrentLocale(locale);
+			localStorage.setItem(LS_LOCALE_KEY, locale);
+
 			const segments = pathname.split('/').filter(Boolean);
 			if (!segments.length) {
 				return;
@@ -24,25 +27,17 @@ export const LangToggleButton = () => {
 			} else {
 				segments.unshift(locale);
 			}
+
 			router.push(`/${segments.join('/')}`);
 		},
 		[pathname, router]
 	);
 
 	useEffect(() => {
-		const locale = localStorage.getItem(LS_LOCALE_KEY);
-		if (locale) {
-			setCurrentLocale(locale);
-		} else {
-			setCurrentLocale('en');
-		}
+		const locale = localStorage.getItem(LS_LOCALE_KEY) || 'en';
+		console.log({ locale });
+		setCurrentLocale(locale);
 	}, []);
-
-	if (currentLocale === null) {
-		return null;
-	}
-
-	console.log({ currentLocale });
 
 	return (
 		<div className={styles.btnGroup}>
