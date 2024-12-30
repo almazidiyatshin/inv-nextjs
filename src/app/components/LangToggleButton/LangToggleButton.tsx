@@ -11,11 +11,14 @@ const locales = ['en', 'ru'];
 export const LangToggleButton = () => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const [currentLocale, setCurrentLocale] = useState('en');
+	const [currentLocale, setCurrentLocale] = useState<string | null>(null);
 
 	const handleChangeLocale = useCallback(
 		(locale: string) => {
 			const segments = pathname.split('/').filter(Boolean);
+			if (!segments.length) {
+				return;
+			}
 			if (locales.includes(segments[0])) {
 				segments[0] = locale;
 			} else {
@@ -30,8 +33,14 @@ export const LangToggleButton = () => {
 		const locale = localStorage.getItem(LS_LOCALE_KEY);
 		if (locale) {
 			setCurrentLocale(locale);
+		} else {
+			setCurrentLocale('en');
 		}
 	}, []);
+
+	if (currentLocale === null) {
+		return null;
+	}
 
 	return (
 		<div className={styles.btnGroup}>

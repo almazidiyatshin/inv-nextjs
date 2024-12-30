@@ -12,6 +12,5 @@ export const getCurrentLocale = (): TLocale => {
 export const translate = (key: TTranslationKeys, locale?: TLocale): string => {
 	const currentLocale = locale || getCurrentLocale();
 	const t = translations[currentLocale] || translations['en'];
-	console.log({ currentLocale });
 	return t[key] || key;
 };
