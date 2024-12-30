@@ -35,7 +35,6 @@ export const LangToggleButton = () => {
 
 	useEffect(() => {
 		const locale = localStorage.getItem(LS_LOCALE_KEY) || 'en';
-		console.log({ locale });
 		setCurrentLocale(locale);
 	}, []);
 
