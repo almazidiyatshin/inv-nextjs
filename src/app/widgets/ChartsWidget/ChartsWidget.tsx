@@ -5,12 +5,15 @@ import styles from './styles.module.css';
 import { memo } from 'react';
 import { TPostPortfolioData } from '@/config/api';
 import { chartColorSchema } from '@/constants/colors';
+import { useTranslation } from '@/app/hooks/useTranslation';
 
 type TProps = {
 	data: TPostPortfolioData;
 };
 
 export const ChartsWidget = memo<TProps>(({ data }) => {
+	const t = useTranslation();
+
 	const {
 		allSharesSum,
 		allBondsSum,
@@ -40,17 +43,17 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 
 	const chartsCongif = [
 		{
-			title: 'All assets statistics',
+			title: t('allAssetsStatistics'),
 			labels: [
-				`Shares (${allSharesPercent.toFixed(0)}%)`,
-				`Bonds (${allBondsPercent.toFixed(0)}%)`,
-				`Gold (${goldPercent.toFixed(0)}%)`,
+				`${t('shares')} (${allSharesPercent.toFixed(0)}%)`,
+				`${t('bonds')} (${allBondsPercent.toFixed(0)}%)`,
+				`${t('gold')} (${goldPercent.toFixed(0)}%)`,
 			],
 			values: [allSharesPercent, allBondsPercent, goldPercent],
 			colorSchema: chartColorSchema,
 		},
 		{
-			title: 'All bonds statistics',
+			title: t('allBondsStatistics'),
 			labels: [
 				`TBRU (${tbruPercent.toFixed(0)}%)`,
 				`TLCB (${tlcbPercent.toFixed(0)}%)`,
@@ -61,9 +64,9 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 			colorSchema: chartColorSchema,
 		},
 		{
-			title: 'All shares statistics',
+			title: t('allSharesStatistics'),
 			labels: [
-				`Other shares (${otherSharesPercent.toFixed(0)}%)`,
+				`${t('otherShares')} (${otherSharesPercent.toFixed(0)}%)`,
 				`TMOS (${tmosPercent.toFixed(0)}%)`,
 				`TITR (${titrPercent.toFixed(0)}%)`,
 			],

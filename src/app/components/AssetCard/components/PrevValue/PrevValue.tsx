@@ -36,6 +36,7 @@ import { PrevValueSkeleton } from './PrevValueSkeleton';
 import { useEffect } from 'react';
 import { LineChart } from '../LineChart';
 import { useGetCandleData } from '@/app/hooks/useGetCandleData';
+import { useTranslation } from '@/app/hooks/useTranslation';
 
 type TProps = {
 	id: EAssetIds;
@@ -44,12 +45,6 @@ type TProps = {
 		[x: string]: number;
 	}[];
 	setTrend: (value: 'up' | 'down') => void;
-};
-
-const texts = {
-	[candleIntervals.WEEK]: 'last week',
-	[candleIntervals.MONTH]: 'last month',
-	[candleIntervals.YEAR]: 'last year',
 };
 
 const fetchCallbacks = {
@@ -81,9 +76,16 @@ const dispatchCallbacks = {
 };
 
 export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
+	const t = useTranslation();
 	const dispatch = useDispatch();
 	const filters = useSelector((state: RootState) => state.filters[id]);
 	const { data, isLoading } = useGetCandleData(filters, fetchCallbacks[id]);
+
+	const texts = {
+		[candleIntervals.WEEK]: t('lastWeek'),
+		[candleIntervals.MONTH]: t('lastMonth'),
+		[candleIntervals.YEAR]: t('lastYear'),
+	};
 
 	const lastPricesResult = data.reduce<{ [key: string]: number }>(
 		(acc, { data }) => {
@@ -130,7 +132,7 @@ export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
 							[styles.diff__negative]: value < prevValue,
 						})}
 					>{`${diff > 0 ? '+' : ''}${toRub(diff)}`}</span>
-					{`to ${texts[filters.interval]}`}
+					{`${t('to')} ${texts[filters.interval]}`}
 					<div
 						className={cn(styles.badge, {
 							[styles.badge__negative]: value < prevValue,
@@ -147,28 +149,28 @@ export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
 						className={cn(styles.btn, {
 							[styles.btn__active]: filters.interval === candleIntervals.WEEK,
 						})}
-						title="Week"
+						title={t('week')}
 						onClick={handleRangeClick(candleIntervals.WEEK)}
 					>
-						Week
+						{t('week')}
 					</button>
 					<button
 						className={cn(styles.btn, {
 							[styles.btn__active]: filters.interval === candleIntervals.MONTH,
 						})}
-						title="Month"
+						title={t('month')}
 						onClick={handleRangeClick(candleIntervals.MONTH)}
 					>
-						Month
+						{t('month')}
 					</button>
 					<button
 						className={cn(styles.btn, {
 							[styles.btn__active]: filters.interval === candleIntervals.YEAR,
 						})}
-						title="Year"
+						title={t('year')}
 						onClick={handleRangeClick(candleIntervals.YEAR)}
 					>
-						Year
+						{t('year')}
 					</button>
 				</div>
 			</div>

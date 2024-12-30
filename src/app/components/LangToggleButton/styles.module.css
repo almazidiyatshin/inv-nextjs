@@ -1,3 +1,8 @@
+.btnGroup {
+	display: flex;
+	gap: 6px;
+}
+
 .btn {
 	display: flex;
 	align-items: center;
@@ -10,12 +15,21 @@
 	cursor: pointer;
 }
 
+.btn__active {
+	color: var(--btn-text-active);
+	background-color: var(--btn-bg-active);
+	cursor: default;
+}
+.btn__dark {
+	color: var(--btn-text-active);
+	background-color: var(--btn-bg-active);
+}
+
 .btn:hover {
 	color: var(--btn-hover-text);
 	background-color: var(--btn-bg-hover);
 }
-
-.btn__dark {
+.btn__active:hover {
 	color: var(--btn-text-active);
 	background-color: var(--btn-bg-active);
 }

@@ -1,9 +1,17 @@
 import { IndicatorsWidget } from '@/app/widgets/IndicatorsWidget';
 
 import styles from './styles.module.css';
-import { ThemeToggleButton } from '@/app/components/ThemeToggleButton';
+import { LangToggleButton } from '../LangToggleButton';
+import { ThemeToggleButton } from '../ThemeToggleButton';
+import { TLocale, useTranslation } from '@/app/hooks/useTranslation';
 
-export const Header = async () => {
+type TProps = {
+	locale: TLocale;
+};
+
+export const Header = async ({ locale }: TProps) => {
+	const t = useTranslation(locale);
+
 	let indicators = [];
 	try {
 		const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
@@ -19,11 +27,14 @@ export const Header = async () => {
 	return (
 		<div>
 			<div className={styles.menu}>
+				<LangToggleButton />
 				<ThemeToggleButton />
 			</div>
 			<div className={styles.header}>
-				<h1 className={styles.title}>Dashboard</h1>
-				{indicators.length > 1 && <IndicatorsWidget data={indicators} />}
+				<h1 className={styles.title}>{t('dashboard')}</h1>
+				{indicators.length > 1 && (
+					<IndicatorsWidget data={indicators} locale={locale} />
+				)}
 			</div>
 		</div>
 	);

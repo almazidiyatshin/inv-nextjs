@@ -9,6 +9,7 @@ import { PrevValue } from './components/PrevValue';
 import { toRub } from '@/app/utils/toRub';
 import { EAssetIds } from '@/constants/common';
 import cn from 'classnames';
+import { useTranslation } from '@/app/hooks/useTranslation';
 
 type TProps = {
 	id: EAssetIds;
@@ -20,19 +21,19 @@ type TProps = {
 	isPrimary?: boolean;
 };
 
-const COPY_TEXT = 'Click to copy';
-
 export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
-	const [tooltipText, setTooltipText] = useState<string>(COPY_TEXT);
+	const t = useTranslation();
+
+	const [tooltipText, setTooltipText] = useState<string>(t('clickToCopy'));
 	const [trend, setTrend] = useState<'up' | 'down' | undefined>(undefined);
 
 	useEffect(() => {
-		const timerId = setTimeout(() => setTooltipText(COPY_TEXT), 2000);
+		const timerId = setTimeout(() => setTooltipText(t('clickToCopy')), 2000);
 
 		return () => {
 			clearTimeout(timerId);
 		};
-	}, [tooltipText]);
+	}, [tooltipText, t]);
 
 	return (
 		<div className={styles.card}>
@@ -51,13 +52,13 @@ export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
 				onClick={() => {
 					const rawValue = value.toFixed();
 					navigator.clipboard.writeText(rawValue);
-					setTooltipText('Copied!');
+					setTooltipText(t('copied'));
 				}}
 			>
 				{!isPrimary && (
 					<div className={styles.tooltip}>
 						{tooltipText}
-						{tooltipText === COPY_TEXT && <CopyIcon />}
+						{tooltipText === t('clickToCopy') && <CopyIcon />}
 					</div>
 				)}
 				<p>{toRub(value)}</p>

@@ -5,12 +5,15 @@ import styles from './styles.module.css';
 import { TPostPortfolioData } from '@/config/api';
 import { memo } from 'react';
 import { EAssetIds, etfIds, sharesIds } from '@/constants/common';
+import { useTranslation } from '@/app/hooks/useTranslation';
 
 type TProps = {
 	data: TPostPortfolioData;
 };
 
 export const AssetsWidget = memo<TProps>(({ data }) => {
+	const t = useTranslation();
+
 	const {
 		totalSum,
 		allSharesSum,
@@ -34,13 +37,13 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 	const assetsConfig = [
 		{
 			id: EAssetIds.ALL,
-			title: 'All assets value',
+			title: t('allAssetsValue'),
 			value: totalSum,
 			isPrimary: true,
 		},
 		{
 			id: EAssetIds.SHARES,
-			title: 'All shares value',
+			title: t('allSharesValue'),
 			value: allSharesSum,
 			counts: [
 				{ [etfIds.TMOS]: Number(tmosCount) },
@@ -55,7 +58,7 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		},
 		{
 			id: EAssetIds.BONDS,
-			title: 'All bonds value',
+			title: t('allBondsValue'),
 			value: allBondsSum,
 			counts: [
 				{ [etfIds.TBRU]: Number(tbruCount) },
@@ -66,7 +69,7 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		},
 		{
 			id: EAssetIds.GOLD,
-			title: 'Gold value',
+			title: t('goldValue'),
 			value: goldSum,
 			counts: [{ [etfIds.TGLD]: Number(tgldCount) }],
 		},

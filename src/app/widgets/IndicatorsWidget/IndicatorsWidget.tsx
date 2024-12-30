@@ -2,23 +2,27 @@ import { ERatesIds } from '@/constants/common';
 
 import styles from './styles.module.css';
 import { Indicator } from '@/app/components/Indicator';
+import { TLocale, useTranslation } from '@/app/hooks/useTranslation';
 
 type TProps = {
 	data: string[];
+	locale: TLocale;
 };
 
-export const IndicatorsWidget = ({ data }: TProps) => {
+export const IndicatorsWidget = ({ data, locale }: TProps) => {
+	const t = useTranslation(locale);
+
 	const [inflationRate, keyRate] = data;
 
 	const ratesConfig = [
 		{
 			id: ERatesIds.INFLATION,
-			title: 'Inflation rate',
+			title: t('inflationRate'),
 			value: inflationRate,
 		},
 		{
 			id: ERatesIds.KEY,
-			title: 'Key rate',
+			title: t('keyRate'),
 			value: keyRate,
 		},
 	];

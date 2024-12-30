@@ -4,6 +4,7 @@ import { ArcElement, Chart as ChartJS, Tooltip, Legend } from 'chart.js';
 
 import styles from './styles.module.css';
 import { Doughnut } from 'react-chartjs-2';
+import { useTranslation } from '@/app/hooks/useTranslation';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,6 +16,8 @@ type TProps = {
 };
 
 export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
+	const t = useTranslation();
+
 	const options = {
 		responsive: true,
 		plugins: {
@@ -28,7 +31,7 @@ export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
 		labels,
 		datasets: [
 			{
-				label: 'Share',
+				label: t('share'),
 				data: values,
 				backgroundColor: colorSchema,
 				hoverOffset: 4,

@@ -1,12 +1,18 @@
 'use client';
 
 import { Preloader } from '@/app/components/Preloader';
-import { usePostPortfolioMutation } from '@/config/api';
 import { useEffect } from 'react';
 import { AssetsWidget } from '../AssetsWIdget';
 import { ChartsWidget } from '../ChartsWidget';
 import { Provider } from 'react-redux';
+import { usePostPortfolioMutation } from '@/config/api';
 import { store } from '@/config/store';
+import { LS_LOCALE_KEY } from '@/constants/common';
+import { TLocale } from '@/app/hooks/useTranslation';
+
+type TProps = {
+	locale: TLocale;
+};
 
 export const WidgetsInner = () => {
 	const [getPortfolio, { data: portfolioData, isLoading: isPortfolioLoading }] =
@@ -35,8 +41,14 @@ export const WidgetsInner = () => {
 	);
 };
 
-export const Widgets = () => (
-	<Provider store={store}>
-		<WidgetsInner />
-	</Provider>
-);
+export const Widgets = ({ locale }: TProps) => {
+	useEffect(() => {
+		localStorage.setItem(LS_LOCALE_KEY, locale);
+	}, [locale]);
+
+	return (
+		<Provider store={store}>
+			<WidgetsInner />
+		</Provider>
+	);
+};
