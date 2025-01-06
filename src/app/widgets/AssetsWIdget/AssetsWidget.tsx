@@ -81,7 +81,7 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		return map;
 	});
 
-	const toggleCardExpanding = (id: EAssetIds) =>
+	const toggleCardExpanding = (id: EAssetIds) => () =>
 		setCardExpanding((prev) => {
 			const copy = new Map(prev);
 
