@@ -3,7 +3,7 @@
 import { AssetCard } from '@/app/components/AssetCard';
 import styles from './styles.module.css';
 import { TPostPortfolioData } from '@/config/api';
-import { memo, useCallback, useState } from 'react';
+import { memo, useState } from 'react';
 import { EAssetIds, etfIds, sharesIds } from '@/constants/common';
 import { useTranslation } from '@/app/hooks/useTranslation';
 
