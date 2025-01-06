@@ -1,10 +1,15 @@
 import { TPostCandlesApiParams, TPostCandlesApiReturn } from '@/config/api';
 import { getDateRange } from '@/config/api';
-import { candleIntervals } from '@/constants/common';
+import { ECandleInterval } from '@/constants/common';
 import { useEffect } from 'react';
 
-const getInterval = (interval: string) => {
-	return interval === candleIntervals.YEAR ? candleIntervals.MONTH : interval;
+const getLimit = (interval: ECandleInterval) => {
+	const limitsMap = {
+		[ECandleInterval.YEAR]: 12,
+		[ECandleInterval.FIVE_YEARS]: 60,
+		[ECandleInterval.TEN_YEARS]: 120,
+	};
+	return limitsMap[interval];
 };
 
 export const useGetCandleData = (
@@ -23,7 +28,12 @@ export const useGetCandleData = (
 	useEffect(() => {
 		if (filters.interval) {
 			results.forEach(({ value: [fetch] }) => {
-				fetch({ from, to, interval: getInterval(filters.interval) });
+				fetch({
+					from,
+					to,
+					interval: 'CANDLE_INTERVAL_MONTH',
+					limit: getLimit(filters.interval),
+				});
 			});
 		}
 		// eslint-disable-next-line

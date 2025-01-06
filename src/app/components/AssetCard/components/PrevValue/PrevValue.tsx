@@ -10,7 +10,7 @@ import {
 	setSharesFilters,
 } from '@/config/store/slices/filtersSlice';
 import {
-	candleIntervals,
+	ECandleInterval,
 	EAssetIds,
 	etfIds,
 	sharesIds,
@@ -33,7 +33,7 @@ import {
 	usePostLqdtCandlesMutation,
 } from '@/config/api';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
-import { useEffect } from 'react';
+import { useMemo } from 'react';
 import { LineChart } from '../LineChart';
 import { useGetCandleData } from '@/app/hooks/useGetCandleData';
 import { useTranslation } from '@/app/hooks/useTranslation';
@@ -44,7 +44,6 @@ type TProps = {
 	counts: {
 		[x: string]: number;
 	}[];
-	setTrend: (value: 'up' | 'down') => void;
 };
 
 const fetchCallbacks = {
@@ -75,28 +74,37 @@ const dispatchCallbacks = {
 	[EAssetIds.GOLD]: setGoldFilters,
 };
 
-export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
+export const PrevValue = ({ id, value, counts }: TProps) => {
 	const t = useTranslation();
 	const dispatch = useDispatch();
 	const filters = useSelector((state: RootState) => state.filters[id]);
 	const { data, isLoading } = useGetCandleData(filters, fetchCallbacks[id]);
 
 	const texts = {
-		[candleIntervals.WEEK]: t('lastWeek'),
-		[candleIntervals.MONTH]: t('lastMonth'),
-		[candleIntervals.YEAR]: t('lastYear'),
+		[ECandleInterval.YEAR]: t('lastYear'),
+		[ECandleInterval.FIVE_YEARS]: t('lastFiveYears'),
+		[ECandleInterval.TEN_YEARS]: t('lastTenYears'),
 	};
 
-	const lastPricesResult = data.reduce<{ [key: string]: number }>(
-		(acc, { data }) => {
-			for (const monthName of Object.keys(data?.lastPrices || {})) {
-				acc[monthName] = (acc[monthName] || 0) + data?.lastPrices[monthName];
-			}
+	const lastPrices = useMemo(() => {
+		const lastPrices = data.reduce<{ [key: string]: number }>(
+			(acc, { data }) => {
+				for (const date of Object.keys(data?.lastPrices || {})) {
+					acc[date] = (acc[date] || 0) + data?.lastPrices[date];
+				}
 
-			return acc;
-		},
-		{}
-	);
+				return acc;
+			},
+			{}
+		);
+
+		return Object.fromEntries(
+			Object.entries(lastPrices).sort(
+				([dateA], [dateB]) =>
+					new Date(dateA).getTime() - new Date(dateB).getTime()
+			)
+		);
+	}, [data]);
 
 	const prevValue = data.reduce((acc, { id, data }) => {
 		const countObject = counts.find((count) => count[id]);
@@ -107,13 +115,9 @@ export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
 
 	const diff = value - prevValue;
 
-	const handleRangeClick = (interval: string) => () => {
+	const handleRangeClick = (interval: ECandleInterval) => () => {
 		dispatch(dispatchCallbacks[id]({ interval }));
 	};
-
-	useEffect(() => {
-		setTrend(diff > 0 ? 'up' : 'down');
-	}, [diff, setTrend]);
 
 	if (!prevValue) {
 		return <PrevValueSkeleton />;
@@ -147,35 +151,39 @@ export const PrevValue = ({ id, value, counts, setTrend }: TProps) => {
 				<div className={styles.btns}>
 					<button
 						className={cn(styles.btn, {
-							[styles.btn__active]: filters.interval === candleIntervals.WEEK,
-						})}
-						title={t('week')}
-						onClick={handleRangeClick(candleIntervals.WEEK)}
-					>
-						{t('week')}
-					</button>
-					<button
-						className={cn(styles.btn, {
-							[styles.btn__active]: filters.interval === candleIntervals.MONTH,
-						})}
-						title={t('month')}
-						onClick={handleRangeClick(candleIntervals.MONTH)}
-					>
-						{t('month')}
-					</button>
-					<button
-						className={cn(styles.btn, {
-							[styles.btn__active]: filters.interval === candleIntervals.YEAR,
+							[styles.btn__active]: filters.interval === ECandleInterval.YEAR,
 						})}
 						title={t('year')}
-						onClick={handleRangeClick(candleIntervals.YEAR)}
+						onClick={handleRangeClick(ECandleInterval.YEAR)}
 					>
-						{t('year')}
+						{t('1Y')}
+					</button>
+
+					<button
+						className={cn(styles.btn, {
+							[styles.btn__active]:
+								filters.interval === ECandleInterval.FIVE_YEARS,
+						})}
+						title={t('fiveYears')}
+						onClick={handleRangeClick(ECandleInterval.FIVE_YEARS)}
+					>
+						{t('5Y')}
+					</button>
+
+					<button
+						className={cn(styles.btn, {
+							[styles.btn__active]:
+								filters.interval === ECandleInterval.TEN_YEARS,
+						})}
+						title={t('tenYears')}
+						onClick={handleRangeClick(ECandleInterval.TEN_YEARS)}
+					>
+						{t('10Y')}
 					</button>
 				</div>
 			</div>
 
-			<LineChart data={lastPricesResult} />
+			<LineChart data={lastPrices} />
 		</>
 	);
 };

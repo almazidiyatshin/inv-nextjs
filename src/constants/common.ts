@@ -17,11 +17,11 @@ export const sharesIds = {
 	CHMF: 'fa6aae10-b8d5-48c8-bbfd-d320d925d096',
 };
 
-export const candleIntervals = {
-	WEEK: 'CANDLE_INTERVAL_WEEK',
-	MONTH: 'CANDLE_INTERVAL_MONTH',
-	YEAR: 'CANDLE_INTERVAL_YEAR',
-};
+export enum ECandleInterval {
+	YEAR = 'CANDLE_INTERVAL_YEAR',
+	FIVE_YEARS = 'CANDLE_INTERVAL_FIVE_YEARS',
+	TEN_YEARS = 'CANDLE_INTERVAL_TEN_YEARS',
+}
 
 export enum EAssetIds {
 	ALL = 'all',

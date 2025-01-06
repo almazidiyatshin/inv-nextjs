@@ -1,3 +1,5 @@
+import { ECandleInterval } from '@/constants/common';
+
 export interface ICurrencyAmount {
 	currency: string;
 	units: string;
@@ -70,7 +72,7 @@ export type TPostPortfolioData = {
 	sberpCount: string;
 };
 
-type Candle = {
+type TCandle = {
 	close: {
 		units: string;
 		nano: number;
@@ -79,14 +81,15 @@ type Candle = {
 };
 
 export interface ICandlesResponse {
-	candles: Candle[];
+	candles: TCandle[];
 }
 
 export type TPostCandlesApiParams = {
 	from: string;
 	to: string;
 	instrumentId: string;
-	interval: string;
+	interval: ECandleInterval;
+	limit: number;
 };
 export type TPostCandlesApiReturn = {
 	lastPrice: number;

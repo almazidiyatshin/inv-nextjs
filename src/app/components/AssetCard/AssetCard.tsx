@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { TbCopy as CopyIcon } from 'react-icons/tb';
-import { TbTrendingUp as TrendUpIcon } from 'react-icons/tb';
-import { TbTrendingDown as TrendDownIcon } from 'react-icons/tb';
 import styles from './styles.module.css';
 import { PrevValue } from './components/PrevValue';
 import { toRub } from '@/app/utils/toRub';
 import { EAssetIds } from '@/constants/common';
-import cn from 'classnames';
 import { useTranslation } from '@/app/hooks/useTranslation';
+import { TbZoom as ZoomIcon } from 'react-icons/tb';
+import cn from 'classnames';
 
 type TProps = {
 	id: EAssetIds;
@@ -19,13 +18,22 @@ type TProps = {
 		[x: string]: number;
 	}[];
 	isPrimary?: boolean;
+	isExpanded?: boolean;
+	onToggle?: () => void;
 };
 
-export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
+export const AssetCard = ({
+	id,
+	title,
+	value,
+	counts,
+	isPrimary,
+	isExpanded,
+	onToggle,
+}: TProps) => {
 	const t = useTranslation();
 
 	const [tooltipText, setTooltipText] = useState<string>(t('clickToCopy'));
-	const [trend, setTrend] = useState<'up' | 'down' | undefined>(undefined);
 
 	useEffect(() => {
 		const timerId = setTimeout(() => setTooltipText(t('clickToCopy')), 2000);
@@ -36,16 +44,20 @@ export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
 	}, [tooltipText, t]);
 
 	return (
-		<div className={styles.card}>
+		<div className={cn(styles.card, { [styles.card__expanded]: isExpanded })}>
 			<div className={styles.titleWrapper}>
 				<p className={styles.title}>{title}</p>
-				{!isPrimary &&
-					!!trend &&
-					(trend === 'up' ? (
-						<TrendUpIcon size={20} className={styles.trendUpIcon} />
-					) : (
-						<TrendDownIcon size={20} className={styles.trendDownIcon} />
-					))}
+				{!isPrimary && (
+					<button
+						className={cn(styles.expandBtn, {
+							[styles.expandBtn__active]: isExpanded,
+						})}
+						title={t('expand')}
+						onClick={onToggle}
+					>
+						<ZoomIcon />
+					</button>
+				)}
 			</div>
 			<div
 				className={cn(styles.value, { [styles.value__primary]: isPrimary })}
@@ -63,9 +75,7 @@ export const AssetCard = ({ id, title, value, counts, isPrimary }: TProps) => {
 				)}
 				<p>{toRub(value)}</p>
 			</div>
-			{counts && (
-				<PrevValue id={id} value={value} counts={counts} setTrend={setTrend} />
-			)}
+			{counts && <PrevValue id={id} value={value} counts={counts} />}
 		</div>
 	);
 };

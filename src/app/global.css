@@ -5,6 +5,7 @@
 
 	--bg: #f2f2f2;
 	--bg-card: #f9f9f9;
+	--bg-card-active: #ece8fd;
 
 	--primary-text: #333333;
 	--secondary-text: #828282;
@@ -33,6 +34,9 @@
 	/** tooltips */
 	--tooltip-bg: #424242;
 	--tooltip-text: #e0e0e0;
+
+	/** borders */
+	--card-border: #bbaaef;
 }
 
 .dark {
@@ -42,6 +46,7 @@
 
 	--bg: #1e1e1e;
 	--bg-card: #2a2a2a;
+	--bg-card-active: #3d2d75;
 
 	--primary-text: #e0e0e0;
 	--secondary-text: #b3b3b3;
@@ -70,6 +75,9 @@
 	/* tooltips */
 	--tooltip-bg: #333333;
 	--tooltip-text: #e0e0e0;
+
+	/** borders */
+	--card-border: #5e4aae;
 }
 
 body {

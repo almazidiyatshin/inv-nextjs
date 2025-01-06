@@ -8,6 +8,13 @@
 	border-radius: 8px;
 }
 
+.card__expanded {
+	min-width: 90%;
+	background-color: var(--bg-card-active);
+	border: 1px solid var(--card-border);
+	transition: background-color 0.2s ease-in-out;
+}
+
 .titleWrapper {
 	display: flex;
 	justify-content: space-between;
@@ -66,10 +73,24 @@
 	visibility: hidden;
 }
 
-.trendUpIcon {
-	color: var(--success-primary);
+.expandBtn {
+	display: flex;
+	align-items: center;
+	border: none;
+	border-radius: 6px;
+	padding: 4px 6px;
+	color: var(--btn-text);
+	background-color: var(--btn-bg);
+	gap: 4px;
+	cursor: pointer;
 }
 
-.trendDownIcon {
-	color: var(--negative-primary);
+.expandBtn:hover {
+	color: var(--btn-hover-text);
+	background-color: var(--btn-bg-hover);
+}
+
+.expandBtn__active {
+	color: var(--btn-text-active);
+	background-color: var(--btn-bg-active);
 }

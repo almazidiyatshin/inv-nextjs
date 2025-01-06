@@ -3,7 +3,7 @@
 import { AssetCard } from '@/app/components/AssetCard';
 import styles from './styles.module.css';
 import { TPostPortfolioData } from '@/config/api';
-import { memo } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { EAssetIds, etfIds, sharesIds } from '@/constants/common';
 import { useTranslation } from '@/app/hooks/useTranslation';
 
@@ -75,10 +75,32 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		},
 	];
 
+	const [cardExpanding, setCardExpanding] = useState(() => {
+		const map = new Map<string, boolean>();
+		assetsConfig.forEach(({ id }) => map.set(id, false));
+		return map;
+	});
+
+	const toggleCardExpanding = (id: EAssetIds) =>
+		setCardExpanding((prev) => {
+			const copy = new Map(prev);
+
+			copy.forEach((_, key) => {
+				copy.set(key, key !== id ? false : !copy.get(key));
+			});
+
+			return copy;
+		});
+
 	return (
 		<div className={styles.assetsContainer}>
 			{assetsConfig.map((config) => (
-				<AssetCard key={config.id} {...config} />
+				<AssetCard
+					key={config.id}
+					isExpanded={cardExpanding.get(config.id)}
+					onToggle={toggleCardExpanding(config.id)}
+					{...config}
+				/>
 			))}
 		</div>
 	);

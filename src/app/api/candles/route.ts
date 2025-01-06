@@ -6,6 +6,7 @@ export async function POST(request: NextRequest) {
 	const from = searchParams.get('from');
 	const instrumentId = searchParams.get('instrumentId');
 	const interval = searchParams.get('interval');
+	const limit = searchParams.get('limit');
 
 	const res = await fetch(
 		'https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.MarketDataService/GetCandles',
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
 				instrumentId,
 				interval,
 				candleSourceType: 'CANDLE_SOURCE_UNSPECIFIED',
-				limit: 12,
+				limit,
 			}),
 			cache: 'no-cache',
 		}

@@ -1,4 +1,4 @@
-import { candleIntervals } from '@/constants/common';
+import { ECandleInterval } from '@/constants/common';
 
 export const getDateRange = (interval: string) => {
 	let from;
@@ -8,29 +8,33 @@ export const getDateRange = (interval: string) => {
 	const formatDateToISO = (date: Date): string => date.toISOString();
 
 	switch (interval) {
-		case candleIntervals.MONTH:
-			const lastMonth = new Date();
-			lastMonth.setMonth(today.getMonth() - 2);
-			to = formatDateToISO(today);
-			from = formatDateToISO(lastMonth);
-			break;
-
-		case candleIntervals.WEEK:
-			const lastWeek = new Date();
-			lastWeek.setDate(today.getDate() - 9);
-			to = formatDateToISO(today);
-			from = formatDateToISO(lastWeek);
-			break;
-
-		case candleIntervals.YEAR:
+		case ECandleInterval.YEAR: {
 			const lastYear = new Date();
 			lastYear.setFullYear(today.getFullYear() - 1);
 			to = formatDateToISO(today);
 			from = formatDateToISO(lastYear);
 			break;
+		}
 
-		default:
+		case ECandleInterval.FIVE_YEARS: {
+			const fiveYearsAgo = new Date();
+			fiveYearsAgo.setFullYear(today.getFullYear() - 5);
+			to = formatDateToISO(today);
+			from = formatDateToISO(fiveYearsAgo);
+			break;
+		}
+
+		case ECandleInterval.TEN_YEARS: {
+			const tenYearsAgo = new Date();
+			tenYearsAgo.setFullYear(today.getFullYear() - 10);
+			to = formatDateToISO(today);
+			from = formatDateToISO(tenYearsAgo);
+			break;
+		}
+
+		default: {
 			throw new Error(`Unknown interval: ${interval}`);
+		}
 	}
 
 	return { from, to };

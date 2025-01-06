@@ -31,7 +31,7 @@ export const Header = async ({ locale }: TProps) => {
 				<ThemeToggleButton />
 			</div>
 			<div className={styles.header}>
-				<h1 className={styles.title}>{t('dashboard')}</h1>
+				<h1 className={styles.title}>{t('investmentPortfolio')}</h1>
 				{indicators.length > 1 && (
 					<IndicatorsWidget data={indicators} locale={locale} />
 				)}

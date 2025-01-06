@@ -33,7 +33,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: etfIds.TGLD },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postTbruCandles: builder.mutation<
@@ -46,7 +46,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: etfIds.TBRU },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postTlcbCandles: builder.mutation<
@@ -59,7 +59,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: etfIds.TLCB },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postTpayCandles: builder.mutation<
@@ -72,7 +72,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: etfIds.TPAY },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postTmosCandles: builder.mutation<
@@ -85,7 +85,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: etfIds.TMOS },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postTitrCandles: builder.mutation<
@@ -98,7 +98,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: etfIds.TITR },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postLqdtCandles: builder.mutation<
@@ -111,7 +111,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: etfIds.LQDT },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postBeluCandles: builder.mutation<
@@ -124,7 +124,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: sharesIds.BELU },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postChmfCandles: builder.mutation<
@@ -137,7 +137,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: sharesIds.CHMF },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postMagnCandles: builder.mutation<
@@ -150,7 +150,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: sharesIds.MAGN },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postMgntCandles: builder.mutation<
@@ -163,7 +163,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: sharesIds.MGNT },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postNlmkCandles: builder.mutation<
@@ -176,7 +176,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: sharesIds.NLMK },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 
 		postSberpCandles: builder.mutation<
@@ -189,7 +189,7 @@ export const tInvestApi = createApi({
 				params: { ...params, instrumentId: sharesIds.SBERP },
 			}),
 			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.interval),
+				getPreparedCandlesData(response, arg.limit),
 		}),
 	}),
 });
