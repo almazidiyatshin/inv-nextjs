@@ -90,7 +90,7 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		const [month, year] = dateStr.split(', ');
 		return new Date(`${year}-${month}-01`).toISOString().split('T')[0];
 	};
-	const lastPrices = useMemo(() => {
+	const { labels, dataset } = useMemo(() => {
 		const lastPrices = data.reduce<{ [key: string]: number }>(
 			(acc, { data }) => {
 				for (const date of Object.keys(data?.lastPrices || {})) {
@@ -102,13 +102,16 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 			{}
 		);
 
-		return Object.fromEntries(
-			Object.entries(lastPrices).sort(
-				([dateA], [dateB]) =>
-					new Date(formatDate(dateA)).getTime() -
-					new Date(formatDate(dateB)).getTime()
-			)
+		const sorted = Object.entries(lastPrices).sort(
+			([dateA], [dateB]) =>
+				new Date(formatDate(dateA)).getTime() -
+				new Date(formatDate(dateB)).getTime()
 		);
+
+		return {
+			labels: sorted.map((item) => item[0]),
+			dataset: sorted.map((item) => item[1]),
+		};
 	}, [data]);
 
 	const prevValue = data.reduce((acc, { id, data }) => {
@@ -188,7 +191,7 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 				</div>
 			</div>
 
-			<LineChart data={lastPrices} />
+			<LineChart labels={labels} dataset={dataset} />
 		</>
 	);
 };

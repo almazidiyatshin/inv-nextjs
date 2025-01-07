@@ -27,17 +27,16 @@ ChartJS.register(
 );
 
 type TProps = {
-	data: {
-		[key: string]: number;
-	};
+	labels: string[];
+	dataset: number[];
 };
 
-export const LineChart = ({ data }: TProps) => {
+export const LineChart = ({ labels, dataset }: TProps) => {
 	const chartData = {
-		labels: Object.keys(data),
+		labels,
 		datasets: [
 			{
-				data: Object.values(data),
+				data: dataset,
 				fill: true,
 				...lineChartPrimaryColorSchema,
 			},
