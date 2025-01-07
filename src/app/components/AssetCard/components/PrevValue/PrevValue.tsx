@@ -14,6 +14,7 @@ import {
 	EAssetIds,
 	etfIds,
 	sharesIds,
+	LS_LOCALE_KEY,
 } from '@/constants/common';
 import cn from 'classnames';
 import { RootState } from '@/config/store/store';
@@ -79,6 +80,7 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 	const dispatch = useDispatch();
 	const filters = useSelector((state: RootState) => state.filters[id]);
 	const { data, isLoading } = useGetCandleData(filters, fetchCallbacks[id]);
+	const locale = localStorage.getItem(LS_LOCALE_KEY) || 'en';
 
 	const texts = {
 		[ECandleInterval.YEAR]: t('lastYear'),
@@ -86,15 +88,11 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		[ECandleInterval.TEN_YEARS]: t('lastTenYears'),
 	};
 
-	const formatDate = (dateStr: string) => {
-		const [month, year] = dateStr.split(', ');
-		return new Date(`${year}-${month}-01`).toISOString().split('T')[0];
-	};
 	const { labels, dataset } = useMemo(() => {
 		const lastPrices = data.reduce<{ [key: string]: number }>(
 			(acc, { data }) => {
-				for (const date of Object.keys(data?.lastPrices || {})) {
-					acc[date] = (acc[date] || 0) + data?.lastPrices[date];
+				for (const msDate of Object.keys(data?.lastPrices || {})) {
+					acc[msDate] = (acc[msDate] || 0) + data?.lastPrices[msDate];
 				}
 
 				return acc;
@@ -103,16 +101,21 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		);
 
 		const sorted = Object.entries(lastPrices).sort(
-			([dateA], [dateB]) =>
-				new Date(formatDate(dateA)).getTime() -
-				new Date(formatDate(dateB)).getTime()
+			([dateA], [dateB]) => Number(dateA) - Number(dateB)
 		);
 
 		return {
-			labels: sorted.map((item) => item[0]),
+			labels: sorted.map((item) =>
+				new Date(Number(item[0]))
+					.toLocaleDateString(locale === 'en' ? 'en-US' : 'ru-RU', {
+						year: 'numeric',
+						month: 'long',
+					})
+					.replace(' г.', '')
+			),
 			dataset: sorted.map((item) => item[1]),
 		};
-	}, [data]);
+	}, [data, locale]);
 
 	const prevValue = data.reduce((acc, { id, data }) => {
 		const countObject = counts.find((count) => count[id]);

@@ -32,8 +32,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TGLD },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postTbruCandles: builder.mutation<
@@ -45,8 +45,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TBRU },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postTlcbCandles: builder.mutation<
@@ -58,8 +58,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TLCB },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postTpayCandles: builder.mutation<
@@ -71,8 +71,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TPAY },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postTmosCandles: builder.mutation<
@@ -84,8 +84,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TMOS },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postTitrCandles: builder.mutation<
@@ -97,8 +97,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.TITR },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postLqdtCandles: builder.mutation<
@@ -110,8 +110,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: etfIds.LQDT },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postBeluCandles: builder.mutation<
@@ -123,8 +123,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.BELU },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postChmfCandles: builder.mutation<
@@ -136,8 +136,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.CHMF },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postMagnCandles: builder.mutation<
@@ -149,8 +149,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.MAGN },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postMgntCandles: builder.mutation<
@@ -162,8 +162,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.MGNT },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postNlmkCandles: builder.mutation<
@@ -175,8 +175,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.NLMK },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 
 		postSberpCandles: builder.mutation<
@@ -188,8 +188,8 @@ export const tInvestApi = createApi({
 				method: 'POST',
 				params: { ...params, instrumentId: sharesIds.SBERP },
 			}),
-			transformResponse: (response: ICandlesResponse, _, arg) =>
-				getPreparedCandlesData(response, arg.limit),
+			transformResponse: (response: ICandlesResponse) =>
+				getPreparedCandlesData(response),
 		}),
 	}),
 });
