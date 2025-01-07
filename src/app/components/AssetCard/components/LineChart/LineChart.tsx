@@ -13,8 +13,11 @@ import {
 import styles from './styles.module.css';
 import {
 	lineChartPrimaryColorSchema,
+	lineChartPrimaryColorSchemaDark,
 	lineChartSecondaryColorSchema,
+	lineChartSecondaryColorSchemaDark,
 } from '@/constants/colors';
+import { useTheme } from '@/config/providers';
 
 ChartJS.register(
 	LinearScale,
@@ -32,13 +35,22 @@ type TProps = {
 };
 
 export const LineChart = ({ labels, dataset }: TProps) => {
+	const { theme } = useTheme();
+	const isDarkTheme = theme === 'dark';
+	const primaryColorSchema = isDarkTheme
+		? lineChartPrimaryColorSchemaDark
+		: lineChartPrimaryColorSchema;
+	const secondaryColorSchema = isDarkTheme
+		? lineChartSecondaryColorSchemaDark
+		: lineChartSecondaryColorSchema;
+
 	const chartData = {
 		labels,
 		datasets: [
 			{
 				data: dataset,
 				fill: true,
-				...lineChartPrimaryColorSchema,
+				...primaryColorSchema,
 			},
 		],
 	};
@@ -49,15 +61,15 @@ export const LineChart = ({ labels, dataset }: TProps) => {
 			y: {
 				beginAtZero: true,
 				grid: {
-					color: lineChartSecondaryColorSchema.gridColor,
+					color: secondaryColorSchema.gridColor,
 				},
 				ticks: {
-					color: lineChartSecondaryColorSchema.ticksColor,
+					color: secondaryColorSchema.ticksColor,
 				},
 			},
 			x: {
 				ticks: {
-					color: lineChartSecondaryColorSchema.xTicksColor,
+					color: secondaryColorSchema.xTicksColor,
 				},
 			},
 		},

@@ -13,9 +13,16 @@ type TProps = {
 	values: number[];
 	labels: string[];
 	colorSchema: string[];
+	labelColor: string;
 };
 
-export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
+export const ChartCard = ({
+	title,
+	values,
+	labels,
+	colorSchema,
+	labelColor,
+}: TProps) => {
 	const t = useTranslation();
 
 	const options = {
@@ -23,6 +30,9 @@ export const ChartCard = ({ title, values, labels, colorSchema }: TProps) => {
 		plugins: {
 			legend: {
 				display: true,
+				labels: {
+					color: labelColor,
+				},
 			},
 		},
 	};

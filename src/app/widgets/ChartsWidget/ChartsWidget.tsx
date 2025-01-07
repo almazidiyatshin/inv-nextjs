@@ -4,8 +4,14 @@ import { ChartCard } from '@/app/components/ChartCard';
 import styles from './styles.module.css';
 import { memo } from 'react';
 import { TPostPortfolioData } from '@/config/api';
-import { chartColorSchema } from '@/constants/colors';
+import {
+	chartColorSchema,
+	chartColorSchemaDark,
+	chartLabelColor,
+	chartLabelColorDark,
+} from '@/constants/colors';
 import { useTranslation } from '@/app/hooks/useTranslation';
+import { useTheme } from '@/config/providers';
 
 type TProps = {
 	data: TPostPortfolioData;
@@ -13,6 +19,10 @@ type TProps = {
 
 export const ChartsWidget = memo<TProps>(({ data }) => {
 	const t = useTranslation();
+	const { theme } = useTheme();
+	const isDarkTheme = theme === 'dark';
+	const colorSchema = isDarkTheme ? chartColorSchemaDark : chartColorSchema;
+	const labelColor = isDarkTheme ? chartLabelColorDark : chartLabelColor;
 
 	const {
 		allSharesSum,
@@ -50,7 +60,7 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 				`${t('gold')} (${goldPercent.toFixed(0)}%)`,
 			],
 			values: [allSharesPercent, allBondsPercent, goldPercent],
-			colorSchema: chartColorSchema,
+			colorSchema,
 		},
 		{
 			title: t('allBondsStatistics'),
@@ -61,7 +71,7 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 				`LQDT (${lqdtPercent.toFixed(0)}%)`,
 			],
 			values: [tbruPercent, tlcbPercent, tpayPercent, lqdtPercent],
-			colorSchema: chartColorSchema,
+			colorSchema,
 		},
 		{
 			title: t('allSharesStatistics'),
@@ -71,7 +81,7 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 				`TITR (${titrPercent.toFixed(0)}%)`,
 			],
 			values: [otherSharesPercent, tmosPercent, titrPercent],
-			colorSchema: chartColorSchema,
+			colorSchema,
 		},
 	];
 
@@ -84,6 +94,7 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 					labels={labels}
 					values={values}
 					colorSchema={colorSchema}
+					labelColor={labelColor}
 				/>
 			))}
 		</div>
