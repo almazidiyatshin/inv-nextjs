@@ -15,7 +15,6 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 	const t = useTranslation();
 
 	const {
-		totalSum,
 		allSharesSum,
 		allBondsSum,
 		goldSum,
@@ -35,12 +34,6 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 	} = data;
 
 	const assetsConfig = [
-		{
-			id: EAssetIds.ALL,
-			title: t('allAssetsValue'),
-			value: totalSum,
-			isPrimary: true,
-		},
 		{
 			id: EAssetIds.SHARES,
 			title: t('allSharesValue'),

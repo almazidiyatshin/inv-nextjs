@@ -1,6 +1,6 @@
-.ratesContainer {
+.paramsContainer {
 	display: flex;
-	gap: 12px;
-	margin-bottom: 12px;
 	flex-wrap: wrap;
+	gap: 18px;
+	max-width: 100%;
 }

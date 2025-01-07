@@ -42,7 +42,7 @@ export interface IPortfolioResponse {
 
 export type TPortfolioResponse = Pick<
 	IPortfolioResponse,
-	'positions' | 'totalAmountShares'
+	'positions' | 'expectedYield' | 'totalAmountShares'
 >;
 
 export type TPostPortfolioData = {
@@ -70,6 +70,7 @@ export type TPostPortfolioData = {
 	mgntCount: string;
 	nlmkCount: string;
 	sberpCount: string;
+	expectedYield: number;
 };
 
 type TCandle = {

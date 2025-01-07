@@ -1,4 +1,4 @@
-import { Header } from '../../components/Header';
+import { Header } from '../../widgets/Header';
 import { Widgets } from '../../widgets/Widgets';
 import '../../global.css';
 import { TLocale } from '@/app/hooks/useTranslation';

@@ -1,37 +1,52 @@
-import { ERatesIds } from '@/constants/common';
+'use client';
 
 import styles from './styles.module.css';
-import { Indicator } from '@/app/components/Indicator';
-import { TLocale, useTranslation } from '@/app/hooks/useTranslation';
+import { TPostPortfolioData } from '@/config/api';
+import { memo } from 'react';
+import { useTranslation } from '@/app/hooks/useTranslation';
+import { IndicatorCard } from '@/app/components/IndicatorCard';
+import { ERatesIds } from '@/constants/common';
+import { TGetIndicatorsApiReturn } from '@/config/api/commonApi/types';
+import { toRub } from '@/app/utils/toRub';
 
 type TProps = {
-	data: string[];
-	locale: TLocale;
+	portfolioData: TPostPortfolioData;
+	indicatorsData: TGetIndicatorsApiReturn;
 };
 
-export const IndicatorsWidget = ({ data, locale }: TProps) => {
-	const t = useTranslation(locale);
+export const IndicatorsWidget = memo<TProps>(
+	({ portfolioData, indicatorsData }) => {
+		const t = useTranslation();
 
-	const [inflationRate, keyRate] = data;
+		const { totalSum } = portfolioData;
+		const [inflationRate, keyRate] = indicatorsData;
 
-	const ratesConfig = [
-		{
-			id: ERatesIds.INFLATION,
-			title: t('inflationRate'),
-			value: inflationRate,
-		},
-		{
-			id: ERatesIds.KEY,
-			title: t('keyRate'),
-			value: keyRate,
-		},
-	];
+		const paramsConfig = [
+			{
+				id: ERatesIds.TOTAL,
+				title: t('allAssetsValue'),
+				value: toRub(totalSum),
+			},
+			{
+				id: ERatesIds.INFLATION,
+				title: t('inflationRate'),
+				value: inflationRate,
+			},
+			{
+				id: ERatesIds.KEY,
+				title: t('keyRate'),
+				value: keyRate,
+			},
+		];
 
-	return (
-		<div className={styles.ratesContainer}>
-			{ratesConfig.map((config) => (
-				<Indicator key={config.id} {...config} />
-			))}
-		</div>
-	);
-};
+		return (
+			<div className={styles.paramsContainer}>
+				{paramsConfig.map((config) => (
+					<IndicatorCard key={config.id} {...config} />
+				))}
+			</div>
+		);
+	}
+);
+
+IndicatorsWidget.displayName = 'IndicatorsWidget';

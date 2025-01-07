@@ -24,13 +24,13 @@ export enum ECandleInterval {
 }
 
 export enum EAssetIds {
-	ALL = 'all',
 	SHARES = 'shares',
 	BONDS = 'bonds',
 	GOLD = 'gold',
 }
 
 export enum ERatesIds {
+	TOTAL = 'total',
 	INFLATION = 'inflation',
 	KEY = 'key',
 }

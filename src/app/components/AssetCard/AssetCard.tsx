@@ -7,7 +7,8 @@ import { PrevValue } from './components/PrevValue';
 import { toRub } from '@/app/utils/toRub';
 import { EAssetIds } from '@/constants/common';
 import { useTranslation } from '@/app/hooks/useTranslation';
-import { TbZoom as ZoomIcon } from 'react-icons/tb';
+import { TbZoomIn as ZoomIconIn } from 'react-icons/tb';
+import { TbZoomOut as ZoomIconOut } from 'react-icons/tb';
 import cn from 'classnames';
 
 type TProps = {
@@ -17,7 +18,6 @@ type TProps = {
 	counts?: {
 		[x: string]: number;
 	}[];
-	isPrimary?: boolean;
 	isExpanded?: boolean;
 	onToggle?: () => void;
 };
@@ -27,7 +27,6 @@ export const AssetCard = ({
 	title,
 	value,
 	counts,
-	isPrimary,
 	isExpanded,
 	onToggle,
 }: TProps) => {
@@ -47,32 +46,28 @@ export const AssetCard = ({
 		<div className={cn(styles.card, { [styles.card__expanded]: isExpanded })}>
 			<div className={styles.titleWrapper}>
 				<p className={styles.title}>{title}</p>
-				{!isPrimary && (
-					<button
-						className={cn(styles.expandBtn, {
-							[styles.expandBtn__active]: isExpanded,
-						})}
-						title={t('expand')}
-						onClick={onToggle}
-					>
-						<ZoomIcon />
-					</button>
-				)}
+				<button
+					className={cn(styles.expandBtn, {
+						[styles.expandBtn__active]: isExpanded,
+					})}
+					title={t('expand')}
+					onClick={onToggle}
+				>
+					{isExpanded ? <ZoomIconOut /> : <ZoomIconIn />}
+				</button>
 			</div>
 			<div
-				className={cn(styles.value, { [styles.value__primary]: isPrimary })}
+				className={styles.value}
 				onClick={() => {
 					const rawValue = value.toFixed();
 					navigator.clipboard.writeText(rawValue);
 					setTooltipText(t('copied'));
 				}}
 			>
-				{!isPrimary && (
-					<div className={styles.tooltip}>
-						{tooltipText}
-						{tooltipText === t('clickToCopy') && <CopyIcon />}
-					</div>
-				)}
+				<div className={styles.tooltip}>
+					{tooltipText}
+					{tooltipText === t('clickToCopy') && <CopyIcon />}
+				</div>
 				<p>{toRub(value)}</p>
 			</div>
 			{counts && <PrevValue id={id} value={value} counts={counts} />}

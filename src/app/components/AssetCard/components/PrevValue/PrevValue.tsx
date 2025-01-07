@@ -4,7 +4,6 @@ import { toRub } from '@/app/utils/toRub';
 import styles from './styles.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	setAllFilters,
 	setBondsFilters,
 	setGoldFilters,
 	setSharesFilters,
@@ -48,7 +47,6 @@ type TProps = {
 };
 
 const fetchCallbacks = {
-	[EAssetIds.ALL]: [{ id: '', fetch: () => {} }],
 	[EAssetIds.SHARES]: [
 		{ id: etfIds.TMOS, fetch: usePostTmosCandlesMutation },
 		{ id: etfIds.TITR, fetch: usePostTitrCandlesMutation },
@@ -69,7 +67,6 @@ const fetchCallbacks = {
 };
 
 const dispatchCallbacks = {
-	[EAssetIds.ALL]: setAllFilters,
 	[EAssetIds.SHARES]: setSharesFilters,
 	[EAssetIds.BONDS]: setBondsFilters,
 	[EAssetIds.GOLD]: setGoldFilters,

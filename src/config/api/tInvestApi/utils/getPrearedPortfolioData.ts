@@ -44,6 +44,11 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 	const allBondsSum = tbruSum + tlcbSum + tpaySum + lqdtSum;
 	const goldSum = calculateTotal(etfIds.TGLD, etfData);
 
+	const expectedYield = getFloatCost(
+		response.expectedYield.units,
+		response.expectedYield.nano
+	);
+
 	return {
 		allSharesSum,
 		allBondsSum,
@@ -69,5 +74,6 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		mgntCount: sharesData[sharesIds.MGNT].units,
 		nlmkCount: sharesData[sharesIds.NLMK].units,
 		sberpCount: sharesData[sharesIds.SBERP].units,
+		expectedYield: expectedYield,
 	};
 };

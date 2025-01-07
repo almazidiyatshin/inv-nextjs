@@ -38,18 +38,8 @@
 	font-weight: 600;
 }
 
-.value__primary {
-	cursor: initial;
-	font-weight: 400;
-	font-size: 48px;
-}
-
 .value:hover {
 	color: var(--secondary);
-}
-
-.value__primary:hover {
-	color: inherit;
 }
 
 .value:hover .tooltip {

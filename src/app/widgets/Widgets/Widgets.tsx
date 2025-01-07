@@ -9,6 +9,8 @@ import { usePostPortfolioMutation } from '@/config/api';
 import { store } from '@/config/store';
 import { LS_LOCALE_KEY } from '@/constants/common';
 import { TLocale } from '@/app/hooks/useTranslation';
+import { useGetIndicatorsQuery } from '@/config/api/commonApi/commonApi';
+import { IndicatorsWidget } from '../IndicatorsWidget';
 
 type TProps = {
 	locale: TLocale;
@@ -17,9 +19,11 @@ type TProps = {
 export const WidgetsInner = () => {
 	const [getPortfolio, { data: portfolioData, isLoading: isPortfolioLoading }] =
 		usePostPortfolioMutation();
+	const { data: indicatorsData, isLoading: isIndicatorsLoading } =
+		useGetIndicatorsQuery();
 
-	const isLoading = isPortfolioLoading;
-	const hasNoData = !portfolioData;
+	const isLoading = isPortfolioLoading || isIndicatorsLoading;
+	const hasNoData = !portfolioData || !indicatorsData;
 
 	useEffect(() => {
 		getPortfolio();
@@ -35,6 +39,10 @@ export const WidgetsInner = () => {
 
 	return (
 		<>
+			<IndicatorsWidget
+				portfolioData={portfolioData}
+				indicatorsData={indicatorsData}
+			/>
 			<AssetsWidget data={portfolioData} />
 			<ChartsWidget data={portfolioData} />
 		</>
