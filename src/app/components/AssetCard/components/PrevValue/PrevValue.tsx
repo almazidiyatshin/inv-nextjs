@@ -86,6 +86,10 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		[ECandleInterval.TEN_YEARS]: t('lastTenYears'),
 	};
 
+	const formatDate = (dateStr: string) => {
+		const [month, year] = dateStr.split(', ');
+		return new Date(`${year}-${month}-01`).toISOString().split('T')[0];
+	};
 	const lastPrices = useMemo(() => {
 		const lastPrices = data.reduce<{ [key: string]: number }>(
 			(acc, { data }) => {
@@ -101,7 +105,8 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		return Object.fromEntries(
 			Object.entries(lastPrices).sort(
 				([dateA], [dateB]) =>
-					new Date(dateA).getTime() - new Date(dateB).getTime()
+					new Date(formatDate(dateA)).getTime() -
+					new Date(formatDate(dateB)).getTime()
 			)
 		);
 	}, [data]);
