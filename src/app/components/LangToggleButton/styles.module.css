@@ -1,18 +1,24 @@
 .btnGroup {
 	display: flex;
-	gap: 6px;
 }
 
 .btn {
 	display: flex;
 	align-items: center;
 	border: none;
-	border-radius: 6px;
 	padding: 4px 6px;
 	color: var(--btn-text);
 	background-color: var(--btn-bg);
 	gap: 4px;
 	cursor: pointer;
+}
+
+.btn_left {
+	border-radius: 6px 0 0 6px;
+}
+
+.btn_right {
+	border-radius: 0 6px 6px 0;
 }
 
 .btn__active {

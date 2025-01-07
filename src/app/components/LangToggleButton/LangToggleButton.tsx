@@ -5,10 +5,12 @@ import styles from './styles.module.css';
 import cn from 'classnames';
 import { LS_LOCALE_KEY } from '@/constants/common';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from '@/app/hooks/useTranslation';
 
 const locales = ['en', 'ru'];
 
 export const LangToggleButton = () => {
+	const t = useTranslation();
 	const router = useRouter();
 	const pathname = usePathname();
 	const [currentLocale, setCurrentLocale] = useState<string | null>(null);
@@ -47,8 +49,11 @@ export const LangToggleButton = () => {
 					<button
 						key={locale}
 						value={locale}
+						title={`${t('changeLanguage')} ${locale}`}
 						className={cn(styles.btn, {
 							[styles.btn__active]: isActive,
+							[styles.btn_left]: locale === 'en',
+							[styles.btn_right]: locale === 'ru',
 						})}
 						disabled={isActive}
 						onClick={() => handleChangeLocale(locale)}
