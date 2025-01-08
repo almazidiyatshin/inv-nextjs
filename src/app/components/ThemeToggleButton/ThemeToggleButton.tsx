@@ -15,6 +15,7 @@ export const ThemeToggleButton = () => {
 				className={cn(styles.btn, styles.btn_left, {
 					[styles.btn__active]: !isDarkTheme,
 				})}
+				disabled={!isDarkTheme}
 				onClick={toggleTheme}
 			>
 				<LightThemeIcon className={styles.icon} />
@@ -23,6 +24,7 @@ export const ThemeToggleButton = () => {
 				className={cn(styles.btn, styles.btn_right, {
 					[styles.btn__active]: isDarkTheme,
 				})}
+				disabled={isDarkTheme}
 				onClick={toggleTheme}
 			>
 				<DarkThemeIcon className={styles.icon} />

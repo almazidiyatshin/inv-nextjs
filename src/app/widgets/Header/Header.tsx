@@ -22,7 +22,7 @@ export const Header = ({ locale }: TProps) => {
 					<LangToggleButton />
 					<ThemeToggleButton />
 				</div>
-				<h1>{t('investmentPortfolio')}</h1>
+				<h1 className={styles.title}>{t('investmentPortfolio')}</h1>
 			</div>
 		</SessionProvider>
 	);

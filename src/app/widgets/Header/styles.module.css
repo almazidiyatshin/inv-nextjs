@@ -2,4 +2,9 @@
 	display: flex;
 	justify-content: end;
 	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.title {
+	margin-top: 0;
 }
