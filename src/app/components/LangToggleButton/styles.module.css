@@ -26,10 +26,6 @@
 	background-color: var(--btn-bg-active);
 	cursor: default;
 }
-.btn__dark {
-	color: var(--btn-text-active);
-	background-color: var(--btn-bg-active);
-}
 
 .btn:hover {
 	color: var(--btn-hover-text);
