@@ -9,6 +9,7 @@ export const LoginButton = () => {
 	const t = useTranslation();
 	const { status, data } = useSession();
 	const isAuthenticated = status === 'authenticated';
+	const isAdmin = data?.user?.role === 'admin';
 
 	const btnTitle = t(isAuthenticated ? 'logout' : 'login');
 	const userName = data?.user?.name;
@@ -29,7 +30,11 @@ export const LoginButton = () => {
 						height={20}
 					/>
 				)}
-				<div>{isAuthenticated ? userName : t('demoMode')}</div>
+				<div>
+					{isAuthenticated && isAdmin
+						? userName
+						: `${userName} (${t('demoMode')})`}
+				</div>
 			</div>
 			<button title={btnTitle} className={styles.btn} onClick={handleBtnClick}>
 				{btnTitle}
