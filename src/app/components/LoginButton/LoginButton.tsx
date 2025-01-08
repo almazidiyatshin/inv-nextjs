@@ -31,9 +31,11 @@ export const LoginButton = () => {
 					/>
 				)}
 				<div>
-					{isAuthenticated && isAdmin
-						? userName
-						: `${userName} (${t('demoMode')})`}
+					{isAuthenticated
+						? isAdmin
+							? userName
+							: `${userName} (${t('demoMode')})`
+						: t('demoMode')}
 				</div>
 			</div>
 			<button title={btnTitle} className={styles.btn} onClick={handleBtnClick}>
