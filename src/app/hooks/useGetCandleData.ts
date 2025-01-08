@@ -27,12 +27,13 @@ export const useGetCandleData = (
 
 	useEffect(() => {
 		if (filters.interval) {
-			results.forEach(({ value: [fetch] }) => {
+			results.forEach(({ id, value: [fetch] }) => {
 				fetch({
 					from,
 					to,
 					interval: 'CANDLE_INTERVAL_MONTH',
 					limit: getLimit(filters.interval),
+					instrumentId: id,
 				});
 			});
 		}

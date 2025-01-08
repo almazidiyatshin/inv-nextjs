@@ -27,5 +27,8 @@
 	"5Y": "5Y",
 	"10Y": "10Y",
 	"expand": "Expand",
-	"changeLanguage": "Change language on"
+	"changeLanguage": "Change language on",
+	"login": "Login",
+	"logout": "Logout",
+	"demoMode": "Demo mode"
 }

@@ -1,7 +1,7 @@
 import { ECandleInterval } from '@/constants/common';
 
 export interface ICurrencyAmount {
-	currency: string;
+	currency?: string;
 	units: string;
 	nano: number;
 }

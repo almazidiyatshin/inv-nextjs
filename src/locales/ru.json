@@ -27,5 +27,8 @@
 	"fiveYears": "5 лет",
 	"tenYears": "10 лет",
 	"expand": "Развернуть",
-	"changeLanguage": "Изменить язык на"
+	"changeLanguage": "Изменить язык на",
+	"login": "Войти",
+	"logout": "Выйти",
+	"demoMode": "Демо-режим"
 }

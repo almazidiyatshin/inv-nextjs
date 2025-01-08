@@ -1,5 +1,5 @@
 .menu {
 	display: flex;
 	justify-content: end;
-	gap: 6px;
+	gap: 12px;
 }

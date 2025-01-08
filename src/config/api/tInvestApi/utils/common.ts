@@ -14,3 +14,7 @@ export const getAssetData = (assetId: string, response: TPortfolioResponse) => {
 		units: etf.quantity.units,
 	};
 };
+
+export const getRandomInteger = () => Math.floor(Math.random() * 100);
+export const getRandomBigInteger = () =>
+	Math.floor(Math.random() * 10000000000);

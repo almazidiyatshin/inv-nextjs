@@ -1,0 +1,35 @@
+.authGroup {
+	display: flex;
+}
+
+.userInfo {
+	display: flex;
+	align-items: center;
+	border: none;
+	border-radius: 6px 0 0 6px;
+	padding: 4px 6px;
+	color: var(--btn-text-active);
+	background-color: var(--btn-bg-active);
+	gap: 4px;
+	font-size: 13px;
+}
+
+.avatar {
+	border-radius: 20px;
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	border: none;
+	border-radius: 0 6px 6px 0;
+	padding: 4px 6px;
+	color: var(--btn-text);
+	background-color: var(--btn-bg);
+	gap: 4px;
+	cursor: pointer;
+}
+.btn:hover {
+	color: var(--btn-hover-text);
+	background-color: var(--btn-bg-hover);
+}

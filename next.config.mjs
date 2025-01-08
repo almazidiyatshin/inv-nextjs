@@ -4,6 +4,9 @@ const nextConfig = {
 		locales: ['en-US'],
 		defaultLocale: 'en-US',
 	},
+	images: {
+		domains: ['avatars.githubusercontent.com'],
+	},
 	async redirects() {
 		return [
 			{

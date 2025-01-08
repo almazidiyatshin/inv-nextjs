@@ -1,195 +1,136 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
-	ICandlesResponse,
-	TPortfolioResponse,
 	TPostCandlesApiReturn,
 	TPostCandlesApiParams,
 	TPostPortfolioData,
 } from './types';
-import { etfIds, sharesIds } from '@/constants/common';
-import { getPreparedPortfolioData } from './utils/getPrearedPortfolioData';
-import { getPreparedCandlesData } from './utils/getPreparedCandlesData';
+import { postCandlesQueryFn, postPortfolioQueryFn } from './utils/queryFns';
 
 export const tInvestApi = createApi({
 	reducerPath: 'tInvestApi',
 	baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
 	endpoints: (builder) => ({
 		postPortfolio: builder.mutation<TPostPortfolioData, void>({
-			query: () => ({
-				url: '/portfolio',
-				method: 'POST',
-			}),
-			transformResponse: (response: TPortfolioResponse) =>
-				getPreparedPortfolioData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postPortfolioQueryFn,
 		}),
 
 		postTgldCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: etfIds.TGLD },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postTbruCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: etfIds.TBRU },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postTlcbCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: etfIds.TLCB },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postTpayCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: etfIds.TPAY },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postTmosCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: etfIds.TMOS },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postTitrCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: etfIds.TITR },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postLqdtCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: etfIds.LQDT },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postBeluCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: sharesIds.BELU },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postChmfCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: sharesIds.CHMF },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postMagnCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: sharesIds.MAGN },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postMgntCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: sharesIds.MGNT },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postNlmkCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: sharesIds.NLMK },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 
 		postSberpCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
-			query: (params) => ({
-				url: '/candles',
-				method: 'POST',
-				params: { ...params, instrumentId: sharesIds.SBERP },
-			}),
-			transformResponse: (response: ICandlesResponse) =>
-				getPreparedCandlesData(response),
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			queryFn: postCandlesQueryFn,
 		}),
 	}),
 });
