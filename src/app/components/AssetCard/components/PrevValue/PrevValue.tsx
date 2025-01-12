@@ -85,11 +85,15 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 		[ECandleInterval.TEN_YEARS]: t('lastTenYears'),
 	};
 
-	const { labels, dataset } = useMemo(() => {
+	const { prevValue, labels, dataset } = useMemo(() => {
 		const lastPrices = data.reduce<{ [key: string]: number }>(
-			(acc, { data }) => {
+			(acc, { id, data }) => {
+				const countObject = counts.find((count) => count[id]);
+				const countValue = countObject ? countObject[id] : 0;
+
 				for (const msDate of Object.keys(data?.lastPrices || {})) {
-					acc[msDate] = (acc[msDate] || 0) + data?.lastPrices[msDate];
+					acc[msDate] =
+						(acc[msDate] || 0) + data?.lastPrices[msDate] * countValue;
 				}
 
 				return acc;
@@ -101,6 +105,8 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 			([dateA], [dateB]) => Number(dateA) - Number(dateB)
 		);
 
+		const prevValue = sorted[0];
+
 		return {
 			labels: sorted.map((item) =>
 				new Date(Number(item[0]))
@@ -111,17 +117,13 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 					.replace(' г.', '')
 			),
 			dataset: sorted.map((item) => item[1]),
+			prevValue: prevValue?.[1] || 0,
 		};
-	}, [data, locale]);
-
-	const prevValue = data.reduce((acc, { id, data }) => {
-		const countObject = counts.find((count) => count[id]);
-		const countValue = countObject ? countObject[id] : 0;
-
-		return acc + data?.lastPrice * countValue;
-	}, 0);
+	}, [data, locale, counts]);
 
 	const diff = value - prevValue;
+
+	console.log({ value, prevValue, diff });
 
 	const handleRangeClick = (interval: ECandleInterval) => () => {
 		dispatch(dispatchCallbacks[id]({ interval }));

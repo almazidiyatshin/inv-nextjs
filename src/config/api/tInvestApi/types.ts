@@ -93,6 +93,5 @@ export type TPostCandlesApiParams = {
 	limit: number;
 };
 export type TPostCandlesApiReturn = {
-	lastPrice: number;
 	lastPrices: { [key: string]: number };
 };

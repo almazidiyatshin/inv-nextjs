@@ -30,5 +30,5 @@
 	"changeLanguage": "Change language on",
 	"login": "Login",
 	"logout": "Logout",
-	"demoMode": "Demo mode"
+	"demoMode": "Demo mode with random data"
 }
