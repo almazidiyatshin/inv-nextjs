@@ -43,7 +43,7 @@ export const tInvestApi = createApi({
 			queryFn: postCandlesQueryFn,
 		}),
 
-		postTpayCandles: builder.mutation<
+		postTofzCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
 		>({
@@ -140,7 +140,7 @@ export const {
 	usePostTgldCandlesMutation,
 	usePostTbruCandlesMutation,
 	usePostTlcbCandlesMutation,
-	usePostTpayCandlesMutation,
+	usePostTofzCandlesMutation,
 	usePostTmosCandlesMutation,
 	usePostTitrCandlesMutation,
 	usePostBeluCandlesMutation,

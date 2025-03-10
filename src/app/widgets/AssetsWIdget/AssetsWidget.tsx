@@ -21,7 +21,7 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		tgldCount,
 		tbruCount,
 		tlcbCount,
-		tpayCount,
+		tofzCount,
 		tmosCount,
 		titrCount,
 		beluCount,
@@ -56,7 +56,7 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 			counts: [
 				{ [etfIds.TBRU]: Number(tbruCount) },
 				{ [etfIds.TLCB]: Number(tlcbCount) },
-				{ [etfIds.TPAY]: Number(tpayCount) },
+				{ [etfIds.TOFZ]: Number(tofzCount) },
 				{ [etfIds.LQDT]: Number(lqdtCount) },
 			],
 		},

@@ -23,7 +23,7 @@ import {
 	usePostTitrCandlesMutation,
 	usePostTlcbCandlesMutation,
 	usePostTmosCandlesMutation,
-	usePostTpayCandlesMutation,
+	usePostTofzCandlesMutation,
 	usePostBeluCandlesMutation,
 	usePostChmfCandlesMutation,
 	usePostMagnCandlesMutation,
@@ -60,7 +60,7 @@ const fetchCallbacks = {
 	[EAssetIds.BONDS]: [
 		{ id: etfIds.TBRU, fetch: usePostTbruCandlesMutation },
 		{ id: etfIds.TLCB, fetch: usePostTlcbCandlesMutation },
-		{ id: etfIds.TPAY, fetch: usePostTpayCandlesMutation },
+		{ id: etfIds.TOFZ, fetch: usePostTofzCandlesMutation },
 		{ id: etfIds.LQDT, fetch: usePostLqdtCandlesMutation },
 	],
 	[EAssetIds.GOLD]: [{ id: etfIds.TGLD, fetch: usePostTgldCandlesMutation }],

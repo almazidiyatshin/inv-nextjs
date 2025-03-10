@@ -52,7 +52,7 @@ export type TPostPortfolioData = {
 	totalSum: number;
 	tbruSum: number;
 	tlcbSum: number;
-	tpaySum: number;
+	tofzSum: number;
 	tmosSum: number;
 	titrSum: number;
 	lqdtSum: number;
@@ -60,7 +60,7 @@ export type TPostPortfolioData = {
 	tgldCount: string;
 	tbruCount: string;
 	tlcbCount: string;
-	tpayCount: string;
+	tofzCount: string;
 	tmosCount: string;
 	titrCount: string;
 	lqdtCount: string;
