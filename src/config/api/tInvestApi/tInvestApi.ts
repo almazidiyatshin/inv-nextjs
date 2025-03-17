@@ -123,15 +123,6 @@ export const tInvestApi = createApi({
 			// @ts-ignore
 			queryFn: postCandlesQueryFn,
 		}),
-
-		postSberpCandles: builder.mutation<
-			TPostCandlesApiReturn,
-			TPostCandlesApiParams
-		>({
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			queryFn: postCandlesQueryFn,
-		}),
 	}),
 });
 
@@ -148,6 +139,5 @@ export const {
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
-	usePostSberpCandlesMutation,
 	usePostLqdtCandlesMutation,
 } = tInvestApi;

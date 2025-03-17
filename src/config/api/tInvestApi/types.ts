@@ -69,7 +69,6 @@ export type TPostPortfolioData = {
 	magnCount: string;
 	mgntCount: string;
 	nlmkCount: string;
-	sberpCount: string;
 	expectedYield: number;
 };
 

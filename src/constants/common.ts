@@ -12,7 +12,6 @@ export const sharesIds = {
 	NLMK: '161eb0d0-aaac-4451-b374-f5d0eeb1b508',
 	MAGN: '7132b1c9-ee26-4464-b5b5-1046264b61d9',
 	BELU: '974077c4-d893-4058-9314-8f1b64a444b8',
-	SBERP: 'c190ff1f-1447-4227-b543-316332699ca5',
 	MGNT: 'ca845f68-6c43-44bc-b584-330d2a1e5eb7',
 	CHMF: 'fa6aae10-b8d5-48c8-bbfd-d320d925d096',
 };

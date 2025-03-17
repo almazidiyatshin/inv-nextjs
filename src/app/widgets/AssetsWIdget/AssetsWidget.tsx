@@ -29,7 +29,6 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		magnCount,
 		mgntCount,
 		nlmkCount,
-		sberpCount,
 		lqdtCount,
 	} = data;
 
@@ -46,7 +45,6 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 				{ [sharesIds.MAGN]: Number(magnCount) },
 				{ [sharesIds.MGNT]: Number(mgntCount) },
 				{ [sharesIds.NLMK]: Number(nlmkCount) },
-				{ [sharesIds.SBERP]: Number(sberpCount) },
 			],
 		},
 		{

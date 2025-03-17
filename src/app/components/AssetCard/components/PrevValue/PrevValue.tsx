@@ -29,7 +29,6 @@ import {
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
-	usePostSberpCandlesMutation,
 	usePostLqdtCandlesMutation,
 } from '@/config/api';
 import { PrevValueSkeleton } from './PrevValueSkeleton';
@@ -55,7 +54,6 @@ const fetchCallbacks = {
 		{ id: sharesIds.MAGN, fetch: usePostMagnCandlesMutation },
 		{ id: sharesIds.MGNT, fetch: usePostMgntCandlesMutation },
 		{ id: sharesIds.NLMK, fetch: usePostNlmkCandlesMutation },
-		{ id: sharesIds.SBERP, fetch: usePostSberpCandlesMutation },
 	],
 	[EAssetIds.BONDS]: [
 		{ id: etfIds.TBRU, fetch: usePostTbruCandlesMutation },
