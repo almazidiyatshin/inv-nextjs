@@ -33,7 +33,6 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 	const tbruSum = calculateTotal(etfIds.TBRU, etfData);
 	const tlcbSum = calculateTotal(etfIds.TLCB, etfData);
 	const tofzSum = calculateTotal(etfIds.TOFZ, etfData);
-	const lqdtSum = calculateTotal(etfIds.LQDT, etfData);
 
 	const otherSharesSum = getFloatCost(
 		response.totalAmountShares.units,
@@ -41,7 +40,7 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 	);
 
 	const allSharesSum = otherSharesSum + tmosSum + titrSum;
-	const allBondsSum = tbruSum + tlcbSum + tofzSum + lqdtSum;
+	const allBondsSum = tbruSum + tlcbSum + tofzSum;
 	const goldSum = calculateTotal(etfIds.TGLD, etfData);
 
 	const expectedYield = getFloatCost(
@@ -57,7 +56,6 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		tbruSum,
 		tlcbSum,
 		tofzSum,
-		lqdtSum,
 		tmosSum,
 		titrSum,
 		otherSharesSum,
@@ -67,7 +65,6 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		tofzCount: etfData[etfIds.TOFZ].units,
 		tmosCount: etfData[etfIds.TMOS].units,
 		titrCount: etfData[etfIds.TITR].units,
-		lqdtCount: etfData[etfIds.LQDT].units,
 		beluCount: sharesData[sharesIds.BELU].units,
 		chmfCount: sharesData[sharesIds.CHMF].units,
 		magnCount: sharesData[sharesIds.MAGN].units,

@@ -31,7 +31,6 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 		tbruSum,
 		tlcbSum,
 		tofzSum,
-		lqdtSum,
 		otherSharesSum,
 		tmosSum,
 		titrSum,
@@ -45,7 +44,6 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 	const tbruPercent = (tbruSum / allBondsSum) * 100;
 	const tlcbPercent = (tlcbSum / allBondsSum) * 100;
 	const tofzPercent = (tofzSum / allBondsSum) * 100;
-	const lqdtPercent = (lqdtSum / allBondsSum) * 100;
 
 	const otherSharesPercent = (otherSharesSum / allSharesSum) * 100;
 	const tmosPercent = (tmosSum / allSharesSum) * 100;
@@ -68,9 +66,8 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 				`TBRU (${tbruPercent.toFixed(0)}%)`,
 				`TLCB (${tlcbPercent.toFixed(0)}%)`,
 				`TOFZ (${tofzPercent.toFixed(0)}%)`,
-				`LQDT (${lqdtPercent.toFixed(0)}%)`,
 			],
-			values: [tbruPercent, tlcbPercent, tofzPercent, lqdtPercent],
+			values: [tbruPercent, tlcbPercent, tofzPercent],
 			colorSchema,
 		},
 		{

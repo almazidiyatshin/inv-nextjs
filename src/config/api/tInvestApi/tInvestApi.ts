@@ -70,15 +70,6 @@ export const tInvestApi = createApi({
 			queryFn: postCandlesQueryFn,
 		}),
 
-		postLqdtCandles: builder.mutation<
-			TPostCandlesApiReturn,
-			TPostCandlesApiParams
-		>({
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			queryFn: postCandlesQueryFn,
-		}),
-
 		postBeluCandles: builder.mutation<
 			TPostCandlesApiReturn,
 			TPostCandlesApiParams
@@ -139,5 +130,4 @@ export const {
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
-	usePostLqdtCandlesMutation,
 } = tInvestApi;
