@@ -8,6 +8,8 @@ export const getAssetData = (assetId: string, response: TPortfolioResponse) => {
 		(value) => assetId === value.instrumentUid
 	) as IPosition;
 
+	console.log({ etf });
+
 	return {
 		priceInt: etf.currentPrice.units,
 		priceNano: etf.currentPrice.nano,

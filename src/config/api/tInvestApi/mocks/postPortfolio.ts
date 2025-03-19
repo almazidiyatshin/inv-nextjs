@@ -8,12 +8,6 @@ const positionsData = [
 		instrumentUid: '161eb0d0-aaac-4451-b374-f5d0eeb1b508',
 	},
 	{
-		figi: 'TCS00A108WX3',
-		instrumentType: 'etf',
-		positionUid: '41be4f89-9d19-4eac-9ae4-09276f85956a',
-		instrumentUid: '1d0e01e5-148c-40e5-bb8f-1bf2d8e03c1a',
-	},
-	{
 		figi: 'TCS00A108BL2',
 		instrumentType: 'etf',
 		positionUid: '8da68570-7ebd-44c6-9afc-83abbd2c2eb7',
@@ -50,28 +44,10 @@ const positionsData = [
 		instrumentUid: '974077c4-d893-4058-9314-8f1b64a444b8',
 	},
 	{
-		figi: 'RUB000UTSTOM',
-		instrumentType: 'currency',
-		positionUid: '33e24a92-aab0-409c-88b8-f2d57415b920',
-		instrumentUid: 'a92e2e25-a698-45cc-a781-167cf465257c',
-	},
-	{
 		figi: 'TCS00A1039N1',
 		instrumentType: 'etf',
 		positionUid: 'c1a8e0b5-a4bb-4f4c-b109-68e0149b5b23',
 		instrumentUid: 'a9ff2a1a-f8de-4648-8d5a-6b264f32fcdf',
-	},
-	{
-		figi: 'BBG00RPRPX12',
-		instrumentType: 'etf',
-		positionUid: 'eee36ccf-5f28-4419-9c29-c6465f39581a',
-		instrumentUid: 'ade12bc5-07d9-44fe-b27a-1543e05bacfd',
-	},
-	{
-		figi: 'BBG0047315Y7',
-		instrumentType: 'share',
-		positionUid: '9cf9718d-50df-4326-a205-cf306933607e',
-		instrumentUid: 'c190ff1f-1447-4227-b543-316332699ca5',
 	},
 	{
 		figi: 'BBG004RVFCY3',
@@ -84,6 +60,12 @@ const positionsData = [
 		instrumentType: 'share',
 		positionUid: '50aac9d1-b53b-4d96-934e-941fe78e38aa',
 		instrumentUid: 'fa6aae10-b8d5-48c8-bbfd-d320d925d096',
+	},
+	{
+		figi: 'TCS00A10A1L8',
+		instrumentType: 'etf',
+		positionUid: '3d4bef30-458c-44d6-b7af-7922989e5092',
+		instrumentUid: 'f2a4ebfb-40c7-43d3-bbfc-6a01855c4907',
 	},
 ];
 
