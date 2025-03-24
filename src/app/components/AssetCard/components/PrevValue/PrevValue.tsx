@@ -20,7 +20,6 @@ import { RootState } from '@/config/store/store';
 import {
 	usePostTbruCandlesMutation,
 	usePostTgldCandlesMutation,
-	usePostTitrCandlesMutation,
 	usePostTlcbCandlesMutation,
 	usePostTmosCandlesMutation,
 	usePostTofzCandlesMutation,
@@ -47,7 +46,6 @@ type TProps = {
 const fetchCallbacks = {
 	[EAssetIds.SHARES]: [
 		{ id: etfIds.TMOS, fetch: usePostTmosCandlesMutation },
-		{ id: etfIds.TITR, fetch: usePostTitrCandlesMutation },
 		{ id: sharesIds.BELU, fetch: usePostBeluCandlesMutation },
 		{ id: sharesIds.CHMF, fetch: usePostChmfCandlesMutation },
 		{ id: sharesIds.MAGN, fetch: usePostMagnCandlesMutation },

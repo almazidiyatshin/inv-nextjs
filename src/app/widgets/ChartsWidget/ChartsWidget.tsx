@@ -33,7 +33,6 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 		tofzSum,
 		otherSharesSum,
 		tmosSum,
-		titrSum,
 		totalSum,
 	} = data;
 
@@ -47,7 +46,6 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 
 	const otherSharesPercent = (otherSharesSum / allSharesSum) * 100;
 	const tmosPercent = (tmosSum / allSharesSum) * 100;
-	const titrPercent = (titrSum / allSharesSum) * 100;
 
 	const chartsCongif = [
 		{
@@ -75,9 +73,8 @@ export const ChartsWidget = memo<TProps>(({ data }) => {
 			labels: [
 				`${t('otherShares')} (${otherSharesPercent.toFixed(0)}%)`,
 				`TMOS (${tmosPercent.toFixed(0)}%)`,
-				`TITR (${titrPercent.toFixed(0)}%)`,
 			],
-			values: [otherSharesPercent, tmosPercent, titrPercent],
+			values: [otherSharesPercent, tmosPercent],
 			colorSchema,
 		},
 	];

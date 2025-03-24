@@ -28,7 +28,6 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		return acc;
 	}, {});
 
-	const titrSum = calculateTotal(etfIds.TITR, etfData);
 	const tmosSum = calculateTotal(etfIds.TMOS, etfData);
 	const tbruSum = calculateTotal(etfIds.TBRU, etfData);
 	const tlcbSum = calculateTotal(etfIds.TLCB, etfData);
@@ -39,7 +38,7 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		response.totalAmountShares.nano
 	);
 
-	const allSharesSum = otherSharesSum + tmosSum + titrSum;
+	const allSharesSum = otherSharesSum + tmosSum;
 	const allBondsSum = tbruSum + tlcbSum + tofzSum;
 	const goldSum = calculateTotal(etfIds.TGLD, etfData);
 
@@ -57,14 +56,12 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		tlcbSum,
 		tofzSum,
 		tmosSum,
-		titrSum,
 		otherSharesSum,
 		tgldCount: etfData[etfIds.TGLD].units,
 		tbruCount: etfData[etfIds.TBRU].units,
 		tlcbCount: etfData[etfIds.TLCB].units,
 		tofzCount: etfData[etfIds.TOFZ].units,
 		tmosCount: etfData[etfIds.TMOS].units,
-		titrCount: etfData[etfIds.TITR].units,
 		beluCount: sharesData[sharesIds.BELU].units,
 		chmfCount: sharesData[sharesIds.CHMF].units,
 		magnCount: sharesData[sharesIds.MAGN].units,

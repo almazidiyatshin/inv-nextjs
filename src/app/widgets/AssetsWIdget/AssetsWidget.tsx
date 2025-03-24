@@ -23,7 +23,6 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 		tlcbCount,
 		tofzCount,
 		tmosCount,
-		titrCount,
 		beluCount,
 		chmfCount,
 		magnCount,
@@ -38,7 +37,6 @@ export const AssetsWidget = memo<TProps>(({ data }) => {
 			value: allSharesSum,
 			counts: [
 				{ [etfIds.TMOS]: Number(tmosCount) },
-				{ [etfIds.TITR]: Number(titrCount) },
 				{ [sharesIds.BELU]: Number(beluCount) },
 				{ [sharesIds.CHMF]: Number(chmfCount) },
 				{ [sharesIds.MAGN]: Number(magnCount) },

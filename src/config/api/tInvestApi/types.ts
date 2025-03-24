@@ -54,14 +54,12 @@ export type TPostPortfolioData = {
 	tlcbSum: number;
 	tofzSum: number;
 	tmosSum: number;
-	titrSum: number;
 	otherSharesSum: number;
 	tgldCount: string;
 	tbruCount: string;
 	tlcbCount: string;
 	tofzCount: string;
 	tmosCount: string;
-	titrCount: string;
 	beluCount: string;
 	chmfCount: string;
 	magnCount: string;

@@ -8,12 +8,6 @@ const positionsData = [
 		instrumentUid: '161eb0d0-aaac-4451-b374-f5d0eeb1b508',
 	},
 	{
-		figi: 'TCS00A108BL2',
-		instrumentType: 'etf',
-		positionUid: '8da68570-7ebd-44c6-9afc-83abbd2c2eb7',
-		instrumentUid: '3783c7a7-4c20-49a8-8e28-f54229b414c8',
-	},
-	{
 		figi: 'TCS10A101X50',
 		instrumentType: 'etf',
 		positionUid: '548bde28-a5ea-4b7b-83d3-47b4c56a0167',
