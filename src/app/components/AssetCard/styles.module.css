@@ -76,6 +76,12 @@
 	cursor: pointer;
 }
 
+@media (max-width: 600px) {
+	.expandBtn {
+		display: none;
+	}
+}
+
 .expandBtn:hover {
 	color: var(--btn-hover-text);
 	background-color: var(--btn-bg-hover);

@@ -7,8 +7,8 @@ import { PrevValue } from './components/PrevValue';
 import { toRub } from '@/app/utils/toRub';
 import { EAssetIds } from '@/constants/common';
 import { useTranslation } from '@/app/hooks/useTranslation';
-import { TbZoomIn as ZoomIconIn } from 'react-icons/tb';
-import { TbZoomOut as ZoomIconOut } from 'react-icons/tb';
+import { TbMaximize as MaximizeOnIcon } from 'react-icons/tb';
+import { TbMaximizeOff as MaximizeOffIcon } from 'react-icons/tb';
 import cn from 'classnames';
 
 type TProps = {
@@ -53,7 +53,7 @@ export const AssetCard = ({
 					title={t('expand')}
 					onClick={onToggle}
 				>
-					{isExpanded ? <ZoomIconOut /> : <ZoomIconIn />}
+					{isExpanded ? <MaximizeOffIcon /> : <MaximizeOnIcon />}
 				</button>
 			</div>
 			<div
