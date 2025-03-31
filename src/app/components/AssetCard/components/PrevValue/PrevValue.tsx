@@ -117,8 +117,6 @@ export const PrevValue = ({ id, value, counts }: TProps) => {
 
 	const diff = value - prevValue;
 
-	console.log({ value, prevValue, diff });
-
 	const handleRangeClick = (interval: ECandleInterval) => () => {
 		dispatch(dispatchCallbacks[id]({ interval }));
 	};

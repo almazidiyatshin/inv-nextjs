@@ -6,16 +6,20 @@ import { memo } from 'react';
 import { useTranslation } from '@/app/hooks/useTranslation';
 import { IndicatorCard } from '@/app/components/IndicatorCard';
 import { ERatesIds } from '@/constants/common';
-import { TGetIndicatorsApiReturn } from '@/config/api/commonApi/types';
+import {
+	TGetIndicatorsApiReturn,
+	TGetMoexIndexApiReturn,
+} from '@/config/api/commonApi/types';
 import { toRub } from '@/app/utils/toRub';
 
 type TProps = {
 	portfolioData: TPostPortfolioData;
 	indicatorsData: TGetIndicatorsApiReturn;
+	moexIndex: TGetMoexIndexApiReturn;
 };
 
 export const IndicatorsWidget = memo<TProps>(
-	({ portfolioData, indicatorsData }) => {
+	({ portfolioData, indicatorsData, moexIndex }) => {
 		const t = useTranslation();
 
 		const { totalSum } = portfolioData;
@@ -36,6 +40,11 @@ export const IndicatorsWidget = memo<TProps>(
 				id: ERatesIds.KEY,
 				title: t('keyRate'),
 				value: keyRate,
+			},
+			{
+				id: ERatesIds.MOEX,
+				title: t('moexIndex'),
+				value: moexIndex,
 			},
 		];
 

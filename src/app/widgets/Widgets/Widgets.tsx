@@ -9,7 +9,10 @@ import { usePostPortfolioMutation } from '@/config/api';
 import { store } from '@/config/store';
 import { LS_LOCALE_KEY } from '@/constants/common';
 import { TLocale } from '@/app/hooks/useTranslation';
-import { useGetIndicatorsQuery } from '@/config/api/commonApi/commonApi';
+import {
+	useGetIndicatorsQuery,
+	useGetMoexIndexQuery,
+} from '@/config/api/commonApi/commonApi';
 import { IndicatorsWidget } from '../IndicatorsWidget';
 
 type TProps = {
@@ -21,9 +24,12 @@ export const WidgetsInner = () => {
 		usePostPortfolioMutation();
 	const { data: indicatorsData, isLoading: isIndicatorsLoading } =
 		useGetIndicatorsQuery();
+	const { data: moexIndex, isLoading: isMoexIndexLoading } =
+		useGetMoexIndexQuery();
 
-	const isLoading = isPortfolioLoading || isIndicatorsLoading;
-	const hasNoData = !portfolioData || !indicatorsData;
+	const isLoading =
+		isPortfolioLoading || isIndicatorsLoading || isMoexIndexLoading;
+	const hasNoData = !portfolioData || !indicatorsData || !moexIndex;
 
 	useEffect(() => {
 		getPortfolio();
@@ -42,6 +48,7 @@ export const WidgetsInner = () => {
 			<IndicatorsWidget
 				portfolioData={portfolioData}
 				indicatorsData={indicatorsData}
+				moexIndex={moexIndex}
 			/>
 			<AssetsWidget data={portfolioData} />
 			<ChartsWidget data={portfolioData} />

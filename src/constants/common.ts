@@ -30,6 +30,7 @@ export enum ERatesIds {
 	TOTAL = 'total',
 	INFLATION = 'inflation',
 	KEY = 'key',
+	MOEX = 'moex',
 }
 
 export const LS_LOCALE_KEY = 'dashboard:localeValue';

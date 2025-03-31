@@ -90,3 +90,10 @@ export type TPostCandlesApiParams = {
 export type TPostCandlesApiReturn = {
 	lastPrices: { [key: string]: number };
 };
+
+type TMarketData = {
+	data: string[][];
+};
+export type IMoexResponse = {
+	marketdata: TMarketData;
+};
