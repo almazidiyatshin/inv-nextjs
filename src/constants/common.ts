@@ -1,5 +1,5 @@
 export const etfIds = {
-	TBRU: 'a9ff2a1a-f8de-4648-8d5a-6b264f32fcdf',
+	TBRU: 'e8acd2fb-6de6-4ea4-9bfb-0daad9b2ed7b',
 	TMOS: '9654c2dd-6993-427e-80fa-04e80a1cf4da',
 	TLCB: '89cdfd81-5021-45f8-b3ac-96dffc2e70a2',
 	TGLD: '4c466956-d2ce-4a95-abb4-17947a65f18a',
