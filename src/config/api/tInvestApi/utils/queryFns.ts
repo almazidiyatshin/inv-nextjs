@@ -1,6 +1,9 @@
 import { getSession } from 'next-auth/react';
 import { getPreparedPortfolioData } from './getPrearedPortfolioData';
-import { postPortfolioMockedResponse } from '../mocks/postPortfolio';
+import {
+	postPortfolioMockedResponse1,
+	postPortfolioMockedResponse2,
+} from '../mocks/postPortfolio';
 import {
 	ICandlesResponse,
 	TPortfolioResponse,
@@ -19,18 +22,23 @@ export const postPortfolioQueryFn = async (
 	const isAuthenticated = session?.user?.role === 'admin';
 
 	if (!isAuthenticated) {
-		return { data: getPreparedPortfolioData(postPortfolioMockedResponse) };
+		return {
+			data: getPreparedPortfolioData([
+				postPortfolioMockedResponse1,
+				postPortfolioMockedResponse2,
+			]),
+		};
 	}
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const result = await baseQuery({
+	const result: { data: TPortfolioResponse } = await baseQuery({
 		url: '/portfolio',
 		method: 'POST',
 	});
 
 	return {
-		data: getPreparedPortfolioData(result.data as TPortfolioResponse),
+		data: getPreparedPortfolioData(result.data),
 	};
 };
 

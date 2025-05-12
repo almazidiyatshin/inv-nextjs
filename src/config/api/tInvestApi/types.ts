@@ -40,10 +40,11 @@ export interface IPortfolioResponse {
 	virtualPositions: any[]; // TODO fix any
 }
 
-export type TPortfolioResponse = Pick<
+export type TPortfolio = Pick<
 	IPortfolioResponse,
 	'positions' | 'expectedYield' | 'totalAmountShares'
 >;
+export type TPortfolioResponse = TPortfolio[];
 
 export type TPostPortfolioData = {
 	allSharesSum: number;
@@ -55,16 +56,16 @@ export type TPostPortfolioData = {
 	tofzSum: number;
 	tmosSum: number;
 	otherSharesSum: number;
-	tgldCount: string;
-	tbruCount: string;
-	tlcbCount: string;
-	tofzCount: string;
-	tmosCount: string;
-	beluCount: string;
-	chmfCount: string;
-	magnCount: string;
-	mgntCount: string;
-	nlmkCount: string;
+	tgldCount: number;
+	tbruCount: number;
+	tlcbCount: number;
+	tofzCount: number;
+	tmosCount: number;
+	beluCount: number;
+	chmfCount: number;
+	magnCount: number;
+	mgntCount: number;
+	nlmkCount: number;
 	expectedYield: number;
 };
 

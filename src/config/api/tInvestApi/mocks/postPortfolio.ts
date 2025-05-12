@@ -63,7 +63,77 @@ const positionsData = [
 	},
 ];
 
-export const postPortfolioMockedResponse = {
+export const postPortfolioMockedResponse1 = {
+	totalAmountShares: {
+		currency: 'rub',
+		units: getRandomInteger().toString(),
+		nano: getRandomBigInteger(),
+	},
+	expectedYield: {
+		units: getRandomInteger().toString(),
+		nano: getRandomBigInteger(),
+	},
+	positions: positionsData.map(
+		({ figi, instrumentType, positionUid, instrumentUid }) => ({
+			figi,
+			instrumentType,
+			positionUid,
+			instrumentUid,
+			quantity: {
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			averagePositionPrice: {
+				currency: 'rub',
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			expectedYield: {
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			averagePositionPricePt: {
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			currentPrice: {
+				currency: 'rub',
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			averagePositionPriceFifo: {
+				currency: 'rub',
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			quantityLots: {
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			blocked: false,
+			blockedLots: {
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			varMargin: {
+				currency: '',
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			expectedYieldFifo: {
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+			dailyYield: {
+				currency: 'rub',
+				units: getRandomInteger().toString(),
+				nano: getRandomBigInteger(),
+			},
+		})
+	),
+};
+
+export const postPortfolioMockedResponse2 = {
 	totalAmountShares: {
 		currency: 'rub',
 		units: getRandomInteger().toString(),

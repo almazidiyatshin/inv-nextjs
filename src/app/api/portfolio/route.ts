@@ -2,7 +2,7 @@ import { IPortfolioResponse } from '@/config/api';
 import { NextResponse } from 'next/server';
 
 export async function POST() {
-	const res = await fetch(
+	const iisResponse = await fetch(
 		'https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio',
 		{
 			method: 'POST',
@@ -12,17 +12,46 @@ export async function POST() {
 				Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
 			},
 			body: JSON.stringify({
-				accountId: process.env.ACC_ID,
+				accountId: process.env.IIS_ACC_ID,
 				currency: 'RUB',
 			}),
 			cache: 'no-store',
 		}
 	);
 
-	if (!res.ok) throw new Error('Failed fetch response T-Invest');
+	const brokerageResponse = await fetch(
+		'https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio',
+		{
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
+			},
+			body: JSON.stringify({
+				accountId: process.env.BROKERAGE_ACC_ID,
+				currency: 'RUB',
+			}),
+			cache: 'no-store',
+		}
+	);
 
-	const data: IPortfolioResponse = await res.json();
-	const { totalAmountShares, expectedYield, positions } = data;
+	if (!iisResponse.ok || !brokerageResponse.ok)
+		throw new Error('Failed fetch response T-Invest');
 
-	return NextResponse.json({ totalAmountShares, expectedYield, positions });
+	const iisData: IPortfolioResponse = await iisResponse.json();
+	const brokerageData: IPortfolioResponse = await brokerageResponse.json();
+
+	return NextResponse.json([
+		{
+			totalAmountShares: iisData.totalAmountShares,
+			expectedYield: iisData.expectedYield,
+			positions: iisData.positions,
+		},
+		{
+			totalAmountShares: brokerageData.totalAmountShares,
+			expectedYield: brokerageData.expectedYield,
+			positions: brokerageData.positions,
+		},
+	]);
 }

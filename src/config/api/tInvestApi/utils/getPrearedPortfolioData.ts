@@ -1,17 +1,19 @@
 import { getAssetData, getFloatCost } from './common';
 import { etfIds, sharesIds } from '@/constants/common';
 import { TAssetData } from '@/types/common';
-import { TPortfolioResponse } from '../types';
+import { TPortfolioResponse, TPostPortfolioData } from '../types';
 
 const calculateTotal = (
 	etfId: string,
 	etfData: { [id: string]: TAssetData }
 ) => {
 	const { priceInt, priceNano, units } = etfData[etfId];
-	return getFloatCost(priceInt, priceNano) * Number(units);
+	return getFloatCost(priceInt, priceNano) * units;
 };
 
-export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
+export const getPreparedPortfolioData = (
+	response: TPortfolioResponse
+): TPostPortfolioData => {
 	const etfData = Object.entries(etfIds).reduce<{ [id: string]: TAssetData }>(
 		(acc, [, id]) => {
 			const { priceInt, priceNano, units } = getAssetData(id, response);
@@ -20,6 +22,7 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 		},
 		{}
 	);
+
 	const sharesData = Object.entries(sharesIds).reduce<{
 		[id: string]: TAssetData;
 	}>((acc, [, id]) => {
@@ -33,18 +36,28 @@ export const getPreparedPortfolioData = (response: TPortfolioResponse) => {
 	const tlcbSum = calculateTotal(etfIds.TLCB, etfData);
 	const tofzSum = calculateTotal(etfIds.TOFZ, etfData);
 
-	const otherSharesSum = getFloatCost(
-		response.totalAmountShares.units,
-		response.totalAmountShares.nano
+	const otherSharesSum = response.reduce(
+		(acc, current) =>
+			acc +
+			getFloatCost(
+				Number(current.totalAmountShares.units),
+				current.totalAmountShares.nano
+			),
+		0
 	);
 
 	const allSharesSum = otherSharesSum + tmosSum;
 	const allBondsSum = tbruSum + tlcbSum + tofzSum;
 	const goldSum = calculateTotal(etfIds.TGLD, etfData);
 
-	const expectedYield = getFloatCost(
-		response.expectedYield.units,
-		response.expectedYield.nano
+	const expectedYield = response.reduce(
+		(acc, current) =>
+			acc +
+			getFloatCost(
+				Number(current.expectedYield.units),
+				current.expectedYield.nano
+			),
+		0
 	);
 
 	return {

@@ -1,5 +1,5 @@
 export type TAssetData = {
-	priceInt: string;
+	priceInt: number;
 	priceNano: number;
-	units: string;
+	units: number;
 };
