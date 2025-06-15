@@ -36,8 +36,9 @@ export async function POST() {
 		}
 	);
 
-	if (!iisResponse.ok || !brokerageResponse.ok)
+	if (!iisResponse.ok || !brokerageResponse.ok) {
 		throw new Error('Failed fetch response T-Invest');
+	}
 
 	const iisData: IPortfolioResponse = await iisResponse.json();
 	const brokerageData: IPortfolioResponse = await brokerageResponse.json();
