@@ -6,8 +6,9 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
-		"lint-fix": "next lint --fix",
+		"check": "pnpm exec biome check --write",
+		"lint": "pnpm exec biome lint --write",
+		"format": "pnpm exec biome format --write",
 		"prepare": "husky",
 		"postinstall": "prisma generate --no-engine",
 		"migrate": "prisma migrate dev --name"
@@ -33,6 +34,7 @@
 		"recharts": "^2.15.3"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "2.0.0",
 		"@chakra-ui/cli": "^3.21.0",
 		"@types/node": "^20",
 		"@types/react": "^18",

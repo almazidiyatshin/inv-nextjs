@@ -1,7 +1,7 @@
-import { ERatesIds } from 'shared/constants';
-import { useTranslation } from 'shared/lib';
-import { toRub } from 'shared/utils';
-import { TIndicatorsWidgetProps } from './types';
+import { ERatesIds } from "shared/constants";
+import { useTranslation } from "shared/lib";
+import { toRub } from "shared/utils";
+import type { TIndicatorsWidgetProps } from "./types";
 
 export const useModel = ({
 	portfolioData,
@@ -16,22 +16,22 @@ export const useModel = ({
 	const paramsConfig = [
 		{
 			id: ERatesIds.TOTAL,
-			title: t('allAssetsValue'),
+			title: t("allAssetsValue"),
 			value: toRub(totalSum),
 		},
 		{
 			id: ERatesIds.INFLATION,
-			title: t('inflationRate'),
+			title: t("inflationRate"),
 			value: inflationRate,
 		},
 		{
 			id: ERatesIds.KEY,
-			title: t('keyRate'),
+			title: t("keyRate"),
 			value: keyRate,
 		},
 		{
 			id: ERatesIds.MOEX,
-			title: t('moexIndex'),
+			title: t("moexIndex"),
 			value: moexIndex,
 		},
 	];

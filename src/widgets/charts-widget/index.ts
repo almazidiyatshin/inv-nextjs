@@ -1,1 +1,1 @@
-export { ChartsWidget } from './ui';
+export { ChartsWidget } from "./ui";

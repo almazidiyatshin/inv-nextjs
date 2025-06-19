@@ -2,4 +2,4 @@ export {
 	commonApi,
 	useGetIndicatorsQuery,
 	useGetMoexIndexQuery,
-} from './commonApi';
+} from "./commonApi";

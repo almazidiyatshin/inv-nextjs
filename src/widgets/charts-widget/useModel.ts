@@ -1,5 +1,5 @@
-import { useTranslation } from 'shared/lib';
-import { TChartsWidgetProps } from './types';
+import { useTranslation } from "shared/lib";
+import type { TChartsWidgetProps } from "./types";
 
 export const useModel = ({ data }: TChartsWidgetProps) => {
 	const t = useTranslation();
@@ -29,30 +29,30 @@ export const useModel = ({ data }: TChartsWidgetProps) => {
 
 	const chartsCongif = [
 		{
-			title: t('allAssetsStatistics'),
+			title: t("allAssetsStatistics"),
 			dataSet: [
-				{ name: t('shares'), value: allSharesPercent, color: 'teal.500' },
-				{ name: t('bonds'), value: allBondsPercent, color: 'teal.400' },
-				{ name: t('gold'), value: goldPercent, color: 'teal.300' },
+				{ name: t("shares"), value: allSharesPercent, color: "teal.500" },
+				{ name: t("bonds"), value: allBondsPercent, color: "teal.400" },
+				{ name: t("gold"), value: goldPercent, color: "teal.300" },
 			],
 		},
 		{
-			title: t('allBondsStatistics'),
+			title: t("allBondsStatistics"),
 			dataSet: [
-				{ name: 'TBRU', value: tbruPercent, color: 'teal.500' },
-				{ name: 'TLCB', value: tlcbPercent, color: 'teal.400' },
-				{ name: 'TOFZ', value: tofzPercent, color: 'teal.300' },
+				{ name: "TBRU", value: tbruPercent, color: "teal.500" },
+				{ name: "TLCB", value: tlcbPercent, color: "teal.400" },
+				{ name: "TOFZ", value: tofzPercent, color: "teal.300" },
 			],
 		},
 		{
-			title: t('allSharesStatistics'),
+			title: t("allSharesStatistics"),
 			dataSet: [
 				{
-					name: t('other'),
+					name: t("other"),
 					value: otherSharesPercent,
-					color: 'teal.500',
+					color: "teal.500",
 				},
-				{ name: 'TMOS', value: tmosPercent, color: 'teal.400' },
+				{ name: "TMOS", value: tmosPercent, color: "teal.400" },
 			],
 		},
 	];

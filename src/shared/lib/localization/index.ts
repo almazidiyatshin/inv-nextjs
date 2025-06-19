@@ -1,1 +1,1 @@
-export { useTranslation } from './hooks';
+export { useTranslation } from "./hooks";

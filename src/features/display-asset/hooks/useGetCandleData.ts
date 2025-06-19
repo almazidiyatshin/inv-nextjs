@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import {
+import { useEffect } from "react";
+import type {
 	TPostCandlesApiParams,
 	TPostCandlesApiReturn,
-} from 'shared/api/tInvest-api/types';
-import { getDateRange } from 'shared/api/tInvest-api/utils/getDateRange';
-import { ECandleInterval } from 'shared/constants';
+} from "shared/api/tInvest-api/types";
+import { getDateRange } from "shared/api/tInvest-api/utils/getDateRange";
+import { ECandleInterval } from "shared/constants";
 
 const getLimit = (interval: ECandleInterval) => {
 	const limitsMap = {
@@ -16,10 +16,10 @@ const getLimit = (interval: ECandleInterval) => {
 };
 
 export const useGetCandleData = (
-	filters: Pick<TPostCandlesApiParams, 'interval'>,
+	filters: Pick<TPostCandlesApiParams, "interval">,
 	// TODO fix any
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	fetchCandles: { id: string; fetch: any }[]
+	fetchCandles: { id: string; fetch: any }[],
 ): {
 	data: { id: string; data: TPostCandlesApiReturn }[];
 	isLoading: boolean;
@@ -28,19 +28,19 @@ export const useGetCandleData = (
 	const results = fetchCandles.map(({ id, fetch }) => ({ id, value: fetch() }));
 	const isLoading = results.some(({ value: [, { isLoading }] }) => isLoading);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <TODO fix>
 	useEffect(() => {
 		if (filters.interval) {
 			results.forEach(({ id, value: [fetch] }) => {
 				fetch({
 					from,
 					to,
-					interval: 'CANDLE_INTERVAL_MONTH',
+					interval: "CANDLE_INTERVAL_MONTH",
 					limit: getLimit(filters.interval),
 					instrumentId: id,
 				});
 			});
 		}
-		// eslint-disable-next-line
 	}, [filters.interval]);
 
 	return {

@@ -1,14 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {
-	TPostCandlesApiReturn,
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type {
 	TPostCandlesApiParams,
+	TPostCandlesApiReturn,
 	TPostPortfolioData,
-} from './types';
-import { postCandlesQueryFn, postPortfolioQueryFn } from './utils/queryFns';
+} from "./types";
+import { postCandlesQueryFn, postPortfolioQueryFn } from "./utils/queryFns";
 
 export const tInvestApi = createApi({
-	reducerPath: 'tInvestApi',
-	baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+	reducerPath: "tInvestApi",
+	baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
 	endpoints: (builder) => ({
 		postPortfolio: builder.mutation<TPostPortfolioData, void>({
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment

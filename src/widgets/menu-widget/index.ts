@@ -1,1 +1,1 @@
-export { MenuWidget } from './ui';
+export { MenuWidget } from "./ui";

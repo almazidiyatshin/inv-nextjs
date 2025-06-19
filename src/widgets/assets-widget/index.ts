@@ -1,1 +1,1 @@
-export { AssetsWidget } from './ui';
+export { AssetsWidget } from "./ui";

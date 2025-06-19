@@ -1,5 +1,4 @@
-import React from 'react';
-import { Chart, useChart } from '@chakra-ui/charts';
+import { Chart, useChart } from "@chakra-ui/charts";
 import {
 	Area,
 	AreaChart,
@@ -7,7 +6,7 @@ import {
 	Tooltip,
 	XAxis,
 	YAxis,
-} from 'recharts';
+} from "recharts";
 
 type TProps = {
 	dataset: { value: number; date: string }[];
@@ -16,19 +15,19 @@ type TProps = {
 export const MyLineChart = ({ dataset }: TProps) => {
 	const chart = useChart({
 		data: dataset,
-		series: [{ name: 'value', color: 'teal.solid' }],
+		series: [{ name: "value", color: "teal.solid" }],
 	});
 
 	return (
 		<Chart.Root maxH="sm" chart={chart}>
 			<AreaChart data={chart.data}>
 				<CartesianGrid
-					stroke={chart.color('border')}
+					stroke={chart.color("border")}
 					vertical={false}
 					strokeDasharray="3 3"
 				/>
 				<XAxis
-					dataKey={chart.key('date')}
+					dataKey={chart.key("date")}
 					tickLine={false}
 					axisLine={false}
 					tickMargin={8}
@@ -46,8 +45,8 @@ export const MyLineChart = ({ dataset }: TProps) => {
 						<Chart.Gradient
 							id={`${item.name}-gradient`}
 							stops={[
-								{ offset: '0%', color: item.color, opacity: 0.3 },
-								{ offset: '100%', color: item.color, opacity: 0.05 },
+								{ offset: "0%", color: item.color, opacity: 0.3 },
+								{ offset: "100%", color: item.color, opacity: 0.05 },
 							]}
 						/>
 					</defs>

@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 type TParams = {
-	params: { assetId: 'vtb' | 'sber' | 'cash' };
+	params: { assetId: "vtb" | "sber" | "cash" };
 };
 
 const prisma = new PrismaClient();
@@ -12,20 +12,20 @@ export async function POST(req: Request, { params }: TParams) {
 		const body = await req.json();
 		const { assetId } = params;
 
-		let newRecord;
+		let newRecord: any;
 
 		switch (assetId) {
-			case 'vtb':
+			case "vtb":
 				newRecord = await prisma.vtb.create({
 					data: body,
 				});
 				break;
-			case 'sber':
+			case "sber":
 				newRecord = await prisma.sber.create({
 					data: body,
 				});
 				break;
-			case 'cash':
+			case "cash":
 				newRecord = await prisma.cash.create({
 					data: body,
 				});
@@ -33,16 +33,16 @@ export async function POST(req: Request, { params }: TParams) {
 			default:
 				return NextResponse.json(
 					{ error: `Неизвестный тип ресурса: ${assetId}` },
-					{ status: 400 }
+					{ status: 400 },
 				);
 		}
 
 		return NextResponse.json(newRecord, { status: 201 });
 	} catch (error) {
-		console.error('[POST /api/testdb]', error);
+		console.error("[POST /api/testdb]", error);
 		return NextResponse.json(
-			{ error: 'Internal Server Error' },
-			{ status: 500 }
+			{ error: "Internal Server Error" },
+			{ status: 500 },
 		);
 	}
 }

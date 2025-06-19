@@ -1,5 +1,5 @@
-import { ICandlesResponse } from '../types';
-import { getFloatCost } from './common';
+import type { ICandlesResponse } from "../types";
+import { getFloatCost } from "./common";
 
 export const getPreparedCandlesData = (response: ICandlesResponse) => {
 	const lastPrices = response.candles.reduce<{ [key: string]: number }>(
@@ -8,7 +8,7 @@ export const getPreparedCandlesData = (response: ICandlesResponse) => {
 			acc[date] = getFloatCost(Number(candle.close.units), candle.close.nano);
 			return acc;
 		},
-		{}
+		{},
 	);
 
 	return {

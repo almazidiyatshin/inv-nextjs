@@ -1,7 +1,7 @@
 export enum EFormTypes {
-	VTB = 'VTB',
-	SBER = 'SBER',
-	CASH = 'CASH',
+	VTB = "VTB",
+	SBER = "SBER",
+	CASH = "CASH",
 }
 
 export type TAddAssetsDataFormProps = {

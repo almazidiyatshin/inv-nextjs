@@ -1,10 +1,10 @@
-import GithubProvider from 'next-auth/providers/github';
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions = {
 	providers: [
 		GithubProvider({
-			clientId: process.env.GITHUB_ID || '',
-			clientSecret: process.env.GITHUB_SECRET || '',
+			clientId: process.env.GITHUB_ID || "",
+			clientSecret: process.env.GITHUB_SECRET || "",
 		}),
 	],
 	callbacks: {
@@ -12,7 +12,7 @@ export const authOptions = {
 		// @ts-ignore
 		async jwt({ token, user, account }) {
 			if (account && user) {
-				token.role = user.email === 'dev@tshin.ru' ? 'admin' : 'user';
+				token.role = user.email === process.env.ADMIN_EMAIL ? "admin" : "user";
 			}
 			return token;
 		},

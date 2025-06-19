@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
 import {
 	ClientOnly,
-	Skeleton,
 	IconButton,
-	IconButtonProps,
-} from '@chakra-ui/react';
-import React from 'react';
-import { ColorModeIcon } from './ColorModeIcon';
-import { useToggleThemeButtonModel } from '../model';
+	type IconButtonProps,
+	Skeleton,
+} from "@chakra-ui/react";
+import React from "react";
+import { useToggleThemeButtonModel } from "../model";
+import { ColorModeIcon } from "./ColorModeIcon";
 
 export const ToggleThemeButton = React.forwardRef<
 	HTMLButtonElement,
-	Omit<IconButtonProps, 'aria-label'>
+	Omit<IconButtonProps, "aria-label">
 >(function ToggleThemeButton(props, ref) {
 	const { toggleColorMode } = useToggleThemeButtonModel();
 
@@ -27,8 +27,8 @@ export const ToggleThemeButton = React.forwardRef<
 				{...props}
 				css={{
 					_icon: {
-						width: '5',
-						height: '5',
+						width: "5",
+						height: "5",
 					},
 				}}
 			>

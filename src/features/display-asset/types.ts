@@ -1,4 +1,4 @@
-import { EAssetIds } from 'shared/constants';
+import type { EAssetIds } from "shared/constants";
 
 export type TAssetCardProps = {
 	id: EAssetIds;

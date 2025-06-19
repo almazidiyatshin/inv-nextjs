@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
 	Badge,
@@ -10,12 +10,12 @@ import {
 	HStack,
 	Loader,
 	Stat,
-} from '@chakra-ui/react';
-import { MyLineChart } from './components/MyLineChart';
-import { ECandleInterval } from 'shared/constants';
-import { toRub } from 'shared/utils';
-import { TAssetCardProps } from './types';
-import { useModel } from './useModel';
+} from "@chakra-ui/react";
+import { ECandleInterval } from "shared/constants";
+import { toRub } from "shared/utils";
+import { MyLineChart } from "./components/MyLineChart";
+import type { TAssetCardProps } from "./types";
+import { useModel } from "./useModel";
 
 export const AssetCard = ({ id, title, value, counts }: TAssetCardProps) => {
 	const {
@@ -38,11 +38,11 @@ export const AssetCard = ({ id, title, value, counts }: TAssetCardProps) => {
 	}
 
 	return (
-		<Card.Root minWidth={'xs'} flex={'1'}>
+		<Card.Root minWidth={"xs"} flex={"1"}>
 			<Card.Header>
 				<Stat.Root>
-					<HStack alignItems={'start'} justify={'space-between'}>
-						<Group display={'block'}>
+					<HStack alignItems={"start"} justify={"space-between"}>
+						<Group display={"block"}>
 							<Stat.Label>{title}</Stat.Label>
 							<HStack>
 								<Stat.ValueText>
@@ -54,7 +54,7 @@ export const AssetCard = ({ id, title, value, counts }: TAssetCardProps) => {
 									/>
 								</Stat.ValueText>
 								<Badge
-									colorPalette={value < prevValue ? 'red' : 'green'}
+									colorPalette={value < prevValue ? "red" : "green"}
 									gap="0"
 								>
 									{value < prevValue ? (
@@ -62,48 +62,48 @@ export const AssetCard = ({ id, title, value, counts }: TAssetCardProps) => {
 									) : (
 										<Stat.UpIndicator />
 									)}
-									{(diff > 0 ? '+' : '') +
+									{(diff > 0 ? "+" : "") +
 										((diff / prevValue) * 100).toFixed(0) +
-										'%'}
+										"%"}
 								</Badge>
 							</HStack>
-							<Stat.HelpText>{`${diff > 0 ? '+' : ''}${toRub(diff)} ${t('to')} ${texts[filters.interval]}`}</Stat.HelpText>
+							<Stat.HelpText>{`${diff > 0 ? "+" : ""}${toRub(diff)} ${t("to")} ${texts[filters.interval]}`}</Stat.HelpText>
 						</Group>
-						<ButtonGroup size={'xs'}>
+						<ButtonGroup size={"xs"}>
 							<Button
 								variant={
 									filters.interval === ECandleInterval.YEAR
-										? 'outline'
-										: 'ghost'
+										? "outline"
+										: "ghost"
 								}
-								title={t('year')}
+								title={t("year")}
 								onClick={handleRangeClick(ECandleInterval.YEAR)}
 							>
-								{t('1Y')}
+								{t("1Y")}
 							</Button>
 
 							<Button
 								variant={
 									filters.interval === ECandleInterval.FIVE_YEARS
-										? 'outline'
-										: 'ghost'
+										? "outline"
+										: "ghost"
 								}
-								title={t('fiveYears')}
+								title={t("fiveYears")}
 								onClick={handleRangeClick(ECandleInterval.FIVE_YEARS)}
 							>
-								{t('5Y')}
+								{t("5Y")}
 							</Button>
 
 							<Button
 								variant={
 									filters.interval === ECandleInterval.TEN_YEARS
-										? 'outline'
-										: 'ghost'
+										? "outline"
+										: "ghost"
 								}
-								title={t('tenYears')}
+								title={t("tenYears")}
 								onClick={handleRangeClick(ECandleInterval.TEN_YEARS)}
 							>
-								{t('10Y')}
+								{t("10Y")}
 							</Button>
 						</ButtonGroup>
 					</HStack>

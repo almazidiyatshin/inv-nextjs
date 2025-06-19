@@ -1,8 +1,8 @@
-import { ECandleInterval } from 'shared/constants';
+import { ECandleInterval } from "shared/constants";
 
 export const getDateRange = (interval: string) => {
-	let from;
-	let to;
+	let from: string;
+	let to: string;
 
 	const today = new Date();
 	const formatDateToISO = (date: Date): string => date.toISOString();

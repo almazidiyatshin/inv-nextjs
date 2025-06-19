@@ -1,1 +1,1 @@
-export { IndicatorsWidget } from './ui';
+export { IndicatorsWidget } from "./ui";

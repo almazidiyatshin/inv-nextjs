@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useColorMode } from '../lib';
+import { useColorMode } from "../lib";
 
 export const useToggleThemeButtonModel = () => {
 	const { toggleColorMode } = useColorMode();

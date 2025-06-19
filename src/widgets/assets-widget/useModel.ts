@@ -1,6 +1,6 @@
-import { EAssetIds, etfIds, sharesIds } from 'shared/constants';
-import { useTranslation } from 'shared/lib';
-import { TAssetsWidgetProps } from './types';
+import { EAssetIds, etfIds, sharesIds } from "shared/constants";
+import { useTranslation } from "shared/lib";
+import type { TAssetsWidgetProps } from "./types";
 
 export const useModel = ({ data }: TAssetsWidgetProps) => {
 	const t = useTranslation();
@@ -24,7 +24,7 @@ export const useModel = ({ data }: TAssetsWidgetProps) => {
 	const assetsConfig = [
 		{
 			id: EAssetIds.SHARES,
-			title: t('allSharesValue'),
+			title: t("allSharesValue"),
 			value: allSharesSum,
 			counts: [
 				{ [etfIds.TMOS]: Number(tmosCount) },
@@ -37,7 +37,7 @@ export const useModel = ({ data }: TAssetsWidgetProps) => {
 		},
 		{
 			id: EAssetIds.BONDS,
-			title: t('allBondsValue'),
+			title: t("allBondsValue"),
 			value: allBondsSum,
 			counts: [
 				{ [etfIds.TBRU]: Number(tbruCount) },
@@ -47,7 +47,7 @@ export const useModel = ({ data }: TAssetsWidgetProps) => {
 		},
 		{
 			id: EAssetIds.GOLD,
-			title: t('goldValue'),
+			title: t("goldValue"),
 			value: goldSum,
 			counts: [{ [etfIds.TGLD]: Number(tgldCount) }],
 		},

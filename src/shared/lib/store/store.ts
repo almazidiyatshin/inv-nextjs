@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
-import { commonApi, tInvestApi } from 'shared/api';
-import { filtersReducer } from './slices';
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { commonApi, tInvestApi } from "shared/api";
+import { filtersReducer } from "./slices";
 
 export const store = configureStore({
 	reducer: {

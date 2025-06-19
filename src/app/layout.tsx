@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import { ChakraProvider, StoreProvider } from 'shared/providers';
+import type { Metadata } from "next";
+import { ChakraProvider, StoreProvider } from "shared/providers";
 
 export const metadata: Metadata = {
-	title: 'Investly',
-	description: 'Investment tracker',
+	title: "Investly",
+	description: "Investment tracker",
 };
 
 export default function RootLayout({

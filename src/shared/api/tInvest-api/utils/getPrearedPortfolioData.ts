@@ -1,18 +1,18 @@
-import { getAssetData, getFloatCost } from './common';
-import { TPortfolioResponse, TPostPortfolioData } from '../types';
-import { etfIds, sharesIds } from 'shared/constants/common';
-import { TAssetData } from 'shared/types/common';
+import { etfIds, sharesIds } from "shared/constants/common";
+import type { TAssetData } from "shared/types/common";
+import type { TPortfolioResponse, TPostPortfolioData } from "../types";
+import { getAssetData, getFloatCost } from "./common";
 
 const calculateTotal = (
 	etfId: string,
-	etfData: { [id: string]: TAssetData }
+	etfData: { [id: string]: TAssetData },
 ) => {
 	const { priceInt, priceNano, units } = etfData[etfId];
 	return getFloatCost(priceInt, priceNano) * units;
 };
 
 export const getPreparedPortfolioData = (
-	response: TPortfolioResponse
+	response: TPortfolioResponse,
 ): TPostPortfolioData => {
 	const etfData = Object.entries(etfIds).reduce<{ [id: string]: TAssetData }>(
 		(acc, [, id]) => {
@@ -20,7 +20,7 @@ export const getPreparedPortfolioData = (
 			acc[id] = { priceInt, priceNano, units };
 			return acc;
 		},
-		{}
+		{},
 	);
 
 	const sharesData = Object.entries(sharesIds).reduce<{
@@ -41,9 +41,9 @@ export const getPreparedPortfolioData = (
 			acc +
 			getFloatCost(
 				Number(current.totalAmountShares.units),
-				current.totalAmountShares.nano
+				current.totalAmountShares.nano,
 			),
-		0
+		0,
 	);
 
 	const allSharesSum = otherSharesSum + tmosSum;
@@ -55,9 +55,9 @@ export const getPreparedPortfolioData = (
 			acc +
 			getFloatCost(
 				Number(current.expectedYield.units),
-				current.expectedYield.nano
+				current.expectedYield.nano,
 			),
-		0
+		0,
 	);
 
 	return {

@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Chart } from '@chakra-ui/charts';
-import { Card, Stat } from '@chakra-ui/react';
-import { PieChart, Pie, Cell } from 'recharts';
-import { useModel } from './useModel';
-import { TChartCardProps } from './types';
+import { Chart } from "@chakra-ui/charts";
+import { Card, Stat } from "@chakra-ui/react";
+import { Cell, Pie, PieChart } from "recharts";
+import type { TChartCardProps } from "./types";
+import { useModel } from "./useModel";
 
 export const ChartCard = ({ title, dataSet }: TChartCardProps) => {
 	const { chart } = useModel({ dataSet });
 
 	return (
-		<Card.Root minWidth={'xs'} flex={'1'}>
+		<Card.Root minWidth={"xs"} flex={"1"}>
 			<Card.Header>
 				<Stat.Root>
 					<Stat.Label>{title}</Stat.Label>
@@ -23,13 +23,13 @@ export const ChartCard = ({ title, dataSet }: TChartCardProps) => {
 							blendStroke
 							isAnimationActive={false}
 							data={chart.data}
-							dataKey={chart.key('value')}
+							dataKey={chart.key("value")}
 							outerRadius={80}
 							innerRadius={0}
 							labelLine={false}
 							label={({ name, index }) => {
 								const { value } = chart.data[index ?? -1];
-								const percent = value / chart.getTotal('value');
+								const percent = value / chart.getTotal("value");
 								return `${name}: ${(percent * 100).toFixed(1)}%`;
 							}}
 						>

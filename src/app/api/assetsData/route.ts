@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -13,10 +13,10 @@ export async function POST(req: Request) {
 
 		return NextResponse.json(newRecord, { status: 201 });
 	} catch (error) {
-		console.error('[POST /api/testdb]', error);
+		console.error("[POST /api/testdb]", error);
 		return NextResponse.json(
-			{ error: 'Internal Server Error' },
-			{ status: 500 }
+			{ error: "Internal Server Error" },
+			{ status: 500 },
 		);
 	}
 }

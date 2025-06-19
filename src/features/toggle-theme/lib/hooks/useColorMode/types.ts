@@ -1,1 +1,1 @@
-export type TColorMode = 'light' | 'dark';
+export type TColorMode = "light" | "dark";

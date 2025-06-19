@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import {
-	usePostPortfolioMutation,
 	useGetIndicatorsQuery,
 	useGetMoexIndexQuery,
-} from 'shared/api';
-import { TDashboardPageProps } from './types';
-import { useTranslation } from 'shared/lib';
+	usePostPortfolioMutation,
+} from "shared/api";
+import { useTranslation } from "shared/lib";
+import type { TDashboardPageProps } from "./types";
 
 export const useModel = ({ locale }: TDashboardPageProps) => {
 	const [getPortfolio, { data: portfolioData, isLoading: isPortfolioLoading }] =

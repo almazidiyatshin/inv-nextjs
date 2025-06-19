@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
 import {
-	ChakraProvider as DefaultChakraProvider,
 	createSystem,
+	ChakraProvider as DefaultChakraProvider,
 	defaultConfig,
 	defineConfig,
-} from '@chakra-ui/react';
-import { ThemeProvider, ThemeProviderProps } from 'next-themes';
+} from "@chakra-ui/react";
+import { ThemeProvider, type ThemeProviderProps } from "next-themes";
 
 const customConfig = defineConfig({
 	globalCss: {
 		body: {
-			padding: '16px',
+			padding: "16px",
 		},
 	},
 });

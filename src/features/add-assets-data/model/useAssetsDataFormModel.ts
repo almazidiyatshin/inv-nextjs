@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
 export const useAssetsDataFormModel = () => {
 	const { register, handleSubmit: handleSubmitForm } = useForm();

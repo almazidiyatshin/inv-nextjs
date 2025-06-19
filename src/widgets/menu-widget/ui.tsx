@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
 	ButtonGroup,
@@ -6,11 +6,10 @@ import {
 	Drawer,
 	IconButton,
 	Portal,
-} from '@chakra-ui/react';
-import { Login, ToggleThemeButton } from 'features';
-import { LuAlignJustify } from 'react-icons/lu';
-import { useModel } from './useModel';
-import { LanguageToggleButton } from 'features';
+} from "@chakra-ui/react";
+import { LanguageToggleButton, Login, ToggleThemeButton } from "features";
+import { LuAlignJustify } from "react-icons/lu";
+import { useModel } from "./useModel";
 
 export const MenuWidget = () => {
 	const { t } = useModel();
@@ -18,7 +17,7 @@ export const MenuWidget = () => {
 	return (
 		<Drawer.Root>
 			<Drawer.Trigger asChild>
-				<IconButton colorPalette={'teal'} variant={'ghost'}>
+				<IconButton colorPalette={"teal"} variant={"ghost"}>
 					<LuAlignJustify />
 				</IconButton>
 			</Drawer.Trigger>
@@ -28,17 +27,17 @@ export const MenuWidget = () => {
 				<Drawer.Positioner>
 					<Drawer.Content>
 						<Drawer.Header>
-							<Drawer.CloseTrigger asChild pos={'initial'}>
-								<CloseButton size={'lg'} />
+							<Drawer.CloseTrigger asChild pos={"initial"}>
+								<CloseButton size={"lg"} />
 							</Drawer.CloseTrigger>
-							<Drawer.Title>{t('investly')}</Drawer.Title>
+							<Drawer.Title>{t("investly")}</Drawer.Title>
 							<ButtonGroup>
 								<ToggleThemeButton />
 								<LanguageToggleButton />
 							</ButtonGroup>
 						</Drawer.Header>
 						<Drawer.Body />
-						<Drawer.Footer justifyContent={'start'}>
+						<Drawer.Footer justifyContent={"start"}>
 							<Login />
 						</Drawer.Footer>
 					</Drawer.Content>

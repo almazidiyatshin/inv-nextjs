@@ -1,8 +1,8 @@
-import { getRandomBigInteger, getRandomInteger } from '../utils/common';
+import { getRandomBigInteger, getRandomInteger } from "../utils/common";
 
 export const generateCandleData = (
 	numberOfMonths: number,
-	startDate = '2015-01-01T00:00:00Z'
+	startDate = "2015-01-01T00:00:00Z",
 ) => {
 	const data = [];
 	const currentDate = new Date(startDate);
@@ -29,7 +29,7 @@ export const generateCandleData = (
 			volume: (Math.random() * 1000000).toFixed(0),
 			time: timeString,
 			isComplete: true,
-			candleSourceType: 'CANDLE_SOURCE_EXCHANGE',
+			candleSourceType: "CANDLE_SOURCE_EXCHANGE",
 		});
 
 		currentDate.setMonth(currentDate.getMonth() + 1);

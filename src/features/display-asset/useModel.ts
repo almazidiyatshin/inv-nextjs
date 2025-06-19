@@ -1,32 +1,32 @@
-import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-	LS_LOCALE_KEY,
-	ECandleInterval,
-	EAssetIds,
-	etfIds,
-	sharesIds,
-} from 'shared/constants';
-import { useTranslation, RootState } from 'shared/lib';
-import { useGetCandleData } from './hooks/useGetCandleData';
-import {
-	usePostTmosCandlesMutation,
 	usePostBeluCandlesMutation,
 	usePostChmfCandlesMutation,
 	usePostMagnCandlesMutation,
 	usePostMgntCandlesMutation,
 	usePostNlmkCandlesMutation,
 	usePostTbruCandlesMutation,
-	usePostTlcbCandlesMutation,
-	usePostTofzCandlesMutation,
 	usePostTgldCandlesMutation,
-} from 'shared/api';
+	usePostTlcbCandlesMutation,
+	usePostTmosCandlesMutation,
+	usePostTofzCandlesMutation,
+} from "shared/api";
 import {
-	setSharesFilters,
+	EAssetIds,
+	ECandleInterval,
+	etfIds,
+	LS_LOCALE_KEY,
+	sharesIds,
+} from "shared/constants";
+import { type RootState, useTranslation } from "shared/lib";
+import {
 	setBondsFilters,
 	setGoldFilters,
-} from 'shared/lib/store/slices';
-import { TAssetCardProps } from './types';
+	setSharesFilters,
+} from "shared/lib/store/slices";
+import { useGetCandleData } from "./hooks/useGetCandleData";
+import type { TAssetCardProps } from "./types";
 
 const fetchCallbacks = {
 	[EAssetIds.SHARES]: [
@@ -55,17 +55,17 @@ export const useModel = ({
 	id,
 	value,
 	counts,
-}: Pick<TAssetCardProps, 'id' | 'value' | 'counts'>) => {
+}: Pick<TAssetCardProps, "id" | "value" | "counts">) => {
 	const t = useTranslation();
 	const dispatch = useDispatch();
 	const filters = useSelector((state: RootState) => state.filters[id]);
 	const { data, isLoading } = useGetCandleData(filters, fetchCallbacks[id]);
-	const locale = localStorage.getItem(LS_LOCALE_KEY) || 'en';
+	const locale = localStorage.getItem(LS_LOCALE_KEY) || "en";
 
 	const texts = {
-		[ECandleInterval.YEAR]: t('lastYear'),
-		[ECandleInterval.FIVE_YEARS]: t('lastFiveYears'),
-		[ECandleInterval.TEN_YEARS]: t('lastTenYears'),
+		[ECandleInterval.YEAR]: t("lastYear"),
+		[ECandleInterval.FIVE_YEARS]: t("lastFiveYears"),
+		[ECandleInterval.TEN_YEARS]: t("lastTenYears"),
 	};
 
 	const { prevValue, dataset } = useMemo(() => {
@@ -81,11 +81,11 @@ export const useModel = ({
 
 				return acc;
 			},
-			{}
+			{},
 		);
 
 		const sorted = Object.entries(lastPrices).sort(
-			([dateA], [dateB]) => Number(dateA) - Number(dateB)
+			([dateA], [dateB]) => Number(dateA) - Number(dateB),
 		);
 
 		const prevValue = sorted[0];
@@ -94,11 +94,11 @@ export const useModel = ({
 			dataset: sorted.map((item) => ({
 				value: item[1],
 				date: new Date(Number(item[0]))
-					.toLocaleDateString(locale === 'en' ? 'en-US' : 'ru-RU', {
-						year: 'numeric',
-						month: 'long',
+					.toLocaleDateString(locale === "en" ? "en-US" : "ru-RU", {
+						year: "numeric",
+						month: "long",
 					})
-					.replace(' г.', ''),
+					.replace(" г.", ""),
 			})),
 			prevValue: prevValue?.[1] || 0,
 		};

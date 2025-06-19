@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 // import { useAddAssetsDataButtonModel } from '../model';
 // import { tabs } from '../config/config';
-import { Button } from '@chakra-ui/react';
+import { Button } from "@chakra-ui/react";
 
 export const AddAssetsDataButton = () => {
 	// const { isModalOpen, handleModalOpen, handleModalClose } =
@@ -11,10 +11,10 @@ export const AddAssetsDataButton = () => {
 	return (
 		<>
 			<Button
-				variant={'subtle'}
-				size={'sm'}
+				variant={"subtle"}
+				size={"sm"}
 				type="submit"
-				colorPalette={'teal'}
+				colorPalette={"teal"}
 				// onClick={handleModalOpen}
 			>
 				Add data

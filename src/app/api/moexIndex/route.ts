@@ -1,20 +1,20 @@
-import { NextResponse } from 'next/server';
-import { IMoexResponse } from 'shared/api/tInvest-api/types';
+import { NextResponse } from "next/server";
+import type { IMoexResponse } from "shared/api/tInvest-api/types";
 
 export async function GET() {
 	const res = await fetch(
-		'https://iss.moex.com/iss/engines/stock/markets/index/securities/IMOEX.json',
+		"https://iss.moex.com/iss/engines/stock/markets/index/securities/IMOEX.json",
 		{
-			method: 'GET',
+			method: "GET",
 			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
+				Accept: "application/json",
+				"Content-Type": "application/json",
 			},
-			cache: 'no-store',
-		}
+			cache: "no-store",
+		},
 	);
 
-	if (!res.ok) throw new Error('Failed fetch response MOEX');
+	if (!res.ok) throw new Error("Failed fetch response MOEX");
 
 	const data: IMoexResponse = await res.json();
 

@@ -1,4 +1,4 @@
-import { TPostPortfolioData } from 'shared/api/tInvest-api/types';
+import type { TPostPortfolioData } from "shared/api/tInvest-api/types";
 
 export type TAssetsWidgetProps = {
 	data: TPostPortfolioData;

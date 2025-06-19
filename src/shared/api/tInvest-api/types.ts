@@ -1,4 +1,4 @@
-import { ECandleInterval } from 'shared/constants';
+import type { ECandleInterval } from "shared/constants";
 
 export interface ICurrencyAmount {
 	currency?: string;
@@ -42,7 +42,7 @@ export interface IPortfolioResponse {
 
 export type TPortfolio = Pick<
 	IPortfolioResponse,
-	'positions' | 'expectedYield' | 'totalAmountShares'
+	"positions" | "expectedYield" | "totalAmountShares"
 >;
 export type TPortfolioResponse = TPortfolio[];
 

@@ -1,12 +1,11 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
-import { useState, useCallback, useEffect } from 'react';
-import { LS_LOCALE_KEY } from 'shared/constants';
-import { useTranslation } from 'shared/lib';
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { LS_LOCALE_KEY } from "shared/constants";
+import { useTranslation } from "shared/lib";
 
-const locales = ['en', 'ru'];
+const locales = ["en", "ru"];
 
 export const useModel = () => {
 	const t = useTranslation();
@@ -19,7 +18,7 @@ export const useModel = () => {
 			setCurrentLocale(locale);
 			localStorage.setItem(LS_LOCALE_KEY, locale);
 
-			const segments = pathname?.split('/').filter(Boolean);
+			const segments = pathname?.split("/").filter(Boolean);
 			if (!segments?.length) {
 				return;
 			}
@@ -29,13 +28,13 @@ export const useModel = () => {
 				segments.unshift(locale);
 			}
 
-			router.push(`/${segments.join('/')}`);
+			router.push(`/${segments.join("/")}`);
 		},
-		[pathname, router]
+		[pathname, router],
 	);
 
 	useEffect(() => {
-		const locale = localStorage.getItem(LS_LOCALE_KEY) || 'en';
+		const locale = localStorage.getItem(LS_LOCALE_KEY) || "en";
 		setCurrentLocale(locale);
 	}, []);
 

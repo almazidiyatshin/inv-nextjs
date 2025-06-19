@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import { useAssetsDataFormModel } from '../model/useAssetsDataFormModel';
-import { TAddAssetsDataFormProps } from '../types/types';
 // import { fields } from '../config/config';
-import { Button } from '@chakra-ui/react';
+import { Button } from "@chakra-ui/react";
+import { useAssetsDataFormModel } from "../model/useAssetsDataFormModel";
+// import type { TAddAssetsDataFormProps } from "../types/types";
 
-export const AddAssetsDataForm = ({}: TAddAssetsDataFormProps) => {
+// export const AddAssetsDataForm = ({type}: TAddAssetsDataFormProps) => {
+export const AddAssetsDataForm = () => {
 	const { handleSubmit } = useAssetsDataFormModel();
 
 	return (
