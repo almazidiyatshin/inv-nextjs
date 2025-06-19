@@ -1,1 +1,0 @@
-export { IndicatorsWidget } from './IndicatorsWidget';

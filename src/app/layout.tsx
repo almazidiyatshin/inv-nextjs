@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'], weight: ['400', '600'] });
+import { ChakraProvider, StoreProvider } from 'shared/providers';
 
 export const metadata: Metadata = {
-	title: 'Investment portfolio',
-	description: 'Control your investitions',
+	title: 'Investly',
+	description: 'Investment tracker',
 };
 
 export default function RootLayout({
@@ -14,8 +12,12 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>{children}</body>
+		<html suppressHydrationWarning lang="en">
+			<body>
+				<ChakraProvider>
+					<StoreProvider>{children}</StoreProvider>
+				</ChakraProvider>
+			</body>
 		</html>
 	);
 }

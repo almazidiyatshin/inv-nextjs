@@ -1,5 +1,5 @@
-import { IMoexResponse } from '@/config/api';
 import { NextResponse } from 'next/server';
+import { IMoexResponse } from 'shared/api/tInvest-api/types';
 
 export async function GET() {
 	const res = await fetch(

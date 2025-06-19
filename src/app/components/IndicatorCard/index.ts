@@ -1,1 +1,0 @@
-export { IndicatorCard } from './IndicatorCard';

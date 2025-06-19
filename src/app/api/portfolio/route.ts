@@ -1,5 +1,5 @@
-import { IPortfolioResponse } from '@/config/api';
 import { NextResponse } from 'next/server';
+import { IPortfolioResponse } from 'shared/api/tInvest-api/types';
 
 export async function POST() {
 	const iisResponse = await fetch(
@@ -36,8 +36,9 @@ export async function POST() {
 		}
 	);
 
-	if (!iisResponse.ok || !brokerageResponse.ok)
+	if (!iisResponse.ok || !brokerageResponse.ok) {
 		throw new Error('Failed fetch response T-Invest');
+	}
 
 	const iisData: IPortfolioResponse = await iisResponse.json();
 	const brokerageData: IPortfolioResponse = await brokerageResponse.json();
