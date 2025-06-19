@@ -1,18 +1,6 @@
-import { Header } from '../../widgets/Header';
-import { Widgets } from '../../widgets/Widgets';
-import '../../global.css';
-import { TLocale } from '@/app/hooks/useTranslation';
-import { ThemeProvider } from '@/config/providers';
+import { DashboardPage } from 'screens';
+import { TPageProps } from './types';
 
-type TProps = { params: { locale: TLocale } };
-
-export default function Page({ params: { locale } }: TProps) {
-	return (
-		<main>
-			<ThemeProvider>
-				<Header locale={locale} />
-				<Widgets locale={locale} />
-			</ThemeProvider>
-		</main>
-	);
+export default function Page({ params: { locale } }: TPageProps) {
+	return <DashboardPage locale={locale} />;
 }

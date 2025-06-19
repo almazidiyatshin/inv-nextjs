@@ -1,5 +1,5 @@
-import { IPortfolioResponse } from '@/config/api';
 import { NextResponse } from 'next/server';
+import { IPortfolioResponse } from 'shared/api/tInvest-api/types';
 
 export async function POST() {
 	const iisResponse = await fetch(

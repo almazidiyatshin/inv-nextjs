@@ -7,10 +7,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Record {
+model Vtb {
   id    Int    @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  shares Int
-  bonds  Int
+  eqmx Int
+  oblg  Int
+  gold  Int
+}
+
+model Sber {
+  id    Int    @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sbmx Int
+  sbcb  Int
+  sbgb  Int
+  sbrb  Int
+  sbgd  Int
+}
+
+model Cash {
+  id    Int    @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  usd Int
+  rub  Int
 }

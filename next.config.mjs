@@ -7,6 +7,9 @@ const nextConfig = {
 	images: {
 		domains: ['avatars.githubusercontent.com'],
 	},
+	experimental: {
+		optimizePackageImports: ['@chakra-ui/react'],
+	},
 	async redirects() {
 		return [
 			{
