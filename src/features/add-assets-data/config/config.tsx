@@ -13,7 +13,8 @@ export const tabs = [
 		title: titles[EFormTypes.VTB],
 		Content: () => (
 			<>
-				<AddAssetsDataForm type={EFormTypes.VTB} />
+				{/* <AddAssetsDataForm type={EFormTypes.VTB} /> */}
+				<AddAssetsDataForm />
 			</>
 		),
 	},
@@ -22,7 +23,8 @@ export const tabs = [
 		title: titles[EFormTypes.SBER],
 		Content: () => (
 			<>
-				<AddAssetsDataForm type={EFormTypes.SBER} />
+				{/* <AddAssetsDataForm type={EFormTypes.SBER} /> */}
+				<AddAssetsDataForm />
 			</>
 		),
 	},
@@ -31,7 +33,8 @@ export const tabs = [
 		title: titles[EFormTypes.CASH],
 		Content: () => (
 			<>
-				<AddAssetsDataForm type={EFormTypes.CASH} />
+				{/* <AddAssetsDataForm type={EFormTypes.CASH} /> */}
+				<AddAssetsDataForm />
 			</>
 		),
 	},

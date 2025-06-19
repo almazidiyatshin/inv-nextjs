@@ -20,3 +20,5 @@ production/
 
 .next/
 out/
+
+tsconfig.tsbuildinfo
