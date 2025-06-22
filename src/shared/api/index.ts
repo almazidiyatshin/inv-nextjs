@@ -1,2 +1,2 @@
 export * from "./common-api";
-export * from "./tInvest-api";
+export * from "./t-invest-api";

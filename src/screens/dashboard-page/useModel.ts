@@ -1,19 +1,17 @@
 import { useEffect } from "react";
-import {
-	useGetIndicatorsQuery,
-	useGetMoexIndexQuery,
-	usePostPortfolioMutation,
-} from "shared/api";
+import { useCommonApi, useTInvestApi } from "shared/api";
 import { useTranslation } from "shared/lib";
 import type { TDashboardPageProps } from "./types";
 
 export const useModel = ({ locale }: TDashboardPageProps) => {
-	const [getPortfolio, { data: portfolioData, isLoading: isPortfolioLoading }] =
-		usePostPortfolioMutation();
+	const [
+		portfolioRequest,
+		{ data: portfolioData, isLoading: isPortfolioLoading },
+	] = useTInvestApi.postPortfolio();
 	const { data: indicatorsData, isLoading: isIndicatorsLoading } =
-		useGetIndicatorsQuery();
+		useCommonApi.getIndicators();
 	const { data: moexIndex, isLoading: isMoexIndexLoading } =
-		useGetMoexIndexQuery();
+		useCommonApi.getMoexIndex();
 
 	const t = useTranslation(locale);
 
@@ -21,8 +19,8 @@ export const useModel = ({ locale }: TDashboardPageProps) => {
 		isPortfolioLoading || isIndicatorsLoading || isMoexIndexLoading;
 
 	useEffect(() => {
-		getPortfolio();
-	}, [getPortfolio]);
+		portfolioRequest();
+	}, [portfolioRequest]);
 
 	return {
 		isLoading,

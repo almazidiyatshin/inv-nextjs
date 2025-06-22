@@ -1,4 +1,6 @@
+import type { BaseQueryApi, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { getSession } from "next-auth/react";
+import type { TAppBaseQuery } from "shared/api/common-api/types";
 import { generateCandleData } from "../mocks/postCandles";
 import {
 	postPortfolioMockedResponse1,
@@ -8,16 +10,18 @@ import type {
 	ICandlesResponse,
 	TPortfolioResponse,
 	TPostCandlesApiParams,
+	TPostCandlesApiReturn,
+	TPostPortfolioReturn,
 } from "../types";
 import { getPreparedPortfolioData } from "./getPrearedPortfolioData";
 import { getPreparedCandlesData } from "./getPreparedCandlesData";
 
 export const postPortfolioQueryFn = async (
-	_userData: undefined,
-	_api: undefined,
-	_extraOptions: undefined,
-	baseQuery: any,
-) => {
+	_arg: undefined,
+	api: BaseQueryApi,
+	extraOptions: object,
+	baseQuery: TAppBaseQuery,
+): Promise<{ data: TPostPortfolioReturn } | { error: FetchBaseQueryError }> => {
 	const session = await getSession();
 	const isAuthenticated = session?.user?.role === "admin";
 
@@ -30,39 +34,49 @@ export const postPortfolioQueryFn = async (
 		};
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const result: { data: TPortfolioResponse } = await baseQuery({
-		url: "/portfolio",
-		method: "POST",
-	});
+	const result = await baseQuery(
+		{
+			url: "/portfolio",
+			method: "POST",
+		},
+		api,
+		extraOptions,
+	);
+
+	if (result.error) {
+		return result as { error: FetchBaseQueryError };
+	}
 
 	return {
-		data: getPreparedPortfolioData(result.data),
+		data: getPreparedPortfolioData(result.data as TPortfolioResponse),
 	};
 };
 
 export const postCandlesQueryFn = async (
-	userData: TPostCandlesApiParams,
-	_api: undefined,
-	_extraOptions: undefined,
-	baseQuery: any,
-) => {
+	arg: TPostCandlesApiParams,
+	api: BaseQueryApi,
+	extraOptions: object,
+	baseQuery: TAppBaseQuery,
+): Promise<
+	{ data: TPostCandlesApiReturn } | { error: FetchBaseQueryError }
+> => {
 	const session = await getSession();
 	const isAuthenticated = session?.user?.role === "admin";
 
 	if (!isAuthenticated) {
-		const data = getPreparedCandlesData(generateCandleData(userData.limit));
+		const data = getPreparedCandlesData(generateCandleData(arg.limit));
 		return { data };
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const result = await baseQuery({
-		url: "/candles",
-		method: "POST",
-		params: userData,
-	});
+	const result = await baseQuery(
+		{
+			url: "/candles",
+			method: "POST",
+			params: arg,
+		},
+		api,
+		extraOptions,
+	);
 
 	return {
 		data: getPreparedCandlesData(result.data as ICandlesResponse),

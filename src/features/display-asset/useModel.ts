@@ -1,17 +1,6 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	usePostBeluCandlesMutation,
-	usePostChmfCandlesMutation,
-	usePostMagnCandlesMutation,
-	usePostMgntCandlesMutation,
-	usePostNlmkCandlesMutation,
-	usePostTbruCandlesMutation,
-	usePostTgldCandlesMutation,
-	usePostTlcbCandlesMutation,
-	usePostTmosCandlesMutation,
-	usePostTofzCandlesMutation,
-} from "shared/api";
+import { useTInvestApi } from "shared/api";
 import {
 	EAssetIds,
 	ECandleInterval,
@@ -30,19 +19,19 @@ import type { TAssetCardProps } from "./types";
 
 const fetchCallbacks = {
 	[EAssetIds.SHARES]: [
-		{ id: etfIds.TMOS, fetch: usePostTmosCandlesMutation },
-		{ id: sharesIds.BELU, fetch: usePostBeluCandlesMutation },
-		{ id: sharesIds.CHMF, fetch: usePostChmfCandlesMutation },
-		{ id: sharesIds.MAGN, fetch: usePostMagnCandlesMutation },
-		{ id: sharesIds.MGNT, fetch: usePostMgntCandlesMutation },
-		{ id: sharesIds.NLMK, fetch: usePostNlmkCandlesMutation },
+		{ id: etfIds.TMOS, fetch: useTInvestApi.postTmos },
+		{ id: sharesIds.BELU, fetch: useTInvestApi.postBelu },
+		{ id: sharesIds.CHMF, fetch: useTInvestApi.postChmf },
+		{ id: sharesIds.MAGN, fetch: useTInvestApi.postMagn },
+		{ id: sharesIds.MGNT, fetch: useTInvestApi.postMgnt },
+		{ id: sharesIds.NLMK, fetch: useTInvestApi.postNlmk },
 	],
 	[EAssetIds.BONDS]: [
-		{ id: etfIds.TBRU, fetch: usePostTbruCandlesMutation },
-		{ id: etfIds.TLCB, fetch: usePostTlcbCandlesMutation },
-		{ id: etfIds.TOFZ, fetch: usePostTofzCandlesMutation },
+		{ id: etfIds.TBRU, fetch: useTInvestApi.postTbru },
+		{ id: etfIds.TLCB, fetch: useTInvestApi.postTlcb },
+		{ id: etfIds.TOFZ, fetch: useTInvestApi.postTofz },
 	],
-	[EAssetIds.GOLD]: [{ id: etfIds.TGLD, fetch: usePostTgldCandlesMutation }],
+	[EAssetIds.GOLD]: [{ id: etfIds.TGLD, fetch: useTInvestApi.postTgld }],
 };
 
 const dispatchCallbacks = {

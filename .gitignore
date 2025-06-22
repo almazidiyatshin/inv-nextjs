@@ -1,5 +1,3 @@
-.husky
-
 .next/
 out/
 build/
@@ -21,4 +19,4 @@ production/
 .next/
 out/
 
-tsconfig.tsbuildinfo
+tsconfig.tsbuildinfoп

@@ -111,7 +111,7 @@ export const AssetCard = ({ id, title, value, counts }: TAssetCardProps) => {
 			</Card.Header>
 
 			<Card.Body>
-				<MyLineChart dataset={dataset} />
+				<MyLineChart id={id} dataset={dataset} isNegative={value < prevValue} />
 			</Card.Body>
 		</Card.Root>
 	);

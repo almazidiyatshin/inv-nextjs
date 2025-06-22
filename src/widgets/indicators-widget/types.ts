@@ -1,11 +1,7 @@
-import type {
-	TGetIndicatorsApiReturn,
-	TGetMoexIndexApiReturn,
-} from "shared/api/common-api/types";
-import type { TPostPortfolioData } from "shared/api/tInvest-api/types";
+import type { TIndicatorsData, TMoexIndex, TPortfolioData } from "shared/types";
 
 export type TIndicatorsWidgetProps = {
-	portfolioData: TPostPortfolioData;
-	indicatorsData: TGetIndicatorsApiReturn;
-	moexIndex: TGetMoexIndexApiReturn;
+	portfolioData: TPortfolioData;
+	indicatorsData: TIndicatorsData;
+	moexIndex: TMoexIndex;
 };

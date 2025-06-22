@@ -1,4 +1,5 @@
 import type { ECandleInterval } from "shared/constants";
+import type { TPortfolioData } from "shared/types";
 
 export interface ICurrencyAmount {
 	currency?: string;
@@ -36,8 +37,6 @@ export interface IPortfolioResponse {
 	totalAmountOptions: ICurrencyAmount;
 	totalAmountSp: ICurrencyAmount;
 	totalAmountPortfolio: ICurrencyAmount;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	virtualPositions: any[]; // TODO fix any
 }
 
 export type TPortfolio = Pick<
@@ -46,28 +45,7 @@ export type TPortfolio = Pick<
 >;
 export type TPortfolioResponse = TPortfolio[];
 
-export type TPostPortfolioData = {
-	allSharesSum: number;
-	allBondsSum: number;
-	goldSum: number;
-	totalSum: number;
-	tbruSum: number;
-	tlcbSum: number;
-	tofzSum: number;
-	tmosSum: number;
-	otherSharesSum: number;
-	tgldCount: number;
-	tbruCount: number;
-	tlcbCount: number;
-	tofzCount: number;
-	tmosCount: number;
-	beluCount: number;
-	chmfCount: number;
-	magnCount: number;
-	mgntCount: number;
-	nlmkCount: number;
-	expectedYield: number;
-};
+export type TPostPortfolioReturn = TPortfolioData;
 
 type TCandle = {
 	close: {

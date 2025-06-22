@@ -1,6 +1,6 @@
 import { etfIds, sharesIds } from "shared/constants/common";
-import type { TAssetData } from "shared/types/common";
-import type { TPortfolioResponse, TPostPortfolioData } from "../types";
+import type { TAssetData, TPortfolioData } from "shared/types/common";
+import type { TPortfolioResponse } from "../types";
 import { getAssetData, getFloatCost } from "./common";
 
 const calculateTotal = (
@@ -13,7 +13,7 @@ const calculateTotal = (
 
 export const getPreparedPortfolioData = (
 	response: TPortfolioResponse,
-): TPostPortfolioData => {
+): TPortfolioData => {
 	const etfData = Object.entries(etfIds).reduce<{ [id: string]: TAssetData }>(
 		(acc, [, id]) => {
 			const { priceInt, priceNano, units } = getAssetData(id, response);

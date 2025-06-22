@@ -9,13 +9,15 @@ import {
 } from "recharts";
 
 type TProps = {
+	id: string;
 	dataset: { value: number; date: string }[];
+	isNegative: boolean;
 };
 
-export const MyLineChart = ({ dataset }: TProps) => {
+export const MyLineChart = ({ id, dataset, isNegative }: TProps) => {
 	const chart = useChart({
 		data: dataset,
-		series: [{ name: "value", color: "teal.solid" }],
+		series: [{ name: "value", color: isNegative ? "red.solid" : "teal.solid" }],
 	});
 
 	return (
@@ -43,7 +45,7 @@ export const MyLineChart = ({ dataset }: TProps) => {
 				{chart.series.map((item) => (
 					<defs key={item.name}>
 						<Chart.Gradient
-							id={`${item.name}-gradient`}
+							id={`${id}-gradient`}
 							stops={[
 								{ offset: "0%", color: item.color, opacity: 0.3 },
 								{ offset: "100%", color: item.color, opacity: 0.05 },
@@ -58,7 +60,7 @@ export const MyLineChart = ({ dataset }: TProps) => {
 						type="natural"
 						isAnimationActive={false}
 						dataKey={chart.key(item.name)}
-						fill={`url(#${item.name}-gradient)`}
+						fill={`url(#${id}-gradient)`}
 						stroke={chart.color(item.color)}
 						strokeWidth={2}
 						stackId="a"

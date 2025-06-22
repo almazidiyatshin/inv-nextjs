@@ -1,5 +1,5 @@
-import type { TPostPortfolioData } from "shared/api/tInvest-api/types";
+import type { TPortfolioData } from "shared/types";
 
 export type TAssetsWidgetProps = {
-	data: TPostPortfolioData;
+	data: TPortfolioData;
 };

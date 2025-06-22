@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import type {
 	TPostCandlesApiParams,
 	TPostCandlesApiReturn,
-} from "shared/api/tInvest-api/types";
-import { getDateRange } from "shared/api/tInvest-api/utils/getDateRange";
+} from "shared/api/t-invest-api/types";
+import { getDateRange } from "shared/api/t-invest-api/utils/getDateRange";
 import { ECandleInterval } from "shared/constants";
 
 const getLimit = (interval: ECandleInterval) => {
@@ -17,8 +17,6 @@ const getLimit = (interval: ECandleInterval) => {
 
 export const useGetCandleData = (
 	filters: Pick<TPostCandlesApiParams, "interval">,
-	// TODO fix any
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	fetchCandles: { id: string; fetch: any }[],
 ): {
 	data: { id: string; data: TPostCandlesApiReturn }[];
