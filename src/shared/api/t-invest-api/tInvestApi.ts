@@ -10,7 +10,7 @@ export const tInvestApi = createApi({
 });
 
 export const useTInvestApi = {
-	postPortfolio: tInvestApi.usePostPortfolioMutation,
+	postPortfolio: tInvestApi.usePostPortfolioQuery,
 	postTgld: tInvestApi.usePostTgldCandlesMutation,
 	postTbru: tInvestApi.usePostTbruCandlesMutation,
 	postTlcb: tInvestApi.usePostTlcbCandlesMutation,

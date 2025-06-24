@@ -20,17 +20,10 @@ export enum ECandleInterval {
 	TEN_YEARS = "CANDLE_INTERVAL_TEN_YEARS",
 }
 
-export enum EAssetIds {
+export enum EAssetId {
 	SHARES = "shares",
 	BONDS = "bonds",
 	GOLD = "gold",
-}
-
-export enum ERatesIds {
-	TOTAL = "total",
-	INFLATION = "inflation",
-	KEY = "key",
-	MOEX = "moex",
 }
 
 export const LS_LOCALE_KEY = "dashboard:localeValue";

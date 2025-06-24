@@ -29,3 +29,8 @@ export type TPortfolioData = {
 	nlmkCount: number;
 	expectedYield: number;
 };
+
+export enum EIndicatorType {
+	CURRENCY = "CURRENCY",
+	NUMBER = "NUMBER",
+}

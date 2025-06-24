@@ -1,0 +1,1 @@
+export { InflationRate } from "./ui";

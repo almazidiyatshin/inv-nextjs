@@ -1,0 +1,1 @@
+export { Gold } from "./ui";

@@ -1,16 +1,16 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { EAssetIds, ECandleInterval } from "shared/constants";
+import { EAssetId, ECandleInterval } from "shared/constants";
 
 interface FilterState {
-	[EAssetIds.SHARES]: { interval: ECandleInterval };
-	[EAssetIds.BONDS]: { interval: ECandleInterval };
-	[EAssetIds.GOLD]: { interval: ECandleInterval };
+	[EAssetId.SHARES]: { interval: ECandleInterval };
+	[EAssetId.BONDS]: { interval: ECandleInterval };
+	[EAssetId.GOLD]: { interval: ECandleInterval };
 }
 
 const initialState: FilterState = {
-	[EAssetIds.SHARES]: { interval: ECandleInterval.YEAR },
-	[EAssetIds.BONDS]: { interval: ECandleInterval.YEAR },
-	[EAssetIds.GOLD]: { interval: ECandleInterval.YEAR },
+	[EAssetId.SHARES]: { interval: ECandleInterval.YEAR },
+	[EAssetId.BONDS]: { interval: ECandleInterval.YEAR },
+	[EAssetId.GOLD]: { interval: ECandleInterval.YEAR },
 };
 
 const filtersSlice = createSlice({
@@ -21,8 +21,8 @@ const filtersSlice = createSlice({
 			state,
 			action: PayloadAction<{ interval: ECandleInterval }>,
 		) {
-			state[EAssetIds.SHARES] = {
-				...state[EAssetIds.SHARES],
+			state[EAssetId.SHARES] = {
+				...state[EAssetId.SHARES],
 				...action.payload,
 			};
 		},
@@ -30,13 +30,13 @@ const filtersSlice = createSlice({
 			state,
 			action: PayloadAction<{ interval: ECandleInterval }>,
 		) {
-			state[EAssetIds.BONDS] = { ...state[EAssetIds.BONDS], ...action.payload };
+			state[EAssetId.BONDS] = { ...state[EAssetId.BONDS], ...action.payload };
 		},
 		setGoldFilters(
 			state,
 			action: PayloadAction<{ interval: ECandleInterval }>,
 		) {
-			state[EAssetIds.GOLD] = { ...state[EAssetIds.GOLD], ...action.payload };
+			state[EAssetId.GOLD] = { ...state[EAssetId.GOLD], ...action.payload };
 		},
 	},
 });

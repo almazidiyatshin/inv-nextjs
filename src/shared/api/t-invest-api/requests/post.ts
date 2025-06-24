@@ -10,7 +10,7 @@ import { postCandlesQueryFn, postPortfolioQueryFn } from "../utils";
 export const postRequests = (
 	builder: EndpointBuilder<TAppBaseQuery, TAppTagTypes, "tInvestApi">,
 ) => ({
-	postPortfolio: builder.mutation<TPostPortfolioReturn, void>({
+	postPortfolio: builder.query<TPostPortfolioReturn, void>({
 		queryFn: postPortfolioQueryFn,
 	}),
 

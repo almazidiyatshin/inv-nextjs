@@ -5,13 +5,13 @@
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
 		"skipLibCheck": true,
-		"baseUrl": "./src",
+		"baseUrl": "src",
 		"paths": {
 			"app/*": ["app/*"],
-			"screens/*": ["screens/*"],
-			"widgets/*": ["widgets/*"],
-			"features/*": ["features/*"],
-			"entities/*": ["/entities/*"],
+			"screen/*": ["screen/*"],
+			"widget/*": ["widget/*"],
+			"feature/*": ["feature/*"],
+			"entity/*": ["entity/*"],
 			"shared/*": ["shared/*"]
 		},
 		"allowJs": true,
