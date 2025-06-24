@@ -1,13 +1,13 @@
 "use client";
 
-import { Flex, Group, Heading, Highlight } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import {
 	AllAssetsChart,
 	Bonds,
 	BondsChart,
 	Gold,
-	MenuWidget,
+	Header,
 	Shares,
 	SharesChart,
 } from "widget";
@@ -18,32 +18,12 @@ import {
 	MoexIndex,
 } from "widget/indicator";
 import type { TDashboardPageProps } from "./types";
-import { useModel } from "./useModel";
 // import { AddAssetsDataButton } from 'features/add-assets-data';
 
 export const DashboardPage = ({ locale }: TDashboardPageProps) => {
-	const { t } = useModel({
-		locale,
-	});
-
 	return (
 		<SessionProvider>
-			<Flex
-				align={"center"}
-				justify={"space-between"}
-				marginBottom={{ base: 6, smDown: 4 }}
-				wrap={{ base: "wrap", smDown: "wrap-reverse" }}
-			>
-				<Heading as={"h1"} size={"3xl"}>
-					<Highlight query={t("investly")} styles={{ color: "teal.600" }}>
-						{t("investly")}
-					</Highlight>
-				</Heading>
-				<Group>
-					{/* <AddAssetsDataButton /> */}
-					<MenuWidget />
-				</Group>
-			</Flex>
+			<Header locale={locale} />
 
 			<Flex wrap={"wrap"} gap={"4"} marginY={"4"}>
 				<AllAssetsValue />

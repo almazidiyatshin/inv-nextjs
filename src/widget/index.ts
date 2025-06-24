@@ -1,3 +1,4 @@
 export * from "./asset";
 export * from "./chart";
-export { MenuWidget } from "./menu-widget";
+export * from "./page";
+export { UserWidget } from "./user";
