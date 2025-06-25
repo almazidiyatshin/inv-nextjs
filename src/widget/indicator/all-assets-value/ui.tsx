@@ -8,7 +8,7 @@ export const AllAssetsValue = () => {
 	return (
 		<Indicator
 			title={title}
-			value={value?.toFixed(0)}
+			value={value}
 			isLoading={isLoading}
 			type={EIndicatorType.CURRENCY}
 		/>

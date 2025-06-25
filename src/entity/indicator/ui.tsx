@@ -1,15 +1,6 @@
 "use client";
 
-import {
-	Card,
-	FormatNumber,
-	HStack,
-	Icon,
-	LocaleProvider,
-	Skeleton,
-	Stat,
-	Text,
-} from "@chakra-ui/react";
+import { Card, HStack, Icon, Skeleton, Stat, Text } from "@chakra-ui/react";
 import type { TIndicatorProps } from "./types";
 import { useModel } from "./useModel";
 
@@ -19,7 +10,9 @@ export const Indicator = ({
 	isLoading,
 	type,
 }: TIndicatorProps) => {
-	const { valueProps, icon: IconComponent } = useModel({ type });
+	const { icon: IconComponent } = useModel({
+		type,
+	});
 
 	return (
 		<Card.Root minWidth={"190px"} flex={"1"}>
@@ -34,10 +27,6 @@ export const Indicator = ({
 					<Stat.ValueText>
 						{isLoading || !value ? (
 							<Skeleton marginTop={"3"} height="5" width="80%" />
-						) : type ? (
-							<LocaleProvider locale="ru-RU">
-								<FormatNumber {...valueProps} value={value as number} />
-							</LocaleProvider>
 						) : (
 							<Text>{value}</Text>
 						)}

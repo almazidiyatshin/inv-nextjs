@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ChakraProvider, StoreProvider } from "shared/providers";
+import { ChakraProvider, StoreProvider, ToastProvider } from "shared/providers";
 
 export const metadata: Metadata = {
 	title: "Investly",
@@ -16,6 +16,7 @@ export default function RootLayout({
 			<body>
 				<ChakraProvider>
 					<StoreProvider>{children}</StoreProvider>
+					<ToastProvider />
 				</ChakraProvider>
 			</body>
 		</html>
