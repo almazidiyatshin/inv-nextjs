@@ -9,7 +9,7 @@ import {
 	Stat,
 	Text,
 } from "@chakra-ui/react";
-import { Tooltip } from "shared/ui";
+import { Clipboard } from "shared/ui";
 import type { TAssetProps } from "./types";
 import { useModel } from "./useModel";
 
@@ -21,7 +21,7 @@ export const Asset = ({
 	persent,
 	description,
 }: TAssetProps) => {
-	const { texts, formattedValue, handleCopy } = useModel({ value });
+	const { formattedValue, handleCopy } = useModel({ value });
 
 	return (
 		<Group display={"block"}>
@@ -34,19 +34,9 @@ export const Asset = ({
 			) : (
 				<>
 					<HStack>
-						<Stat.ValueText>
-							<Tooltip content={texts.copy} openDelay={300} closeDelay={100}>
-								<Text
-									_hover={{
-										cursor: "pointer",
-										color: "teal.solid",
-									}}
-									transition="text-decoration 0.2s ease-in-out, color 0.2s ease-in-out"
-									onClick={handleCopy}
-								>
-									{formattedValue}
-								</Text>
-							</Tooltip>
+						<Stat.ValueText alignItems={"center"}>
+							<Text>{formattedValue}</Text>
+							<Clipboard value={formattedValue} onCopy={handleCopy} />
 						</Stat.ValueText>
 						<Badge colorPalette={isNegative ? "red" : "green"} gap="0">
 							{isNegative ? <Stat.DownIndicator /> : <Stat.UpIndicator />}

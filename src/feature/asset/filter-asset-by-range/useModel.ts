@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import type { SegmentGroupValueChangeDetails } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
 import { EAssetId, ECandleInterval } from "shared/constants";
-import { type RootState, useTranslation } from "shared/lib";
+import { useTranslation } from "shared/lib";
 import {
 	setBondsFilters,
 	setGoldFilters,
@@ -17,43 +18,20 @@ const dispatchCallbacks = {
 export const useModel = ({ id }: Pick<TAssetRangeFilterProps, "id">) => {
 	const t = useTranslation();
 	const dispatch = useDispatch();
-	const filters = useSelector((state: RootState) => state.filters[id]);
 
-	const yearLabel = t("1Y");
-	const fiveYearsLabel = t("5Y");
-	const tenYearsLabel = t("10Y");
+	const items = [
+		{ label: t("1Y"), value: ECandleInterval.YEAR },
+		{ label: t("5Y"), value: ECandleInterval.FIVE_YEARS },
+		{ label: t("10Y"), value: ECandleInterval.TEN_YEARS },
+	];
 
-	const yearButtonTitle = t("year");
-	const fiveYearsButtonTitle = t("fiveYears");
-	const tenYearsButtonTitle = t("tenYears");
-
-	const yearButtonType =
-		filters.interval === ECandleInterval.YEAR
-			? ("outline" as const)
-			: ("ghost" as const);
-	const fiveYearsButtonType =
-		filters.interval === ECandleInterval.FIVE_YEARS
-			? ("outline" as const)
-			: ("ghost" as const);
-	const tenYearsButtonType =
-		filters.interval === ECandleInterval.TEN_YEARS
-			? ("outline" as const)
-			: ("ghost" as const);
-
-	const handleRangeClick = (interval: ECandleInterval) => () => {
+	const handleRangeClick = (details: SegmentGroupValueChangeDetails) => {
+		const interval = details.value as ECandleInterval;
 		dispatch(dispatchCallbacks[id]({ interval }));
 	};
 
 	return {
-		yearLabel,
-		fiveYearsLabel,
-		tenYearsLabel,
-		yearButtonTitle,
-		fiveYearsButtonTitle,
-		tenYearsButtonTitle,
-		yearButtonType,
-		fiveYearsButtonType,
-		tenYearsButtonType,
+		items,
 		handleRangeClick,
 	};
 };

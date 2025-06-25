@@ -5,29 +5,13 @@ import type { TAssetProps } from "./types";
 
 export const useModel = ({ value }: Pick<TAssetProps, "value">) => {
 	const t = useTranslation();
-
-	const texts = {
-		copy: t("copy"),
-		copied: t("copied"),
-		notCopied: t("notCopied"),
-	};
-
 	const formattedValue = toRub(Number(value.toFixed(0)));
 
-	const handleCopy = async () => {
-		try {
-			await navigator.clipboard.writeText(formattedValue.replace(/\D/g, ""));
-			toaster.create({
-				title: texts.copied,
-				type: "success",
-			});
-		} catch {
-			toaster.create({
-				title: texts.notCopied,
-				type: "error",
-			});
-		}
-	};
+	const handleCopy = () =>
+		toaster.create({
+			title: t("copied"),
+			type: "success",
+		});
 
-	return { texts, formattedValue, handleCopy };
+	return { formattedValue, handleCopy };
 };
