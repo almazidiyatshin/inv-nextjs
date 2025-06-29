@@ -24,7 +24,7 @@ export const Shares = () => {
 						description={description}
 					/>
 				</Stat.Root>
-				<AssetFilters id={EAssetId.T_BONDS} isLoading={isLoading} />
+				<AssetFilters id={EAssetId.T_SHARES} isLoading={isLoading} />
 			</Card.Header>
 
 			<Card.Body>
