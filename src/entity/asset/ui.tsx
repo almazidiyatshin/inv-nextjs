@@ -28,8 +28,8 @@ export const Asset = ({
 			<Stat.Label>{title}</Stat.Label>
 			{isLoading ? (
 				<Stack marginTop={"2"} flex="1">
-					<Skeleton height={"5"} width="260%" />
-					<Skeleton height={"5"} width="200%" />
+					<Skeleton height={"5"} width="80%" />
+					<Skeleton height={"5"} width="40%" />
 				</Stack>
 			) : (
 				<>

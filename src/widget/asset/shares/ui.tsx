@@ -1,9 +1,10 @@
 "use client";
 
-import { Card, HStack, Stat } from "@chakra-ui/react";
+import { Card, Stat } from "@chakra-ui/react";
 import { Asset } from "entity";
-import { AssetChart, AssetRangeFilter } from "feature";
+import { AssetChart } from "feature";
 import { EAssetId } from "shared/constants";
+import { AssetFilters } from "../filters";
 import { useModel } from "./useModel";
 
 export const Shares = () => {
@@ -12,20 +13,18 @@ export const Shares = () => {
 
 	return (
 		<Card.Root minWidth={"xs"} flex={"1"}>
-			<Card.Header>
+			<Card.Header gap={"4"}>
 				<Stat.Root>
-					<HStack alignItems={"start"} justify={"space-between"}>
-						<Asset
-							title={title}
-							value={value}
-							isNegative={isNegative}
-							isLoading={isLoading}
-							persent={persent}
-							description={description}
-						/>
-						<AssetRangeFilter id={EAssetId.SHARES} isDisabled={isLoading} />
-					</HStack>
+					<Asset
+						title={title}
+						value={value}
+						isNegative={isNegative}
+						isLoading={isLoading}
+						persent={persent}
+						description={description}
+					/>
 				</Stat.Root>
+				<AssetFilters id={EAssetId.T_BONDS} isLoading={isLoading} />
 			</Card.Header>
 
 			<Card.Body>

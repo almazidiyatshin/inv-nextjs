@@ -3,16 +3,22 @@ import { useDispatch } from "react-redux";
 import { EAssetId, ECandleInterval } from "shared/constants";
 import { useTranslation } from "shared/lib";
 import {
-	setBondsFilters,
-	setGoldFilters,
-	setSharesFilters,
+	setTBondsFilters,
+	setTGoldFilters,
+	setTSharesFilters,
 } from "shared/lib/store/slices";
 import type { TAssetRangeFilterProps } from "./types";
 
 const dispatchCallbacks = {
-	[EAssetId.SHARES]: setSharesFilters,
-	[EAssetId.BONDS]: setBondsFilters,
-	[EAssetId.GOLD]: setGoldFilters,
+	[EAssetId.T_SHARES]: setTSharesFilters,
+	[EAssetId.T_BONDS]: setTBondsFilters,
+	[EAssetId.T_GOLD]: setTGoldFilters,
+	[EAssetId.VTB_SHARES]: setTSharesFilters,
+	[EAssetId.VTB_BONDS]: setTBondsFilters,
+	[EAssetId.VTB_GOLD]: setTGoldFilters,
+	[EAssetId.SBER_SHARES]: setTSharesFilters,
+	[EAssetId.SBER_BONDS]: setTBondsFilters,
+	[EAssetId.SBER_GOLD]: setTGoldFilters,
 };
 
 export const useModel = ({ id }: Pick<TAssetRangeFilterProps, "id">) => {
@@ -20,18 +26,23 @@ export const useModel = ({ id }: Pick<TAssetRangeFilterProps, "id">) => {
 	const dispatch = useDispatch();
 
 	const items = [
-		{ label: t("1Y"), value: ECandleInterval.YEAR },
-		{ label: t("5Y"), value: ECandleInterval.FIVE_YEARS },
-		{ label: t("10Y"), value: ECandleInterval.TEN_YEARS },
+		{ label: t("year"), value: ECandleInterval.YEAR },
+		{ label: t("fiveYears"), value: ECandleInterval.FIVE_YEARS },
+		{ label: t("tenYears"), value: ECandleInterval.TEN_YEARS },
 	];
 
-	const handleRangeClick = (details: SegmentGroupValueChangeDetails) => {
+	const texts = {
+		label: t("byRange"),
+	};
+
+	const handleChange = (details: SegmentGroupValueChangeDetails) => {
 		const interval = details.value as ECandleInterval;
 		dispatch(dispatchCallbacks[id]({ interval }));
 	};
 
 	return {
+		texts,
 		items,
-		handleRangeClick,
+		handleChange,
 	};
 };

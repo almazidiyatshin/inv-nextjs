@@ -13,7 +13,7 @@ export const Clipboard = ({ value, onCopy }: TClipboardProps) => {
 		>
 			<ChakraClipboard.Trigger asChild>
 				<IconButton variant="ghost" size="xs">
-					<Tooltip content={texts.copy} openDelay={300} closeDelay={100}>
+					<Tooltip content={texts.copy}>
 						<ChakraClipboard.Indicator />
 					</Tooltip>
 				</IconButton>

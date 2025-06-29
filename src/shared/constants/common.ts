@@ -21,9 +21,20 @@ export enum ECandleInterval {
 }
 
 export enum EAssetId {
-	SHARES = "shares",
-	BONDS = "bonds",
-	GOLD = "gold",
+	T_SHARES = "tShares",
+	T_BONDS = "tBonds",
+	T_GOLD = "tGold",
+	VTB_SHARES = "vtbShares",
+	VTB_BONDS = "vtbBonds",
+	VTB_GOLD = "vtbGold",
+	SBER_SHARES = "sberShares",
+	SBER_BONDS = "sberBonds",
+	SBER_GOLD = "sberGold",
 }
 
 export const LS_LOCALE_KEY = "dashboard:localeValue";
+
+export enum EValueType {
+	ASSET = "ASSET",
+	PORTFOLIO = "PORTFOLIO",
+}

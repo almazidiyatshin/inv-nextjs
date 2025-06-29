@@ -1,47 +1,143 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { EAssetId, ECandleInterval } from "shared/constants";
+import { EAssetId, ECandleInterval, EValueType } from "shared/constants";
 
 interface FilterState {
-	[EAssetId.SHARES]: { interval: ECandleInterval };
-	[EAssetId.BONDS]: { interval: ECandleInterval };
-	[EAssetId.GOLD]: { interval: ECandleInterval };
+	[EAssetId.T_SHARES]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.T_BONDS]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.T_GOLD]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.VTB_SHARES]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.VTB_BONDS]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.VTB_GOLD]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.SBER_SHARES]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.SBER_BONDS]: { interval: ECandleInterval; value: EValueType };
+	[EAssetId.SBER_GOLD]: { interval: ECandleInterval; value: EValueType };
 }
 
 const initialState: FilterState = {
-	[EAssetId.SHARES]: { interval: ECandleInterval.YEAR },
-	[EAssetId.BONDS]: { interval: ECandleInterval.YEAR },
-	[EAssetId.GOLD]: { interval: ECandleInterval.YEAR },
+	[EAssetId.T_SHARES]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.T_BONDS]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.T_GOLD]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.VTB_SHARES]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.VTB_BONDS]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.VTB_GOLD]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.SBER_SHARES]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.SBER_BONDS]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
+	[EAssetId.SBER_GOLD]: {
+		interval: ECandleInterval.YEAR,
+		value: EValueType.ASSET,
+	},
 };
 
 const filtersSlice = createSlice({
 	name: "filters",
 	initialState,
 	reducers: {
-		setSharesFilters(
+		setTSharesFilters(
 			state,
 			action: PayloadAction<{ interval: ECandleInterval }>,
 		) {
-			state[EAssetId.SHARES] = {
-				...state[EAssetId.SHARES],
+			state[EAssetId.T_SHARES] = {
+				...state[EAssetId.T_SHARES],
 				...action.payload,
 			};
 		},
-		setBondsFilters(
+		setTBondsFilters(
 			state,
 			action: PayloadAction<{ interval: ECandleInterval }>,
 		) {
-			state[EAssetId.BONDS] = { ...state[EAssetId.BONDS], ...action.payload };
+			state[EAssetId.T_BONDS] = {
+				...state[EAssetId.T_BONDS],
+				...action.payload,
+			};
 		},
-		setGoldFilters(
+		setTGoldFilters(
 			state,
 			action: PayloadAction<{ interval: ECandleInterval }>,
 		) {
-			state[EAssetId.GOLD] = { ...state[EAssetId.GOLD], ...action.payload };
+			state[EAssetId.T_GOLD] = { ...state[EAssetId.T_GOLD], ...action.payload };
+		},
+		setVtbSharesFilters(
+			state,
+			action: PayloadAction<{ interval: ECandleInterval }>,
+		) {
+			state[EAssetId.VTB_SHARES] = {
+				...state[EAssetId.VTB_SHARES],
+				...action.payload,
+			};
+		},
+		setVtbBondsFilters(
+			state,
+			action: PayloadAction<{ interval: ECandleInterval }>,
+		) {
+			state[EAssetId.VTB_BONDS] = {
+				...state[EAssetId.VTB_BONDS],
+				...action.payload,
+			};
+		},
+		setVtbGoldFilters(
+			state,
+			action: PayloadAction<{ interval: ECandleInterval }>,
+		) {
+			state[EAssetId.VTB_GOLD] = {
+				...state[EAssetId.VTB_GOLD],
+				...action.payload,
+			};
+		},
+		setSberSharesFilters(
+			state,
+			action: PayloadAction<{ interval: ECandleInterval }>,
+		) {
+			state[EAssetId.SBER_SHARES] = {
+				...state[EAssetId.SBER_SHARES],
+				...action.payload,
+			};
+		},
+		setSberBondsFilters(
+			state,
+			action: PayloadAction<{ interval: ECandleInterval }>,
+		) {
+			state[EAssetId.SBER_BONDS] = {
+				...state[EAssetId.SBER_BONDS],
+				...action.payload,
+			};
+		},
+		setSberGoldFilters(
+			state,
+			action: PayloadAction<{ interval: ECandleInterval }>,
+		) {
+			state[EAssetId.SBER_GOLD] = {
+				...state[EAssetId.SBER_GOLD],
+				...action.payload,
+			};
 		},
 	},
 });
 
-export const { setSharesFilters, setBondsFilters, setGoldFilters } =
+export const { setTSharesFilters, setTBondsFilters, setTGoldFilters } =
 	filtersSlice.actions;
 
 export const { reducer: filtersReducer } = filtersSlice;

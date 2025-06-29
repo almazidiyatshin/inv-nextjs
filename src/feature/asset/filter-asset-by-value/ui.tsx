@@ -1,14 +1,14 @@
 "use client";
 
 import { Field, HStack, RadioGroup } from "@chakra-ui/react";
-import { ECandleInterval } from "shared/constants";
-import type { TAssetRangeFilterProps } from "./types";
+import { EValueType } from "shared/constants";
+import type { TAssetValueFilterProps } from "./types";
 import { useModel } from "./useModel";
 
-export const AssetRangeFilter = ({
+export const AssetValueFilter = ({
 	id,
 	isDisabled,
-}: TAssetRangeFilterProps) => {
+}: TAssetValueFilterProps) => {
 	const { texts, items, handleChange } = useModel({
 		id,
 	});
@@ -17,8 +17,8 @@ export const AssetRangeFilter = ({
 		<Field.Root>
 			<Field.Label>{texts.label}</Field.Label>
 			<RadioGroup.Root
-				defaultValue={ECandleInterval.YEAR}
 				variant={"subtle"}
+				defaultValue={EValueType.ASSET}
 				size={"sm"}
 				disabled={isDisabled}
 				onValueChange={handleChange}

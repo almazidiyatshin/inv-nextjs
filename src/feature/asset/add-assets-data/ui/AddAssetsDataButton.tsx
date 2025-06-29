@@ -1,28 +1,50 @@
 "use client";
 
-// import { useAddAssetsDataButtonModel } from '../model';
-// import { tabs } from '../config/config';
-import { Button } from "@chakra-ui/react";
+import { Button, CloseButton, Dialog, Portal, Tabs } from "@chakra-ui/react";
+import { AddCashAssetsDataForm } from "./AddCashAssetsDataForm";
+import { AddSberAssetsDataForm } from "./AddSberAssetsDataForm";
+import { AddVtbAssetsDataForm } from "./AddVtbAssetsDataForm";
 
 export const AddAssetsDataButton = () => {
-	// const { isModalOpen, handleModalOpen, handleModalClose } =
-	// 	useAddAssetsDataButtonModel();
-
 	return (
-		<>
-			<Button
-				variant={"subtle"}
-				size={"sm"}
-				type="submit"
-				colorPalette={"teal"}
-				// onClick={handleModalOpen}
-			>
-				Add data
-			</Button>
+		<Dialog.Root placement={"center"}>
+			<Dialog.Trigger asChild>
+				<Button colorPalette={"teal"} variant="solid" size="sm">
+					Add data
+				</Button>
+			</Dialog.Trigger>
 
-			{/* <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-				<Tabs tabs={tabs} />
-			</Modal> */}
-		</>
+			<Portal>
+				<Dialog.Backdrop />
+				<Dialog.Positioner>
+					<Dialog.Content>
+						<Dialog.Header>
+							<Dialog.Title>Add assets data</Dialog.Title>
+						</Dialog.Header>
+						<Dialog.Body>
+							<Tabs.Root variant={"subtle"} fitted defaultValue="vtb">
+								<Tabs.List>
+									<Tabs.Trigger value="vtb">Vtb</Tabs.Trigger>
+									<Tabs.Trigger value="sber">Sber</Tabs.Trigger>
+									<Tabs.Trigger value="cash">Cash</Tabs.Trigger>
+								</Tabs.List>
+								<Tabs.Content value="vtb">
+									<AddVtbAssetsDataForm />
+								</Tabs.Content>
+								<Tabs.Content value="sber">
+									<AddSberAssetsDataForm />
+								</Tabs.Content>
+								<Tabs.Content value="cash">
+									<AddCashAssetsDataForm />
+								</Tabs.Content>
+							</Tabs.Root>
+						</Dialog.Body>
+						<Dialog.CloseTrigger asChild>
+							<CloseButton size="sm" />
+						</Dialog.CloseTrigger>
+					</Dialog.Content>
+				</Dialog.Positioner>
+			</Portal>
+		</Dialog.Root>
 	);
 };

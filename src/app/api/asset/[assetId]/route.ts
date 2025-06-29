@@ -11,6 +11,7 @@ export async function POST(req: Request, { params }: TParams) {
 	try {
 		const body = await req.json();
 		const { assetId } = params;
+		console.log(body, assetId);
 
 		let newRecord: any;
 
@@ -32,14 +33,14 @@ export async function POST(req: Request, { params }: TParams) {
 				break;
 			default:
 				return NextResponse.json(
-					{ error: `Неизвестный тип ресурса: ${assetId}` },
+					{ error: `Неизвестный тип актива: ${assetId}` },
 					{ status: 400 },
 				);
 		}
 
-		return NextResponse.json(newRecord, { status: 201 });
+		return NextResponse.json(newRecord, { status: 200 });
 	} catch (error) {
-		console.error("[POST /api/testdb]", error);
+		console.error("[POST /api/asset]", error);
 		return NextResponse.json(
 			{ error: "Internal Server Error" },
 			{ status: 500 },

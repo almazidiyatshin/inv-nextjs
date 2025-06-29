@@ -1,2 +1,4 @@
 export { AddAssetsDataButton } from "./AddAssetsDataButton";
-export { AddAssetsDataForm } from "./AddAssetsDataForm";
+export { AddCashAssetsDataForm } from "./AddCashAssetsDataForm";
+export { AddSberAssetsDataForm } from "./AddSberAssetsDataForm";
+export { AddVtbAssetsDataForm } from "./AddVtbAssetsDataForm";

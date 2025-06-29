@@ -15,13 +15,13 @@ import { toRub } from "shared/utils";
 export const useModel = () => {
 	const t = useTranslation();
 	const filters = useSelector(
-		(state: RootState) => state.filters[EAssetId.BONDS],
+		(state: RootState) => state.filters[EAssetId.T_BONDS],
 	);
 	const { data: portfolioData, isLoading: isPortfolioLoading } =
 		useTInvestApi.postPortfolio();
 	const { data: candlesData, isLoading: isCandlesLoading } = useGetCandleData(
 		filters,
-		fetchCallbacks[EAssetId.BONDS],
+		fetchCallbacks[EAssetId.T_BONDS],
 	);
 	const locale = localStorage.getItem(LS_LOCALE_KEY) || "en";
 
