@@ -1,1 +1,1 @@
-export { AddAssetsDataButton } from "./ui";
+export { AddAssetsDataForm } from "./ui";

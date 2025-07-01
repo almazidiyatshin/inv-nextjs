@@ -1,58 +1,93 @@
-import { NextResponse } from "next/server";
-import type { IPortfolioResponse } from "shared/api/t-invest-api/types";
+import { EAssetCategory, EPortfolioType, PrismaClient } from "@prisma/client";
+import { type NextRequest, NextResponse } from "next/server";
+import type { TCreatePortfolioSnapshotRequestBody } from "shared/api";
 
-export async function POST() {
-	const iisResponse = await fetch(
-		"https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio",
-		{
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+const prisma = new PrismaClient();
+
+export async function POST(req: NextRequest) {
+	try {
+		const body: TCreatePortfolioSnapshotRequestBody = await req.json();
+
+		if (
+			!body.name ||
+			!body.type ||
+			!Array.isArray(body.assets) ||
+			body.assets.length === 0
+		) {
+			return NextResponse.json(
+				{
+					message: "Недостаточно данных: name, type и assets обязательны.",
+				},
+				{ status: 400 },
+			);
+		}
+
+		if (!Object.values(EPortfolioType).includes(body.type)) {
+			return NextResponse.json(
+				{ message: `Недопустимое значение type: ${body.type}` },
+				{ status: 400 },
+			);
+		}
+		for (const asset of body.assets) {
+			if (
+				!asset.name ||
+				typeof asset.quantity !== "number" ||
+				typeof asset.price !== "number" ||
+				!asset.type
+			) {
+				return NextResponse.json(
+					{
+						message: `Недостаточно данных для актива: name, quantity, price и type обязательны.`,
+					},
+					{ status: 400 },
+				);
+			}
+			if (!Object.values(EAssetCategory).includes(asset.type)) {
+				return NextResponse.json(
+					{
+						message: `Недопустимое значение type для name ${asset.name}: ${asset.type}`,
+					},
+					{ status: 400 },
+				);
+			}
+		}
+
+		// const newSnapshot = await prisma.$transaction(async (tx) => {
+		// 	const portfolio = await tx.portfolio.create({
+		// 		data: {
+		// 			name: body.name,
+		// 			type: body.type,
+		// 		},
+		// 	});
+
+		// 	const assets = body.assets.map((asset) => ({
+		// 		...asset,
+		// 		portfolioId: portfolio.id,
+		// 	}));
+
+		// 	await tx.assetRecord.createMany({
+		// 		data: assets,
+		// 	});
+
+		// 	return portfolio;
+		// });
+
+		return NextResponse.json(
+			{
+				message: "Снимок портфеля и активы успешно созданы",
+				// snapshotId: newSnapshot.id,
+				// createdAt: newSnapshot.createdAt,
 			},
-			body: JSON.stringify({
-				accountId: process.env.IIS_ACC_ID,
-				currency: "RUB",
-			}),
-			cache: "no-store",
-		},
-	);
-
-	const brokerageResponse = await fetch(
-		"https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio",
-		{
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+			{ status: 201 },
+		);
+	} catch (error) {
+		console.error("Ошибка при создании снимка портфеля:", error);
+		return NextResponse.json(
+			{
+				message: "Ошибка сервера при создании записи",
+				error: error instanceof Error ? error.message : String(error),
 			},
-			body: JSON.stringify({
-				accountId: process.env.BROKERAGE_ACC_ID,
-				currency: "RUB",
-			}),
-			cache: "no-store",
-		},
-	);
-
-	if (!iisResponse.ok || !brokerageResponse.ok) {
-		throw new Error("Failed fetch response T-Invest");
+			{ status: 500 },
+		);
 	}
-
-	const iisData: IPortfolioResponse = await iisResponse.json();
-	const brokerageData: IPortfolioResponse = await brokerageResponse.json();
-
-	return NextResponse.json([
-		{
-			totalAmountShares: iisData.totalAmountShares,
-			expectedYield: iisData.expectedYield,
-			positions: iisData.positions,
-		},
-		{
-			totalAmountShares: brokerageData.totalAmountShares,
-			expectedYield: brokerageData.expectedYield,
-			positions: brokerageData.positions,
-		},
-	]);
 }

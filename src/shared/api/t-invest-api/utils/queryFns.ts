@@ -36,7 +36,7 @@ export const postPortfolioQueryFn = async (
 
 	const result = await baseQuery(
 		{
-			url: "/portfolio",
+			url: "/tInvestPortfolio",
 			method: "POST",
 		},
 		api,

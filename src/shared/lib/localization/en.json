@@ -36,5 +36,15 @@
 	"byPortfolioValue": "By portfolio value",
 	"byAssetValue": "By asset value",
 	"range": "Range",
-	"value": "Value"
+	"value": "Value",
+	"addData": "Add data",
+	"addAssetsData": "Add assets data",
+	"vtb": "VTB",
+	"sber": "Sber",
+	"money": "Money",
+	"submit": "Submit",
+	"quantity": "quantity",
+	"price": "price",
+	"dataSubmitSuccess": "The data was sent successfully",
+	"dataSubmitFailure": "An error occurred when sending data"
 }

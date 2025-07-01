@@ -7,30 +7,54 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Vtb {
-  id    Int    @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  eqmx  Int
-  oblg  Int
-  gold  Int
+enum EAssetCategory {
+  SHARE
+  BOND
+  METAL
+  MONEY
+}
+enum EAssetName {
+  EQMX
+  OBLG
+  GOLD
+  SBMX
+  SBCB
+  SBGB
+  SBRB
+  SBGD
+  USD
+  RUB
+}
+enum ECurrency {
+  USD
+  RUB
 }
 
-model Sber {
-  id    Int    @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  sbmx  Int
-  sbcb  Int
-  sbgb  Int
-  sbrb  Int
-  sbgd  Int
+model AssetRecord {
+  id              Int             @id @default(autoincrement())
+  portfolioId     Int      
+  portfolio       Portfolio       @relation(fields: [portfolioId], references: [id])
+  name            EAssetName
+  type            EAssetCategory   
+  quantity        Int    
+  price           Float    
+  currency        ECurrency
 }
 
-model Cash {
-  id   Int    @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  usd  Int
-  rub  Int
+enum EPortfolioType {
+  BROKERAGE
+  MONEY
+}
+enum EPortfolioName {
+  VTB
+  SBER
+  MONEY
+}
+
+model Portfolio {
+  id          Int               @id @default(autoincrement())
+  createdAt   DateTime          @default(now())
+  name        EPortfolioName
+  type        EPortfolioType
+  assets      AssetRecord[]
 }

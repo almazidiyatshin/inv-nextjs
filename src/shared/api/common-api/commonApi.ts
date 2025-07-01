@@ -14,5 +14,5 @@ export const useCommonApi = {
 	getIndicators: commonApi.useGetIndicatorsQuery,
 	getMoexIndex: commonApi.useGetMoexIndexQuery,
 
-	postCreateAssetRecord: commonApi.usePostCreateAssetRecordMutation,
+	postCreatePortfolioSnapshot: commonApi.usePostCreatePortfolioSnapshotMutation,
 };

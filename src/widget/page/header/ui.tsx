@@ -1,8 +1,7 @@
 "use client";
 
 import { Flex, Group, Heading, Highlight } from "@chakra-ui/react";
-// import { AddAssetsDataButton } from "feature";
-import { Menu } from "widget";
+import { AssetsAddingFlow, Menu } from "widget";
 import type { THeaderProps } from "./types";
 import { useModel } from "./useModel";
 
@@ -24,7 +23,7 @@ export const Header = ({ locale }: THeaderProps) => {
 				</Highlight>
 			</Heading>
 			<Group>
-				{/* <AddAssetsDataButton /> */}
+				<AssetsAddingFlow />
 				<Menu />
 			</Group>
 		</Flex>
