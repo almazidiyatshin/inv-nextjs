@@ -19,13 +19,13 @@ import { UserWidget } from "widget";
 import { useModel } from "./useModel";
 
 export const Menu = () => {
-	const { texts } = useModel();
+	const { texts, currentPath, open, onOpen, onClose } = useModel();
 
 	return (
 		<SessionProvider>
-			<Drawer.Root>
+			<Drawer.Root open={open}>
 				<Drawer.Trigger asChild>
-					<IconButton colorPalette={"teal"} variant={"ghost"}>
+					<IconButton colorPalette={"teal"} variant={"ghost"} onClick={onOpen}>
 						<LuAlignJustify />
 					</IconButton>
 				</Drawer.Trigger>
@@ -36,16 +36,32 @@ export const Menu = () => {
 						<Drawer.Content>
 							<Drawer.Header>
 								<Drawer.CloseTrigger asChild>
-									<CloseButton size={"lg"} />
+									<CloseButton size={"lg"} onClick={onClose} />
 								</Drawer.CloseTrigger>
 								<Drawer.Title>{texts.title}</Drawer.Title>
 							</Drawer.Header>
-							<Drawer.Body>
+							<Drawer.Body fontSize={"md"}>
 								<VStack gap={"4"} align={"flex-start"}>
-									<ChakraLink asChild>
+									<ChakraLink
+										asChild
+										fontWeight={currentPath === "dashboard" ? "bold" : "normal"}
+										_focus={{
+											outline: "none",
+										}}
+										onClick={onClose}
+									>
 										<NextLink href="/dashboard">{texts.dashboard}</NextLink>
 									</ChakraLink>
-									<ChakraLink asChild>
+									<ChakraLink
+										asChild
+										fontWeight={
+											currentPath === "portfolio-management" ? "bold" : "normal"
+										}
+										_focus={{
+											outline: "none",
+										}}
+										onClick={onClose}
+									>
 										<NextLink href="/portfolio-management">
 											{texts.portfolioManagement}
 										</NextLink>

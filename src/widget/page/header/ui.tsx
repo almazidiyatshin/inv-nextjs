@@ -12,7 +12,7 @@ import { Menu } from "widget";
 import { useModel } from "./useModel";
 
 export const Header = () => {
-	const { texts } = useModel();
+	const { texts, currentPath } = useModel();
 
 	return (
 		<Flex
@@ -28,10 +28,24 @@ export const Header = () => {
 					</Highlight>
 				</Heading>
 				<HStack gap={"4"} display={{ base: "flex", smDown: "none" }}>
-					<ChakraLink asChild>
+					<ChakraLink
+						asChild
+						fontWeight={currentPath === "dashboard" ? "bold" : "normal"}
+						_focus={{
+							outline: "none",
+						}}
+					>
 						<NextLink href="/dashboard">{texts.dashboard}</NextLink>
 					</ChakraLink>
-					<ChakraLink asChild>
+					<ChakraLink
+						asChild
+						fontWeight={
+							currentPath === "portfolio-management" ? "bold" : "normal"
+						}
+						_focus={{
+							outline: "none",
+						}}
+					>
 						<NextLink href="/portfolio-management">
 							{texts.portfolioManagement}
 						</NextLink>

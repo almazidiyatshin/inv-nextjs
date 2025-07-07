@@ -1,6 +1,13 @@
 "use client";
 
-import { Card, EmptyState, Skeleton, Stack, VStack } from "@chakra-ui/react";
+import {
+	Card,
+	EmptyState,
+	Flex,
+	Skeleton,
+	Stack,
+	VStack,
+} from "@chakra-ui/react";
 import { AddAssetsForm } from "feature";
 import { LuBriefcaseBusiness } from "react-icons/lu";
 import { useModel } from "./useModel";
@@ -13,7 +20,7 @@ export const AssetAddCard = () => {
 			<Card.Body gap="4">
 				<Card.Title mt="2">{texts.title}</Card.Title>
 				{isLoading ? (
-					<Stack gap={"4"}>
+					<Stack gap={"5"}>
 						<Stack gap={"2"}>
 							<Skeleton height={"5"} width="40%" />
 							<Skeleton height={"8"} width="100%" />
@@ -22,6 +29,9 @@ export const AssetAddCard = () => {
 							<Skeleton height={"5"} width="40%" />
 							<Skeleton height={"8"} width="100%" />
 						</Stack>
+						<Flex justify={"flex-end"}>
+							<Skeleton height={"10"} width="40%" />
+						</Flex>
 					</Stack>
 				) : isActive ? (
 					<AddAssetsForm />

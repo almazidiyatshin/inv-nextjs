@@ -3,8 +3,9 @@
 import {
 	Card,
 	EmptyState,
+	Flex,
 	For,
-	HStack,
+	SimpleGrid,
 	Skeleton,
 	Stack,
 	Tabs,
@@ -22,19 +23,34 @@ export const PortfolioUpdateStateCard = () => {
 			<Card.Body gap="4">
 				<Card.Title mt="2">{texts.title}</Card.Title>
 				{isLoading ? (
-					<Stack gap={"4"}>
-						<HStack gap={"2"}>
-							<Skeleton height={"8"} width="100%" flex={1} />
-							<Skeleton height={"8"} width="100%" flex={1} />
-							<Skeleton height={"8"} width="100%" flex={1} />
-						</HStack>
+					<Stack gap={"8"}>
+						<Skeleton height={"8"} width="100%" />
+						<SimpleGrid columns={3} gap={"4"} width={"full"}>
+							{[1, 2, 3].map((item) => (
+								<Stack key={item}>
+									<Stack gap={"5"}>
+										<Stack gap={"2"}>
+											<Skeleton height={"5"} width="40%" />
+											<Skeleton height={"8"} width="100%" />
+										</Stack>
+										<Stack gap={"2"}>
+											<Skeleton height={"5"} width="40%" />
+											<Skeleton height={"8"} width="100%" />
+										</Stack>
+									</Stack>
+								</Stack>
+							))}
+						</SimpleGrid>
+						<Flex justify={"flex-end"}>
+							<Skeleton height={"10"} width="20%" />
+						</Flex>
 					</Stack>
 				) : isActive ? (
 					<Tabs.Root
 						fitted
 						lazyMount={true}
 						unmountOnExit={true}
-						variant={"outline"}
+						variant={"line"}
 						defaultValue={Object.keys(data)[0]}
 					>
 						<Tabs.List>
