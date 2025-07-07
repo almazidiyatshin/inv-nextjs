@@ -1,6 +1,7 @@
 "use client";
 
 import {
+	Link as ChakraLink,
 	CloseButton,
 	Drawer,
 	HStack,
@@ -11,6 +12,7 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { LanguageToggleButton, ToggleThemeButton } from "feature";
+import NextLink from "next/link";
 import { SessionProvider } from "next-auth/react";
 import { LuAlignJustify } from "react-icons/lu";
 import { UserWidget } from "widget";
@@ -33,12 +35,23 @@ export const Menu = () => {
 					<Drawer.Positioner>
 						<Drawer.Content>
 							<Drawer.Header>
-								<Drawer.CloseTrigger asChild pos={"initial"}>
+								<Drawer.CloseTrigger asChild>
 									<CloseButton size={"lg"} />
 								</Drawer.CloseTrigger>
 								<Drawer.Title>{texts.title}</Drawer.Title>
 							</Drawer.Header>
-							<Drawer.Body />
+							<Drawer.Body>
+								<VStack gap={"4"} align={"flex-start"}>
+									<ChakraLink asChild>
+										<NextLink href="/dashboard">{texts.dashboard}</NextLink>
+									</ChakraLink>
+									<ChakraLink asChild>
+										<NextLink href="/portfolio-management">
+											{texts.portfolioManagement}
+										</NextLink>
+									</ChakraLink>
+								</VStack>
+							</Drawer.Body>
 							<Drawer.Footer justifyContent={"start"}>
 								<VStack width={"100%"}>
 									<Separator

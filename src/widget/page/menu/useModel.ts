@@ -7,6 +7,8 @@ export const useModel = () => {
 		title: t("investly"),
 		language: t("language"),
 		darkMode: t("darkMode"),
+		dashboard: t("dashboard"),
+		portfolioManagement: t("portfolioManagement"),
 	};
 
 	return { texts };
