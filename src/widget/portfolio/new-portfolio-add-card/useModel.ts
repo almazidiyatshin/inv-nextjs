@@ -1,0 +1,11 @@
+import { useTranslation } from "shared/lib";
+
+export const useModel = () => {
+	const t = useTranslation();
+
+	const texts = {
+		title: t("addNewPortfolio"),
+	};
+
+	return { texts };
+};

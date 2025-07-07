@@ -1,4 +1,5 @@
 export * from "./asset";
 export * from "./chart";
 export * from "./page";
-export { UserWidget } from "./user";
+export * from "./portfolio";
+export * from "./user";

@@ -1,8 +1,13 @@
 import { useTranslation } from "shared/lib";
-import type { THeaderProps } from "./types";
 
-export const useModel = ({ locale }: THeaderProps) => {
-	const t = useTranslation(locale);
+export const useModel = () => {
+	const t = useTranslation();
 
-	return { title: t("investly") };
+	const texts = {
+		title: t("investly"),
+		dashboard: t("dashboard"),
+		portfolioManagement: t("portfolioManagement"),
+	};
+
+	return { texts };
 };

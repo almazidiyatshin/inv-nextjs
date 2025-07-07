@@ -2,4 +2,4 @@ export {
 	commonApi,
 	useCommonApi,
 } from "./commonApi";
-export type { TCreatePortfolioSnapshotRequestBody } from "./types";
+export type * from "./types";

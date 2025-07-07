@@ -12,7 +12,10 @@
 		"format": "pnpm exec biome format --write",
 		"prepare": "husky",
 		"postinstall": "prisma generate --no-engine",
-		"migrate": "prisma migrate dev --name"
+		"migrate:prod": "prisma migrate dev --name",
+    "migrate:test": "DATABASE_URL=$(grep DEV_DATABASE_URL .env | cut -d '=' -f2-) prisma migrate dev --name",
+		"migrate-reset:prod": "prisma migrate reset",
+    "migrate-reset:test": "DATABASE_URL=$(grep DEV_DATABASE_URL .env | cut -d '=' -f2-) prisma migrate reset"
 	},
 	"dependencies": {
 		"@chakra-ui/charts": "^3.21.0",

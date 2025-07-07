@@ -1,14 +1,18 @@
 "use client";
 
-import { Flex, Group, Heading, Highlight } from "@chakra-ui/react";
-import { AssetsAddingFlow, Menu } from "widget";
-import type { THeaderProps } from "./types";
+import {
+	Link as ChakraLink,
+	Flex,
+	Heading,
+	Highlight,
+	HStack,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Menu } from "widget";
 import { useModel } from "./useModel";
 
-export const Header = ({ locale }: THeaderProps) => {
-	const { title } = useModel({
-		locale,
-	});
+export const Header = () => {
+	const { texts } = useModel();
 
 	return (
 		<Flex
@@ -17,15 +21,24 @@ export const Header = ({ locale }: THeaderProps) => {
 			marginBottom={{ base: 6, smDown: 4 }}
 			wrap={{ base: "wrap", smDown: "wrap-reverse" }}
 		>
-			<Heading as={"h1"} size={"3xl"}>
-				<Highlight query={title} styles={{ color: "teal.600" }}>
-					{title}
-				</Highlight>
-			</Heading>
-			<Group>
-				<AssetsAddingFlow />
-				<Menu />
-			</Group>
+			<HStack gap={"4"} align={"baseline"}>
+				<Heading size={"xl"}>
+					<Highlight query={texts.title} styles={{ color: "teal.solid" }}>
+						{texts.title}
+					</Highlight>
+				</Heading>
+				<HStack gap={"4"} display={{ base: "flex", smDown: "none" }}>
+					<ChakraLink asChild>
+						<NextLink href="/dashboard">{texts.dashboard}</NextLink>
+					</ChakraLink>
+					<ChakraLink asChild>
+						<NextLink href="/portfolio-management">
+							{texts.portfolioManagement}
+						</NextLink>
+					</ChakraLink>
+				</HStack>
+			</HStack>
+			<Menu />
 		</Flex>
 	);
 };

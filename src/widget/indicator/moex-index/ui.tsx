@@ -1,16 +1,15 @@
+import { Card } from "@chakra-ui/react";
 import { Indicator } from "entity/indicator";
-import { EIndicatorType } from "shared/types";
 import { useModel } from "./useModel";
 
 export const MoexIndex = () => {
 	const { title, value, isLoading } = useModel();
 
 	return (
-		<Indicator
-			title={title}
-			value={value}
-			isLoading={isLoading}
-			type={EIndicatorType.NUMBER}
-		/>
+		<Card.Root minWidth={"190px"} flex={"1"}>
+			<Card.Body>
+				<Indicator title={title} value={value} isLoading={isLoading} />
+			</Card.Body>
+		</Card.Root>
 	);
 };

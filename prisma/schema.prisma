@@ -7,54 +7,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum EAssetCategory {
+enum EAssetType {
   SHARE
   BOND
   METAL
   MONEY
 }
-enum EAssetName {
-  EQMX
-  OBLG
-  GOLD
-  SBMX
-  SBCB
-  SBGB
-  SBRB
-  SBGD
-  USD
-  RUB
-}
 enum ECurrency {
   USD
   RUB
 }
-
-model AssetRecord {
-  id              Int             @id @default(autoincrement())
-  portfolioId     Int      
-  portfolio       Portfolio       @relation(fields: [portfolioId], references: [id])
-  name            EAssetName
-  type            EAssetCategory   
-  quantity        Int    
-  price           Float    
-  currency        ECurrency
-}
-
 enum EPortfolioType {
   BROKERAGE
   MONEY
 }
-enum EPortfolioName {
-  VTB
-  SBER
-  MONEY
-}
 
-model Portfolio {
-  id          Int               @id @default(autoincrement())
+model Portfolio { 
+  id          Int               @id @default(autoincrement()) 
   createdAt   DateTime          @default(now())
-  name        EPortfolioName
-  type        EPortfolioType
-  assets      AssetRecord[]
+
+  name        String            @unique
+  type        EPortfolioType 
+  
+  assetsHistory AssetRecord[] 
+  currentAssets AssetCurrentState[] 
+} 
+
+model AssetRecord { 
+  id              Int             @id @default(autoincrement())
+  createdAt       DateTime        @default(now())
+
+  portfolioId     Int       
+  name            String      
+  type            EAssetType    
+  quantity        Int             
+  price           Float           
+  currency        ECurrency 
+
+  portfolio       Portfolio       @relation(fields: [portfolioId], references: [id]) 
+} 
+
+model AssetCurrentState {
+  id              Int             @id @default(autoincrement())
+  updatedAt       DateTime        @updatedAt
+
+  portfolioId     Int       
+  name            String       
+  quantity        Int             
+  price           Float           
+  currency        ECurrency       
+
+  portfolio       Portfolio       @relation(fields: [portfolioId], references: [id])
+
+  @@unique([portfolioId, name])
 }

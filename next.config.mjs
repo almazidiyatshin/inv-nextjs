@@ -20,6 +20,11 @@ const nextConfig = {
 				destination: '/en/dashboard',
 				permanent: false,
 			},
+			{
+				source: '/portfolio-management',
+				destination: '/en/portfolio-management',
+				permanent: false,
+			},
 		];
 	},
 };

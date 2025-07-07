@@ -1,10 +1,13 @@
 import { useTranslation } from "shared/lib";
-import type { TDashboardPageProps } from "./types";
 
-export const useModel = ({ locale }: TDashboardPageProps) => {
-	const t = useTranslation(locale);
+export const useModel = () => {
+	const t = useTranslation();
+
+	const texts = {
+		dashboard: t("dashboard"),
+	};
 
 	return {
-		t,
+		texts,
 	};
 };

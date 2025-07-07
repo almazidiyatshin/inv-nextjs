@@ -2,21 +2,36 @@ import type { EndpointBuilder } from "@reduxjs/toolkit/query";
 import type {
 	TAppBaseQuery,
 	TAppTagTypes,
-	TPostCreatePortfolioSnapshotApiParams,
-	TPostCreatePortfolioSnapshotApiReturn,
+	TPostCreateAssetApiParams,
+	TPostCreateAssetApiReturn,
+	TPostCreatePortfolioApiParams,
+	TPostCreatePortfolioApiReturn,
 } from "../types";
 
 export const postRequests = (
 	builder: EndpointBuilder<TAppBaseQuery, TAppTagTypes, "commonApi">,
 ) => ({
-	postCreatePortfolioSnapshot: builder.mutation<
-		TPostCreatePortfolioSnapshotApiReturn,
-		TPostCreatePortfolioSnapshotApiParams
+	postCreatePortfolio: builder.mutation<
+		TPostCreatePortfolioApiReturn,
+		TPostCreatePortfolioApiParams
 	>({
-		query: ({ body }) => ({
-			url: `/portfolio`,
+		query: (body) => ({
+			url: `/portfolios`,
 			method: "POST",
 			body,
 		}),
+		invalidatesTags: ["Portfolio"],
+	}),
+
+	postCreateAsset: builder.mutation<
+		TPostCreateAssetApiReturn,
+		TPostCreateAssetApiParams
+	>({
+		query: (body) => ({
+			url: `/assets`,
+			method: "POST",
+			body,
+		}),
+		invalidatesTags: ["Asset"],
 	}),
 });
