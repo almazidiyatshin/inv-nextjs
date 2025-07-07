@@ -1,3 +1,5 @@
+"use client";
+
 import { useCommonApi } from "shared/api";
 import { useTranslation } from "shared/lib";
 

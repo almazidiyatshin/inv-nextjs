@@ -1,3 +1,5 @@
+"use client";
+
 import { fetchCallbacks } from "entity/asset/config";
 import { useGetCandleData } from "entity/asset/hooks";
 import { useMemo } from "react";

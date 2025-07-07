@@ -1,3 +1,5 @@
+"use client";
+
 import { createListCollection } from "@chakra-ui/react";
 import { EPortfolioType } from "@prisma/client";
 import { useForm } from "react-hook-form";
