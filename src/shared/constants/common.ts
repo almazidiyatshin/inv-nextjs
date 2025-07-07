@@ -1,9 +1,9 @@
 export const etfIds = {
 	TBRU: "e8acd2fb-6de6-4ea4-9bfb-0daad9b2ed7b",
 	TMOS: "9654c2dd-6993-427e-80fa-04e80a1cf4da",
-	TLCB: "89cdfd81-5021-45f8-b3ac-96dffc2e70a2",
+	TLCB: "2f243f46-34ce-4d50-a931-c6f8a67eb758",
 	TGLD: "4c466956-d2ce-4a95-abb4-17947a65f18a",
-	TOFZ: "f2a4ebfb-40c7-43d3-bbfc-6a01855c4907",
+	TOFZ: "c5049184-ded4-49d0-8e14-bffefc40a223",
 };
 
 export const sharesIds = {
