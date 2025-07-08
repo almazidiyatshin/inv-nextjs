@@ -23,7 +23,7 @@ export const Menu = () => {
 
 	return (
 		<SessionProvider>
-			<Drawer.Root open={open}>
+			<Drawer.Root open={open} onInteractOutside={onClose}>
 				<Drawer.Trigger asChild>
 					<IconButton colorPalette={"teal"} variant={"ghost"} onClick={onOpen}>
 						<LuAlignJustify />
@@ -40,6 +40,7 @@ export const Menu = () => {
 								</Drawer.CloseTrigger>
 								<Drawer.Title>{texts.title}</Drawer.Title>
 							</Drawer.Header>
+
 							<Drawer.Body fontSize={"md"}>
 								<VStack gap={"4"} align={"flex-start"}>
 									<ChakraLink

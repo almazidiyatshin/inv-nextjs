@@ -27,7 +27,7 @@ export const UpdatePortfolioStateForm = ({
 		<form onSubmit={handleSubmit}>
 			<Fieldset.Root size="lg">
 				<Fieldset.Content>
-					<SimpleGrid columns={3} gap={"4"} width="full">
+					<SimpleGrid columns={3} gap={"8"} width="full">
 						<For each={assets}>
 							{({ name }) => (
 								<VStack key={name} align={"flex-start"}>

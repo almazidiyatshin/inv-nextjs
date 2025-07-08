@@ -23,9 +23,9 @@ export const PortfolioUpdateStateCard = () => {
 			<Card.Body gap="4">
 				<Card.Title mt="2">{texts.title}</Card.Title>
 				{isLoading ? (
-					<Stack gap={"8"}>
-						<Skeleton height={"8"} width="100%" />
-						<SimpleGrid columns={3} gap={"4"} width={"full"}>
+					<Stack gap={"6"}>
+						<Skeleton height={"8"} width="100%" marginTop={"2"} />
+						<SimpleGrid columns={3} gap={"8"} width={"full"} padding={"4"}>
 							{[1, 2, 3].map((item) => (
 								<Stack key={item}>
 									<Stack gap={"5"}>
@@ -41,7 +41,7 @@ export const PortfolioUpdateStateCard = () => {
 								</Stack>
 							))}
 						</SimpleGrid>
-						<Flex justify={"flex-end"}>
+						<Flex justify={"flex-end"} paddingX={"4"} paddingBottom={"4"}>
 							<Skeleton height={"10"} width="20%" />
 						</Flex>
 					</Stack>
@@ -66,7 +66,13 @@ export const PortfolioUpdateStateCard = () => {
 						{
 							<For each={Object.entries(data)}>
 								{([portfolioName, assets]) => (
-									<Tabs.Content key={portfolioName} value={portfolioName}>
+									<Tabs.Content
+										key={portfolioName}
+										value={portfolioName}
+										paddingTop={"8"}
+										paddingBottom={"4"}
+										paddingX={"4"}
+									>
 										<UpdatePortfolioStateForm assets={assets} />
 									</Tabs.Content>
 								)}
