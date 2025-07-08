@@ -2,15 +2,15 @@
 
 import { createListCollection } from "@chakra-ui/react";
 import { EAssetType } from "@prisma/client";
+import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useCommonApi } from "shared/api";
-import { useTranslation } from "shared/lib";
 import { toaster } from "shared/providers";
 import { EAddAssetsFormField, type TAddAssetsFormValues } from "./types";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const { data: portfolios } = useCommonApi.getPortfolios();
 	const [request, { isLoading }] = useCommonApi.postCreateAsset();
 	const {

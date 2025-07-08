@@ -1,8 +1,8 @@
+import { useTranslations } from "next-intl";
 import { useCommonApi } from "shared/api";
-import { useTranslation } from "shared/lib";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const { data, isLoading, isFetching } = useCommonApi.getPortfolios();
 
 	const texts = {

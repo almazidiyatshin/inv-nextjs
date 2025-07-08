@@ -1,3 +1,3 @@
 export { authOptions } from "./auth";
-export { useTranslation } from "./localization";
+export * from "./i18n";
 export { type RootState, store } from "./store";

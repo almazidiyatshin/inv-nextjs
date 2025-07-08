@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+import createNextIntlPlugin from 'next-intl/plugin';
+const withNextIntl = createNextIntlPlugin('src/shared/lib/i18n/request.ts');
+
 const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
-	},
-	i18n: {
-		locales: ['en-US'],
-		defaultLocale: 'en-US',
 	},
 	images: {
 		domains: ['avatars.githubusercontent.com'],
@@ -13,20 +13,6 @@ const nextConfig = {
 	experimental: {
 		optimizePackageImports: ['@chakra-ui/react'],
 	},
-	async redirects() {
-		return [
-			{
-				source: '/dashboard',
-				destination: '/en/dashboard',
-				permanent: false,
-			},
-			{
-				source: '/portfolio-management',
-				destination: '/en/portfolio-management',
-				permanent: false,
-			},
-		];
-	},
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

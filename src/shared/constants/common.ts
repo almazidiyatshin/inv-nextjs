@@ -32,8 +32,6 @@ export enum EAssetId {
 	SBER_GOLD = "sberGold",
 }
 
-export const LS_LOCALE_KEY = "dashboard:localeValue";
-
 export enum EValueType {
 	ASSET = "ASSET",
 	PORTFOLIO = "PORTFOLIO",

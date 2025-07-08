@@ -1,7 +1,7 @@
-import { useTranslation } from "shared/lib";
+import { useTranslations } from "next-intl";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
 
 	const texts = {
 		dashboard: t("dashboard"),

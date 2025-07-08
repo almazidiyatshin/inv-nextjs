@@ -7,7 +7,7 @@ import {
 	Highlight,
 	HStack,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
+import { Link } from "shared/lib/i18n/navigation";
 import { Menu } from "widget";
 import { useModel } from "./useModel";
 
@@ -35,7 +35,7 @@ export const Header = () => {
 							outline: "none",
 						}}
 					>
-						<NextLink href="/dashboard">{texts.dashboard}</NextLink>
+						<Link href="/dashboard">{texts.dashboard}</Link>
 					</ChakraLink>
 					<ChakraLink
 						asChild
@@ -46,9 +46,9 @@ export const Header = () => {
 							outline: "none",
 						}}
 					>
-						<NextLink href="/portfolio-management">
+						<Link href="/portfolio-management">
 							{texts.portfolioManagement}
-						</NextLink>
+						</Link>
 					</ChakraLink>
 				</HStack>
 			</HStack>

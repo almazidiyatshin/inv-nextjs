@@ -1,9 +1,9 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
-import { useTranslation } from "shared/lib";
+import { useTranslations } from "next-intl";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const pathname = usePathname();
 	const { open, onOpen, onClose } = useDisclosure();
 

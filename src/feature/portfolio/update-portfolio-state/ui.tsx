@@ -30,7 +30,7 @@ export const UpdatePortfolioStateForm = ({
 					<SimpleGrid columns={3} gap={"4"} width="full">
 						<For each={assets}>
 							{({ name }) => (
-								<VStack align={"flex-start"}>
+								<VStack key={name} align={"flex-start"}>
 									<Heading size={"md"}>{name}</Heading>
 									<Field.Root
 										invalid={

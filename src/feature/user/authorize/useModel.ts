@@ -1,10 +1,10 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useTranslation } from "shared/lib";
+import { useTranslations } from "next-intl";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const { status } = useSession();
 
 	const isAuthenticated = status === "authenticated";

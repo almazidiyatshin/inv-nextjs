@@ -12,9 +12,9 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { LanguageToggleButton, ToggleThemeButton } from "feature";
-import NextLink from "next/link";
 import { SessionProvider } from "next-auth/react";
 import { LuAlignJustify } from "react-icons/lu";
+import { Link } from "shared/lib/i18n/navigation";
 import { UserWidget } from "widget";
 import { useModel } from "./useModel";
 
@@ -50,7 +50,7 @@ export const Menu = () => {
 										}}
 										onClick={onClose}
 									>
-										<NextLink href="/dashboard">{texts.dashboard}</NextLink>
+										<Link href="/dashboard">{texts.dashboard}</Link>
 									</ChakraLink>
 									<ChakraLink
 										asChild
@@ -62,9 +62,9 @@ export const Menu = () => {
 										}}
 										onClick={onClose}
 									>
-										<NextLink href="/portfolio-management">
+										<Link href="/portfolio-management">
 											{texts.portfolioManagement}
-										</NextLink>
+										</Link>
 									</ChakraLink>
 								</VStack>
 							</Drawer.Body>

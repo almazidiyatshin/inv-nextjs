@@ -2,20 +2,17 @@
 
 import { fetchCallbacks } from "entity/asset/config";
 import { useGetCandleData } from "entity/asset/hooks";
+import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useTInvestApi } from "shared/api";
-import {
-	EAssetId,
-	ECandleInterval,
-	etfIds,
-	LS_LOCALE_KEY,
-} from "shared/constants";
-import { type RootState, useTranslation } from "shared/lib";
+import { EAssetId, ECandleInterval, etfIds } from "shared/constants";
+import type { RootState } from "shared/lib";
 import { toRub } from "shared/utils";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
+	const locale = useLocale();
 	const filters = useSelector(
 		(state: RootState) => state.filters[EAssetId.T_GOLD],
 	);
@@ -25,7 +22,6 @@ export const useModel = () => {
 		filters,
 		fetchCallbacks[EAssetId.T_GOLD],
 	);
-	const locale = localStorage.getItem(LS_LOCALE_KEY) || "en";
 
 	const { goldSum, tgldCount } = portfolioData || {};
 

@@ -2,14 +2,14 @@
 
 import { createListCollection } from "@chakra-ui/react";
 import { EPortfolioType } from "@prisma/client";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { useCommonApi } from "shared/api";
-import { useTranslation } from "shared/lib";
 import { toaster } from "shared/providers";
 import { EAddPortfolioFormField, type TAddPortfolioFormValues } from "./types";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const [request, { isLoading }] = useCommonApi.postCreatePortfolio();
 	const {
 		register,

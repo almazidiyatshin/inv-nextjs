@@ -1,12 +1,13 @@
 import type { CollapsibleOpenChangeDetails } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { ECandleInterval, EValueType } from "shared/constants";
-import { type RootState, useTranslation } from "shared/lib";
+import type { RootState } from "shared/lib";
 import type { TAssetFiltersProps } from "./types";
 
 export const useModel = ({ id }: Pick<TAssetFiltersProps, "id">) => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const filters = useSelector((state: RootState) => state.filters[id]);
 
 	const [isOpen, setIsOpen] = useState(false);

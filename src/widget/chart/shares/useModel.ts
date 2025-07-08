@@ -1,8 +1,8 @@
+import { useTranslations } from "next-intl";
 import { useTInvestApi } from "shared/api";
-import { useTranslation } from "shared/lib";
 
 export const useModel = () => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const { data, isLoading } = useTInvestApi.postPortfolio();
 
 	const { allSharesSum = 0, otherSharesSum = 0, tmosSum = 0 } = data || {};

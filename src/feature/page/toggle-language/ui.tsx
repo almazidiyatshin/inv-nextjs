@@ -4,14 +4,14 @@ import { Icon, Switch, Text } from "@chakra-ui/react";
 import { useModel } from "./useModel";
 
 export const LanguageToggleButton = () => {
-	const { currentLocale, handleChangeLocale } = useModel();
+	const { currentLocale, handleChange } = useModel();
 
 	return (
 		<Switch.Root
 			colorPalette={"teal"}
 			size="lg"
 			checked={currentLocale === "en"}
-			onCheckedChange={handleChangeLocale}
+			onCheckedChange={handleChange}
 		>
 			<Switch.HiddenInput />
 			<Switch.Control background={"gray.muted"}>

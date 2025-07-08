@@ -1,7 +1,7 @@
 import type { SegmentGroupValueChangeDetails } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 import { EAssetId, ECandleInterval } from "shared/constants";
-import { useTranslation } from "shared/lib";
 import {
 	setTBondsFilters,
 	setTGoldFilters,
@@ -22,7 +22,7 @@ const dispatchCallbacks = {
 };
 
 export const useModel = ({ id }: Pick<TAssetRangeFilterProps, "id">) => {
-	const t = useTranslation();
+	const t = useTranslations();
 	const dispatch = useDispatch();
 
 	const items = [
