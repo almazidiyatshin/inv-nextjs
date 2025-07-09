@@ -1,7 +1,6 @@
 "use client";
 
 import {
-	Link as ChakraLink,
 	CloseButton,
 	Drawer,
 	HStack,
@@ -14,12 +13,12 @@ import {
 import { LanguageToggleButton, ToggleThemeButton } from "feature";
 import { SessionProvider } from "next-auth/react";
 import { LuAlignJustify } from "react-icons/lu";
-import { Link } from "shared/lib/i18n/navigation";
+import { NavBar } from "shared/ui";
 import { UserWidget } from "widget";
 import { useModel } from "./useModel";
 
 export const Menu = () => {
-	const { texts, currentPath, open, onOpen, onClose } = useModel();
+	const { texts, open, onOpen, onClose } = useModel();
 
 	return (
 		<SessionProvider>
@@ -41,32 +40,9 @@ export const Menu = () => {
 								<Drawer.Title>{texts.title}</Drawer.Title>
 							</Drawer.Header>
 
-							<Drawer.Body fontSize={"md"}>
+							<Drawer.Body fontSize={"md"} onClick={onClose}>
 								<VStack gap={"4"} align={"flex-start"}>
-									<ChakraLink
-										asChild
-										fontWeight={currentPath === "dashboard" ? "bold" : "normal"}
-										_focus={{
-											outline: "none",
-										}}
-										onClick={onClose}
-									>
-										<Link href="/dashboard">{texts.dashboard}</Link>
-									</ChakraLink>
-									<ChakraLink
-										asChild
-										fontWeight={
-											currentPath === "portfolio-management" ? "bold" : "normal"
-										}
-										_focus={{
-											outline: "none",
-										}}
-										onClick={onClose}
-									>
-										<Link href="/portfolio-management">
-											{texts.portfolioManagement}
-										</Link>
-									</ChakraLink>
+									<NavBar />
 								</VStack>
 							</Drawer.Body>
 							<Drawer.Footer justifyContent={"start"}>

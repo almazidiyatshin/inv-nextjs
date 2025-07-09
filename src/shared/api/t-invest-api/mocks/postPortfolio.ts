@@ -23,7 +23,7 @@ const positionsData = [
 		figi: "TCS00A107597",
 		instrumentType: "etf",
 		positionUid: "e958867f-6592-42c5-8712-bb9476726e08",
-		instrumentUid: "89cdfd81-5021-45f8-b3ac-96dffc2e70a2",
+		instrumentUid: "2f243f46-34ce-4d50-a931-c6f8a67eb758",
 	},
 	{
 		figi: "BBG333333333",
@@ -59,7 +59,13 @@ const positionsData = [
 		figi: "TCS00A10A1L8",
 		instrumentType: "etf",
 		positionUid: "3d4bef30-458c-44d6-b7af-7922989e5092",
-		instrumentUid: "f2a4ebfb-40c7-43d3-bbfc-6a01855c4907",
+		instrumentUid: "c5049184-ded4-49d0-8e14-bffefc40a223",
+	},
+	{
+		figi: "TCS60A1039N1",
+		instrumentType: "etf",
+		positionUid: "68f44dc7-7ad2-4246-b1ba-c039b7703371",
+		instrumentUid: "e8acd2fb-6de6-4ea4-9bfb-0daad9b2ed7b",
 	},
 ];
 
