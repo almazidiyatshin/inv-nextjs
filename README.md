@@ -1,2 +1,2 @@
-Investment panel
-https://inv-nextjs.vercel.app/dashboard
+App
+https://investlyapp.vercel.app
