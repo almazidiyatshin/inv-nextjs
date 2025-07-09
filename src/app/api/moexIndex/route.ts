@@ -1,22 +1,18 @@
+import { getMoexIndex } from "app/server/services/moexIndex.service";
 import { NextResponse } from "next/server";
-import type { IMoexResponse } from "shared/api/t-invest-api/types";
 
 export async function GET() {
-	const res = await fetch(
-		"https://iss.moex.com/iss/engines/stock/markets/index/securities/IMOEX.json",
-		{
-			method: "GET",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
+	try {
+		const data = await getMoexIndex();
+
+		return NextResponse.json(data, { status: 200 });
+	} catch (error) {
+		return NextResponse.json(
+			{
+				message: "Ошибка при получении индекса MOEX",
+				error: error instanceof Error ? error.message : String(error),
 			},
-			cache: "no-store",
-		},
-	);
-
-	if (!res.ok) throw new Error("Failed fetch response MOEX");
-
-	const data: IMoexResponse = await res.json();
-
-	return NextResponse.json(data.marketdata.data[0].at(4));
+			{ status: 500 },
+		);
+	}
 }

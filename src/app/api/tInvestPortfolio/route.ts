@@ -1,58 +1,37 @@
+import { getPortfolio } from "app/server/services/tInvestPortfolio.service";
 import { NextResponse } from "next/server";
-import type { IPortfolioResponse } from "shared/api/t-invest-api/types";
 
 export async function POST() {
-	const iisResponse = await fetch(
-		"https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio",
-		{
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
-			},
-			body: JSON.stringify({
-				accountId: process.env.IIS_ACC_ID,
-				currency: "RUB",
-			}),
-			cache: "no-store",
-		},
-	);
-
-	const brokerageResponse = await fetch(
-		"https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio",
-		{
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
-			},
-			body: JSON.stringify({
-				accountId: process.env.BROKERAGE_ACC_ID,
-				currency: "RUB",
-			}),
-			cache: "no-store",
-		},
-	);
-
-	if (!iisResponse.ok || !brokerageResponse.ok) {
-		throw new Error("Failed fetch response T-Invest");
+	if (!process.env.IIS_ACC_ID || !process.env.BROKERAGE_ACC_ID) {
+		throw new Error("Отсутствует portfolioId для получения портфеля T-Invest");
 	}
 
-	const iisData: IPortfolioResponse = await iisResponse.json();
-	const brokerageData: IPortfolioResponse = await brokerageResponse.json();
+	try {
+		const iisPortfolio = await getPortfolio(process.env.IIS_ACC_ID);
+		const brokeragePortfolio = await getPortfolio(process.env.BROKERAGE_ACC_ID);
 
-	return NextResponse.json([
-		{
-			totalAmountShares: iisData.totalAmountShares,
-			expectedYield: iisData.expectedYield,
-			positions: iisData.positions,
-		},
-		{
-			totalAmountShares: brokerageData.totalAmountShares,
-			expectedYield: brokerageData.expectedYield,
-			positions: brokerageData.positions,
-		},
-	]);
+		return NextResponse.json(
+			[
+				{
+					totalAmountShares: iisPortfolio.totalAmountShares,
+					expectedYield: iisPortfolio.expectedYield,
+					positions: iisPortfolio.positions,
+				},
+				{
+					totalAmountShares: brokeragePortfolio.totalAmountShares,
+					expectedYield: brokeragePortfolio.expectedYield,
+					positions: brokeragePortfolio.positions,
+				},
+			],
+			{ status: 200 },
+		);
+	} catch (error) {
+		return NextResponse.json(
+			{
+				message: "Ошибка при получении портфелей T-Invest",
+				error: error instanceof Error ? error.message : String(error),
+			},
+			{ status: 500 },
+		);
+	}
 }

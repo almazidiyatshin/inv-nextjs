@@ -1,37 +1,19 @@
+import { getCandles } from "app/server/services/tInvestPortfolio.service";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-	const { searchParams } = request.nextUrl;
-	const to = searchParams.get("to");
-	const from = searchParams.get("from");
-	const instrumentId = searchParams.get("instrumentId");
-	const interval = searchParams.get("interval");
-	const limit = searchParams.get("limit");
+	try {
+		const { searchParams } = request.nextUrl;
+		const data = await getCandles(searchParams);
 
-	const res = await fetch(
-		"https://invest-public-api.tinkoff.ru/rest/tinkoff.public.invest.api.contract.v1.MarketDataService/GetCandles",
-		{
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+		return NextResponse.json(data, { status: 200 });
+	} catch (error) {
+		return NextResponse.json(
+			{
+				message: "Ошибка при получении исторических данных T-Invest",
+				error: error instanceof Error ? error.message : String(error),
 			},
-			body: JSON.stringify({
-				from,
-				to,
-				instrumentId,
-				interval,
-				candleSourceType: "CANDLE_SOURCE_UNSPECIFIED",
-				limit,
-			}),
-			cache: "no-cache",
-		},
-	);
-
-	if (!res.ok) throw new Error("Failed fetch response T-Invest");
-
-	const data = await res.json();
-
-	return NextResponse.json(data);
+			{ status: 500 },
+		);
+	}
 }
