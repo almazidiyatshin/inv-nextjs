@@ -37,7 +37,7 @@ export const AssetFilters = ({ id, isLoading }: TAssetFiltersProps) => {
 				textAlign={"end"}
 				onOpenChange={handleChange}
 			>
-				<Collapsible.Trigger position={"absolute"} top={"4"} right={"4"}>
+				<Collapsible.Trigger position={"absolute"} top={"2"} right={"2"}>
 					<Tooltip content={texts.filters}>
 						<IconButton
 							size={"sm"}

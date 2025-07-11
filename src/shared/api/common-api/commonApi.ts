@@ -18,6 +18,7 @@ export const useCommonApi = {
 	getMoexIndex: commonApi.useGetMoexIndexQuery,
 	getPortfolios: commonApi.useGetPortfoliosQuery,
 	getAssets: commonApi.useGetAssetsQuery,
+	getUsdExchangeRate: commonApi.useGetUsdExchangeRateQuery,
 
 	postCreatePortfolio: commonApi.usePostCreatePortfolioMutation,
 	postCreateAsset: commonApi.usePostCreateAssetMutation,

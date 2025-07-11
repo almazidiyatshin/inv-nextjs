@@ -55,3 +55,5 @@ export type TPutUpdateAssetApiParams = {
 	price: number;
 }[];
 export type TPutUpdateAssetApiReturn = AssetCurrentState[];
+
+export type TGetUsdExchangeRateApiReturn = string;

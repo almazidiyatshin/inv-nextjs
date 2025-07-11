@@ -1,4 +1,4 @@
-import { getIndicators } from "app/server/services/indicators.service";
+import { getIndicators } from "app/server/services/cbr.service";
 import { NextResponse } from "next/server";
 
 export async function GET() {

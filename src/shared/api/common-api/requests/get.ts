@@ -6,6 +6,7 @@ import type {
 	TGetIndicatorsApiReturn,
 	TGetMoexIndexApiReturn,
 	TGetPortfoliosApiReturn,
+	TGetUsdExchangeRateApiReturn,
 } from "../types";
 
 export const getRequests = (
@@ -13,7 +14,7 @@ export const getRequests = (
 ) => ({
 	getIndicators: builder.query<TGetIndicatorsApiReturn, void>({
 		query: () => ({
-			url: "/indicators",
+			url: "/cbr/indicators",
 		}),
 	}),
 	getMoexIndex: builder.query<TGetMoexIndexApiReturn, void>({
@@ -26,5 +27,10 @@ export const getRequests = (
 	getAssets: builder.query<TGetAssetsApiReturn, void>({
 		query: () => ({ url: "/assets" }),
 		providesTags: ["Asset"],
+	}),
+	getUsdExchangeRate: builder.query<TGetUsdExchangeRateApiReturn, void>({
+		query: () => ({
+			url: "/cbr/exchangeRate",
+		}),
 	}),
 });

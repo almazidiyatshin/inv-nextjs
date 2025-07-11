@@ -1,6 +1,6 @@
 import { Card, HStack } from "@chakra-ui/react";
 import { Indicator } from "entity";
-// import { AllValuesIndicatorFilter } from "feature";
+import { AllValuesIndicatorFilter } from "feature";
 import { useModel } from "./useModel";
 
 export const AllAssetsValue = () => {
@@ -11,7 +11,7 @@ export const AllAssetsValue = () => {
 			<Card.Body>
 				<HStack align={"start"}>
 					<Indicator title={title} value={value} isLoading={isLoading} />
-					{/* <AllValuesIndicatorFilter /> */}
+					<AllValuesIndicatorFilter />
 				</HStack>
 			</Card.Body>
 		</Card.Root>

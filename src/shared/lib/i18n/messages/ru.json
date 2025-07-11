@@ -1,5 +1,7 @@
 {
 	"allAssetsValue": "Все активы",
+	"tAssetsValue": "T активы",
+	"assetsValue": "активы",
 	"allSharesValue": "Все акции",
 	"allBondsValue": "Все облигации",
 	"goldValue": "Золото",
