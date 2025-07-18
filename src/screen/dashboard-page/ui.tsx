@@ -14,6 +14,7 @@ import {
 	InflationRate,
 	KeyRate,
 	MoexIndex,
+	UsdExchangeRate,
 } from "widget/indicator";
 import { useModel } from "./useModel";
 
@@ -31,6 +32,7 @@ export const DashboardPage = () => {
 				<MoexIndex />
 				<InflationRate />
 				<KeyRate />
+				<UsdExchangeRate />
 			</Flex>
 
 			<Flex wrap={"wrap"} gap={"4"} marginY={"4"}>

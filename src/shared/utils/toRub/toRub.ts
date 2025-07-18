@@ -1,7 +1,7 @@
-export const toRub = (value: number) =>
+export const toRub = (value: number, fractionDigits = 0) =>
 	value.toLocaleString("ru-RU", {
 		style: "currency",
 		currency: "RUB",
-		minimumFractionDigits: 0,
-		maximumFractionDigits: 0,
+		minimumFractionDigits: fractionDigits,
+		maximumFractionDigits: fractionDigits,
 	});
