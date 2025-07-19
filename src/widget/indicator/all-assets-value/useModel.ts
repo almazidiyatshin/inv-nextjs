@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -16,7 +15,6 @@ import {
 import { toRub } from "shared/utils";
 
 export const useModel = () => {
-	const t = useTranslations();
 	const { data: tInvestAssets, isLoading: isTInvestAssetsLoading } =
 		useTInvestApi.postPortfolio();
 	const { data: commonAssets = {}, isLoading: isCommonAssetsLoading } =
@@ -69,15 +67,10 @@ export const useModel = () => {
 		[EAllValuesIndicatorTypes.T]: tInvestTotalSum,
 		...portfolioTotalSums,
 	};
-	const titlesMap: Record<TAllValuesIndicatorType, string> = {
-		[EAllValuesIndicatorTypes.ALL]: t("allAssetsValue"),
-		[EAllValuesIndicatorTypes.T]: t("tAssetsValue"),
-	};
 
 	const value = toRub(Number(valuesMap[type].toFixed(0)));
 
 	return {
-		title: titlesMap[type] || `${type} ${t("assetsValue")}`,
 		value,
 		isLoading:
 			isTInvestAssetsLoading ||

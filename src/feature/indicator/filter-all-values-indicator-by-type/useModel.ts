@@ -1,14 +1,17 @@
 import type { MenuSelectionDetails } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { useCommonApi } from "shared/api";
 import {
 	EAllValuesIndicatorTypes,
 	type RootState,
 	setAllValuesIndicatorFilter,
+	type TAllValuesIndicatorType,
 } from "shared/lib";
 
 export const useModel = () => {
 	const dispatch = useDispatch();
+	const t = useTranslations();
 	const { data: commonAssets } = useCommonApi.getAssets();
 	const type = useSelector(
 		(state: RootState) => state.allValuesIndicatorFilters.type,
@@ -26,6 +29,11 @@ export const useModel = () => {
 	);
 	const options = [...baseOptions, ...commonOptions];
 
+	const titlesMap: Record<TAllValuesIndicatorType, string> = {
+		[EAllValuesIndicatorTypes.ALL]: t("allAssetsValue"),
+		[EAllValuesIndicatorTypes.T]: t("tAssetsValue"),
+	};
+
 	const handleSelect = (item: MenuSelectionDetails) => {
 		dispatch(
 			setAllValuesIndicatorFilter({
@@ -34,5 +42,10 @@ export const useModel = () => {
 		);
 	};
 
-	return { options, currentType: type, handleSelect };
+	return {
+		title: titlesMap[type] || `${type} ${t("assetsValue")}`,
+		options,
+		currentType: type,
+		handleSelect,
+	};
 };

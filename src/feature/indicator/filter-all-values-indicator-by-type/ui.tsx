@@ -1,22 +1,28 @@
-import { For, IconButton, Menu, Portal } from "@chakra-ui/react";
-import { LuSettings2 } from "react-icons/lu";
+import { Button, For, Menu, Portal } from "@chakra-ui/react";
+import { LuArrowDown } from "react-icons/lu";
+
 import { useModel } from "./useModel";
 
 export const AllValuesIndicatorFilter = () => {
-	const { options, currentType, handleSelect } = useModel();
+	const { title, options, currentType, handleSelect } = useModel();
 
 	return (
 		<Menu.Root onSelect={handleSelect}>
-			<Menu.Trigger position={"absolute"} right={"2%"} top={"6%"} asChild>
-				<IconButton
-					size={"sm"}
-					variant={"ghost"}
+			<Menu.Trigger asChild>
+				<Button
+					padding={0}
+					variant={"plain"}
+					fontSize={"lg"}
+					gap={2}
+					color={"gray.500"}
 					_focus={{
 						outline: "none",
 					}}
+					_hover={{ color: "gray.900" }}
 				>
-					<LuSettings2 />
-				</IconButton>
+					{title}
+					<LuArrowDown />
+				</Button>
 			</Menu.Trigger>
 			<Portal>
 				<Menu.Positioner>
