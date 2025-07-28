@@ -32,6 +32,7 @@ export const useModel = () => {
 		submit: t("submit"),
 		selectType: t("selectType"),
 		requiredError: t("requiredError"),
+		placeholder: t("portfolioNamePlaceholder"),
 	};
 
 	const options = createListCollection({
@@ -49,29 +50,30 @@ export const useModel = () => {
 			][0] as EPortfolioType,
 		};
 
-		try {
-			await request(body).unwrap();
+		await request(body)
+			.unwrap()
+			.then(() => {
+				toaster.create({
+					title: t("dataSubmitSuccess"),
+					type: "success",
+				});
 
-			toaster.create({
-				title: t("dataSubmitSuccess"),
-				type: "success",
+				reset(
+					{},
+					{
+						keepErrors: false,
+						keepDirty: false,
+						keepIsSubmitted: false,
+						keepTouched: false,
+					},
+				);
+			})
+			.catch(() => {
+				toaster.create({
+					title: t("dataSubmitFailure"),
+					type: "error",
+				});
 			});
-
-			reset(
-				{},
-				{
-					keepErrors: false,
-					keepDirty: false,
-					keepIsSubmitted: false,
-					keepTouched: false,
-				},
-			);
-		} catch {
-			toaster.create({
-				title: t("dataSubmitFailure"),
-				type: "error",
-			});
-		}
 	});
 
 	return { texts, options, register, control, isLoading, errors, handleSubmit };

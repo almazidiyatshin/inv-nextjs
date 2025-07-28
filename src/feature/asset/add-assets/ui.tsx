@@ -9,6 +9,7 @@ import {
 	Select,
 	SimpleGrid,
 } from "@chakra-ui/react";
+import { random } from "lodash";
 import { Controller } from "react-hook-form";
 import { EAddAssetsFormField } from "./types";
 import { useModel } from "./useModel";
@@ -35,6 +36,8 @@ export const AddAssetsForm = () => {
 								<Field.Label>{texts.name}</Field.Label>
 								<Input
 									size={"sm"}
+									placeholder={texts.placeholder}
+									_placeholder={{ fontStyle: "italic" }}
 									{...register(EAddAssetsFormField.NAME, {
 										required: texts.requiredError,
 									})}
@@ -54,6 +57,8 @@ export const AddAssetsForm = () => {
 									valueAsNumber: true,
 								})}
 								type="number"
+								placeholder={random(0, 100).toFixed(0)}
+								_placeholder={{ fontStyle: "italic" }}
 							/>
 							<Field.ErrorText>
 								{errors[EAddAssetsFormField.QUANTITY]?.message}
@@ -70,6 +75,8 @@ export const AddAssetsForm = () => {
 								})}
 								step="0.0001"
 								type="number"
+								placeholder={random(0, 100).toFixed(2)}
+								_placeholder={{ fontStyle: "italic" }}
 							/>
 							<Field.ErrorText>
 								{errors[EAddAssetsFormField.PRICE]?.message}

@@ -10,6 +10,7 @@ import {
 	SimpleGrid,
 	VStack,
 } from "@chakra-ui/react";
+import { random } from "lodash";
 import {
 	EUpdatePortfolioStateFormField,
 	type TUpdatePortfolioStateFormProps,
@@ -48,6 +49,8 @@ export const UpdatePortfolioStateForm = ({
 												},
 											)}
 											type="number"
+											placeholder={random(0, 100).toFixed(0)}
+											_placeholder={{ fontStyle: "italic" }}
 										/>
 										<Field.ErrorText>
 											{
@@ -74,6 +77,8 @@ export const UpdatePortfolioStateForm = ({
 											)}
 											step="0.0001"
 											type="number"
+											placeholder={random(0, 100, true).toFixed(2)}
+											_placeholder={{ fontStyle: "italic" }}
 										/>
 										<Field.ErrorText>
 											{

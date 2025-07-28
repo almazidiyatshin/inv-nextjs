@@ -3,7 +3,6 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import {
 	AllAssetsChart,
-	AllAssetsValue,
 	Bonds,
 	BondsChart,
 	Gold,
@@ -21,8 +20,6 @@ export const DashboardPage = () => {
 			<Heading as={"h1"} size={"4xl"}>
 				{texts.dashboard}
 			</Heading>
-
-			<AllAssetsValue />
 
 			<Indicators />
 

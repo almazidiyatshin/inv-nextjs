@@ -1,5 +1,4 @@
 import { Button, For, Menu, Portal } from "@chakra-ui/react";
-import { LuArrowDown } from "react-icons/lu";
 
 import { useModel } from "./useModel";
 
@@ -10,18 +9,20 @@ export const AllValuesIndicatorFilter = () => {
 		<Menu.Root onSelect={handleSelect}>
 			<Menu.Trigger asChild>
 				<Button
+					h={5}
 					padding={0}
 					variant={"plain"}
-					fontSize={"lg"}
+					fontSize={"sm"}
 					gap={2}
 					color={"gray.500"}
+					textDecoration={"underline dashed"}
+					textUnderlineOffset={4}
 					_focus={{
 						outline: "none",
 					}}
 					_hover={{ color: "gray.900" }}
 				>
 					{title}
-					<LuArrowDown />
 				</Button>
 			</Menu.Trigger>
 			<Portal>

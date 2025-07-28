@@ -17,6 +17,8 @@ export const AddPortfolioForm = () => {
 						<Field.Label>{texts.name}</Field.Label>
 						<Input
 							size={"sm"}
+							placeholder={texts.placeholder}
+							_placeholder={{ fontStyle: "italic" }}
 							{...register(EAddPortfolioFormField.NAME, {
 								required: texts.requiredError,
 							})}

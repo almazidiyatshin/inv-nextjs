@@ -41,6 +41,7 @@ export const useModel = () => {
 		selectType: t("selectType"),
 		selectPortfolio: t("selectPortfolio"),
 		requiredError: t("requiredError"),
+		placeholder: t("assetNamePlaceholder"),
 	};
 
 	const typeOptions = createListCollection({
@@ -76,29 +77,30 @@ export const useModel = () => {
 			[EAddAssetsFormField.PRICE]: data[EAddAssetsFormField.PRICE],
 		};
 
-		try {
-			await request(body).unwrap();
+		await request(body)
+			.unwrap()
+			.then(() => {
+				toaster.create({
+					title: t("dataSubmitSuccess"),
+					type: "success",
+				});
 
-			toaster.create({
-				title: t("dataSubmitSuccess"),
-				type: "success",
+				reset(
+					{},
+					{
+						keepErrors: false,
+						keepDirty: false,
+						keepIsSubmitted: false,
+						keepTouched: false,
+					},
+				);
+			})
+			.catch(() => {
+				toaster.create({
+					title: t("dataSubmitFailure"),
+					type: "error",
+				});
 			});
-
-			reset(
-				{},
-				{
-					keepErrors: false,
-					keepDirty: false,
-					keepIsSubmitted: false,
-					keepTouched: false,
-				},
-			);
-		} catch {
-			toaster.create({
-				title: t("dataSubmitFailure"),
-				type: "error",
-			});
-		}
 	});
 
 	return {

@@ -39,8 +39,8 @@ export const useModel = ({ assets }: TUpdatePortfolioStateFormProps) => {
 	});
 
 	const texts = {
-		quantity: t("quantity"),
-		price: t("price"),
+		quantity: t("totalQuantity"),
+		price: t("currentPrice"),
 		submit: t("submit"),
 		requiredError: t("requiredError"),
 	};
@@ -66,29 +66,30 @@ export const useModel = ({ assets }: TUpdatePortfolioStateFormProps) => {
 			return acc;
 		}, []);
 
-		try {
-			await request(body).unwrap();
+		await request(body)
+			.unwrap()
+			.then(() => {
+				toaster.create({
+					title: t("dataSubmitSuccess"),
+					type: "success",
+				});
 
-			toaster.create({
-				title: t("dataSubmitSuccess"),
-				type: "success",
+				reset(
+					{},
+					{
+						keepErrors: false,
+						keepDirty: false,
+						keepIsSubmitted: false,
+						keepTouched: false,
+					},
+				);
+			})
+			.catch(() => {
+				toaster.create({
+					title: t("dataSubmitFailure"),
+					type: "error",
+				});
 			});
-
-			reset(
-				{},
-				{
-					keepErrors: false,
-					keepDirty: false,
-					keepIsSubmitted: false,
-					keepTouched: false,
-				},
-			);
-		} catch {
-			toaster.create({
-				title: t("dataSubmitFailure"),
-				type: "error",
-			});
-		}
 	});
 
 	return { texts, register, isLoading, errors, handleSubmit };

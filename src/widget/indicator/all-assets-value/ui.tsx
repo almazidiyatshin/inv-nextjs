@@ -6,16 +6,16 @@ export const AllAssetsValue = () => {
 	const { value, isLoading } = useModel();
 
 	return (
-		<Card.Root variant={"subtle"} minWidth={"190px"}>
+		<Card.Root minWidth={"190px"} flex={"1"}>
 			<Card.Body>
-				<Stat.Root size={"lg"}>
-					<VStack align={"start"} gap={0}>
+				<Stat.Root>
+					<VStack align={"start"} gap={1}>
 						<AllValuesIndicatorFilter />
-						<Stat.ValueText width={"full"}>
+						<Stat.ValueText w={"full"}>
 							{isLoading ? (
-								<Skeleton marginTop={"2"} height="7" width="20%" />
+								<Skeleton marginTop={"3"} height="5" width="80%" />
 							) : (
-								<Text fontSize={"4xl"}>{value}</Text>
+								<Text>{value}</Text>
 							)}
 						</Stat.ValueText>
 					</VStack>
