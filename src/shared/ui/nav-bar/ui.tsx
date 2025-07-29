@@ -1,3 +1,5 @@
+"use client";
+
 import { Link as ChakraLink } from "@chakra-ui/react";
 import { Link } from "shared/lib/i18n/navigation";
 import { urls } from "./constants";

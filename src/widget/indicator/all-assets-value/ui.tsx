@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, Skeleton, Stat, Text, VStack } from "@chakra-ui/react";
 import { AllValuesIndicatorFilter } from "feature";
 import { useModel } from "./useModel";

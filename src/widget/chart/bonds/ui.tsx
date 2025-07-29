@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, Flex, SkeletonCircle, Stat } from "@chakra-ui/react";
 import { Chart } from "entity";
 import { useModel } from "./useModel";

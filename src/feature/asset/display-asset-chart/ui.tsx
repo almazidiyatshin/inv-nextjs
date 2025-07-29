@@ -1,3 +1,5 @@
+"use client";
+
 import { Chart } from "@chakra-ui/charts";
 import { Skeleton } from "@chakra-ui/react";
 import {

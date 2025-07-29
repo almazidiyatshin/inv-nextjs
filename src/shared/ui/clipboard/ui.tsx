@@ -1,3 +1,5 @@
+"use client";
+
 import { Clipboard as ChakraClipboard, IconButton } from "@chakra-ui/react";
 import { Tooltip } from "../tooltip";
 import type { TClipboardProps } from "./types";

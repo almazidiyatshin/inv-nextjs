@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, Text, VStack } from "@chakra-ui/react";
 import type { TUserProps } from "./types";
 import { useModel } from "./useModel";

@@ -1,3 +1,5 @@
+"use client";
+
 import { Flex } from "@chakra-ui/react";
 import { AllAssetsValue } from "../all-assets-value";
 import { InflationRate } from "../inflation-rate";
