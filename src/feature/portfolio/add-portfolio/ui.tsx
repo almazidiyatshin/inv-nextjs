@@ -14,7 +14,7 @@ export const AddPortfolioForm = () => {
 			<Fieldset.Root size="lg">
 				<Fieldset.Content>
 					<Field.Root invalid={!!errors[EAddPortfolioFormField.NAME]}>
-						<Field.Label>{texts.name}</Field.Label>
+						<Field.Label color={"gray.500"}>{texts.name}</Field.Label>
 						<Input
 							size={"sm"}
 							placeholder={texts.placeholder}
@@ -29,7 +29,7 @@ export const AddPortfolioForm = () => {
 					</Field.Root>
 
 					<Field.Root invalid={!!errors[EAddPortfolioFormField.TYPE]}>
-						<Field.Label>{texts.type}</Field.Label>
+						<Field.Label color={"gray.500"}>{texts.type}</Field.Label>
 						<Controller
 							control={control}
 							name={EAddPortfolioFormField.TYPE}

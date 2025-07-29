@@ -33,7 +33,7 @@ export const AddAssetsForm = () => {
 					<SimpleGrid columns={4} gap={"4"} width="full">
 						<GridItem colSpan={2}>
 							<Field.Root invalid={!!errors[EAddAssetsFormField.NAME]}>
-								<Field.Label>{texts.name}</Field.Label>
+								<Field.Label color={"gray.500"}>{texts.name}</Field.Label>
 								<Input
 									size={"sm"}
 									placeholder={texts.placeholder}
@@ -49,7 +49,7 @@ export const AddAssetsForm = () => {
 						</GridItem>
 
 						<Field.Root invalid={!!errors[EAddAssetsFormField.QUANTITY]}>
-							<Field.Label>{texts.quantity}</Field.Label>
+							<Field.Label color={"gray.500"}>{texts.quantity}</Field.Label>
 							<Input
 								size={"sm"}
 								{...register(EAddAssetsFormField.QUANTITY, {
@@ -66,7 +66,7 @@ export const AddAssetsForm = () => {
 						</Field.Root>
 
 						<Field.Root invalid={!!errors[EAddAssetsFormField.PRICE]}>
-							<Field.Label>{texts.price}</Field.Label>
+							<Field.Label color={"gray.500"}>{texts.price}</Field.Label>
 							<Input
 								size={"sm"}
 								{...register(EAddAssetsFormField.PRICE, {
@@ -86,7 +86,7 @@ export const AddAssetsForm = () => {
 
 					<SimpleGrid columns={2} gap={"4"} width="full">
 						<Field.Root invalid={!!errors[EAddAssetsFormField.TYPE]}>
-							<Field.Label>{texts.type}</Field.Label>
+							<Field.Label color={"gray.500"}>{texts.type}</Field.Label>
 							<Controller
 								control={control}
 								name={EAddAssetsFormField.TYPE}
@@ -130,7 +130,7 @@ export const AddAssetsForm = () => {
 						</Field.Root>
 
 						<Field.Root invalid={!!errors[EAddAssetsFormField.PORTFOLIO]}>
-							<Field.Label>{texts.portfolio}</Field.Label>
+							<Field.Label color={"gray.500"}>{texts.portfolio}</Field.Label>
 							<Controller
 								control={control}
 								name={EAddAssetsFormField.PORTFOLIO}

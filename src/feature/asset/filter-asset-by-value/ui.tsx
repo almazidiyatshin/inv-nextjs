@@ -15,7 +15,7 @@ export const AssetValueFilter = ({
 
 	return (
 		<Field.Root>
-			<Field.Label>{texts.label}</Field.Label>
+			<Field.Label color={"gray.500"}>{texts.label}</Field.Label>
 			<RadioGroup.Root
 				variant={"subtle"}
 				defaultValue={EValueType.ASSET}

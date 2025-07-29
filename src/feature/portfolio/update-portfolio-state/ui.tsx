@@ -38,7 +38,9 @@ export const UpdatePortfolioStateForm = ({
 											!!errors[name]?.[EUpdatePortfolioStateFormField.QUANTITY]
 										}
 									>
-										<Field.Label>{texts.quantity}</Field.Label>
+										<Field.Label color={"gray.500"}>
+											{texts.quantity}
+										</Field.Label>
 										<Input
 											size={"sm"}
 											{...register(
@@ -65,7 +67,7 @@ export const UpdatePortfolioStateForm = ({
 											!!errors[name]?.[EUpdatePortfolioStateFormField.PRICE]
 										}
 									>
-										<Field.Label>{texts.price}</Field.Label>
+										<Field.Label color={"gray.500"}>{texts.price}</Field.Label>
 										<Input
 											size={"sm"}
 											{...register(
