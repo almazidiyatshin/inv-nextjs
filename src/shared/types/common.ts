@@ -1,3 +1,5 @@
+import type { AssetCurrentState, EAssetType } from "@prisma/client";
+
 export type TAssetData = {
 	priceInt: number;
 	priceNano: number;
@@ -28,4 +30,9 @@ export type TPortfolioData = {
 	mgntCount: number;
 	nlmkCount: number;
 	expectedYield: number;
+};
+
+export type TAssetWithDetails = Omit<AssetCurrentState, "assetId"> & {
+	name: string;
+	type: EAssetType;
 };

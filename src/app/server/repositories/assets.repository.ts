@@ -1,4 +1,4 @@
-import { ECurrency } from "@prisma/client";
+import { type EAssetType, ECurrency } from "@prisma/client";
 import type { TPrismaExtendedClient } from "../lib";
 import type { TAssetDbInput } from "../types/assets";
 
@@ -10,23 +10,45 @@ export async function getAllAssetCurrentStates(prisma: TPrismaExtendedClient) {
 					name: true,
 				},
 			},
+			asset: {
+				// Добавляем включение данных актива
+				select: {
+					name: true,
+					type: true,
+				},
+			},
 		},
 	});
 
 	return assets;
 }
 
-export async function getByPortfolioIdAndName(
+export async function getOrCreateAsset(
 	prisma: TPrismaExtendedClient,
 	name: string,
+	type: EAssetType,
+) {
+	return await prisma.asset.upsert({
+		where: { name },
+		update: {},
+		create: { name, type },
+	});
+}
+
+export async function getByPortfolioIdAndAssetName(
+	prisma: TPrismaExtendedClient,
+	assetName: string,
 	portfolioId: number,
 ) {
-	const asset = await prisma.assetCurrentState.findUnique({
+	const asset = await prisma.assetCurrentState.findFirst({
 		where: {
-			portfolioId_name: {
-				portfolioId,
-				name,
+			portfolioId,
+			asset: {
+				name: assetName,
 			},
+		},
+		include: {
+			asset: true,
 		},
 	});
 
@@ -38,46 +60,43 @@ export async function save(prisma: TPrismaExtendedClient, data: TAssetDbInput) {
 
 	let assetType = type;
 
+	// Если тип не указан, пытаемся получить его из таблицы Asset напрямую
 	if (!assetType) {
-		const lastRecord = await prisma.assetRecord.findFirst({
-			where: {
-				portfolioId,
-				name,
-			},
-			orderBy: {
-				createdAt: "desc",
-			},
-			select: {
-				type: true,
-			},
+		const existingAsset = await prisma.asset.findUnique({
+			where: { name },
 		});
 
-		if (!lastRecord) {
+		if (!existingAsset) {
 			throw new Error(
-				`Невозможно обновить актив: нет предыдущей записи в AssetRecord для ${name}`,
+				`Невозможно обновить актив: актив "${name}" не найден в базе данных`,
 			);
 		}
 
-		assetType = lastRecord.type;
+		assetType = existingAsset.type;
 	}
 
+	// Получаем или создаем актив в таблице Asset
+	const asset = await getOrCreateAsset(prisma, name, assetType);
+
+	// Создаем записи в транзакции
 	const [_, newAssetCurrentState] = await prisma.$transaction([
+		// Создаем запись в истории
 		prisma.assetRecord.create({
 			data: {
 				portfolioId,
-				name,
-				type: assetType,
+				assetId: asset.id,
 				quantity,
 				price,
 				currency: ECurrency.RUB,
 			},
 		}),
 
+		// Обновляем или создаем текущее состояние
 		prisma.assetCurrentState.upsert({
 			where: {
-				portfolioId_name: {
+				portfolioId_assetId: {
 					portfolioId,
-					name,
+					assetId: asset.id,
 				},
 			},
 			update: {
@@ -87,10 +106,13 @@ export async function save(prisma: TPrismaExtendedClient, data: TAssetDbInput) {
 			},
 			create: {
 				portfolioId,
-				name,
+				assetId: asset.id,
 				quantity,
 				price,
 				currency: ECurrency.RUB,
+			},
+			include: {
+				asset: true, // Включаем данные об активе в ответ
 			},
 		}),
 	]);

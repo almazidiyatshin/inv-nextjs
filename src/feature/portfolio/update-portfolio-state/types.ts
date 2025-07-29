@@ -1,4 +1,4 @@
-import type { AssetCurrentState } from "@prisma/client";
+import type { TAssetWithDetails } from "shared/types";
 
 export enum EUpdatePortfolioStateFormField {
 	QUANTITY = "quantity",
@@ -13,5 +13,5 @@ export type TUpdatePortfolioStateFormValues = {
 };
 
 export type TUpdatePortfolioStateFormProps = {
-	assets: AssetCurrentState[];
+	assets: TAssetWithDetails[];
 };

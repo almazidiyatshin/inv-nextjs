@@ -1,11 +1,18 @@
 import { useTranslations } from "next-intl";
-import { useTInvestApi } from "shared/api";
+import { useCommonApi, useTInvestApi } from "shared/api";
 
 export const useModel = () => {
 	const t = useTranslations();
-	const { data, isLoading } = useTInvestApi.postPortfolio();
-
-	const { allSharesSum = 0, otherSharesSum = 0, tmosSum = 0 } = data || {};
+	const { data: tPortfolio, isLoading: isTPortfolioLoading } =
+		useTInvestApi.postPortfolio();
+	const { data: commonAssets = {}, isLoading: isCommonAssetsLoading } =
+		useCommonApi.getAssets();
+	console.log({ commonAssets });
+	const {
+		allSharesSum = 0,
+		otherSharesSum = 0,
+		tmosSum = 0,
+	} = tPortfolio || {};
 
 	const otherSharesPercent = (otherSharesSum / allSharesSum) * 100;
 	const tmosPercent = (tmosSum / allSharesSum) * 100;
@@ -19,5 +26,9 @@ export const useModel = () => {
 		{ name: "TMOS", value: tmosPercent, color: "teal.400" },
 	];
 
-	return { title: t("allSharesStatistics"), dataSet, isLoading };
+	return {
+		title: t("allSharesStatistics"),
+		dataSet,
+		isLoading: isTPortfolioLoading || isCommonAssetsLoading,
+	};
 };

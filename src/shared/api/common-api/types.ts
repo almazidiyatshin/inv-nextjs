@@ -8,7 +8,11 @@ import type {
 	FetchArgs,
 	FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import type { TIndicatorsData, TMoexIndex } from "shared/types";
+import type {
+	TAssetWithDetails,
+	TIndicatorsData,
+	TMoexIndex,
+} from "shared/types";
 
 export type TGetIndicatorsApiReturn = TIndicatorsData;
 export type TGetMoexIndexApiReturn = TMoexIndex;
@@ -19,7 +23,7 @@ export type TGetPortfoliosApiReturn = {
 	createdAt: Date;
 }[];
 
-export type TGetAssetsApiReturn = Record<string, AssetCurrentState[]>;
+export type TGetAssetsApiReturn = Record<string, TAssetWithDetails[]>;
 
 export type TPostCreatePortfolioApiParams = {
 	name: string;

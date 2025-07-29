@@ -31,20 +31,29 @@ model Portfolio {
   
   assetsHistory AssetRecord[] 
   currentAssets AssetCurrentState[] 
-} 
+}
+
+model Asset {
+  id          Int             @id @default(autoincrement())
+  name        String          @unique
+  type        EAssetType
+  
+  records     AssetRecord[]
+  currentStates AssetCurrentState[]
+}
 
 model AssetRecord { 
   id              Int             @id @default(autoincrement())
   createdAt       DateTime        @default(now())
 
   portfolioId     Int       
-  name            String      
-  type            EAssetType    
+  assetId         Int             
   quantity        Int             
   price           Float           
   currency        ECurrency 
 
-  portfolio       Portfolio       @relation(fields: [portfolioId], references: [id]) 
+  portfolio       Portfolio       @relation(fields: [portfolioId], references: [id])
+  asset           Asset           @relation(fields: [assetId], references: [id])
 } 
 
 model AssetCurrentState {
@@ -52,12 +61,13 @@ model AssetCurrentState {
   updatedAt       DateTime        @updatedAt
 
   portfolioId     Int       
-  name            String       
+  assetId         Int             
   quantity        Int             
   price           Float           
   currency        ECurrency       
 
   portfolio       Portfolio       @relation(fields: [portfolioId], references: [id])
+  asset           Asset           @relation(fields: [assetId], references: [id])
 
-  @@unique([portfolioId, name])
+  @@unique([portfolioId, assetId])  
 }
