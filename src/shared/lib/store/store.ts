@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { commonApi, tInvestApi } from "shared/api";
 import {
 	allValuesIndicatorFiltersReducer,
+	bondsChartReducer,
 	filtersReducer,
 	sharesChartReducer,
 } from "./slices";
@@ -14,6 +15,7 @@ export const store = configureStore({
 		filters: filtersReducer,
 		allValuesIndicatorFilters: allValuesIndicatorFiltersReducer,
 		sharesChartFilters: sharesChartReducer,
+		bondsChartFilters: bondsChartReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()

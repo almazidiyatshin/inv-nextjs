@@ -2,16 +2,19 @@
 
 import { Card, Flex, SkeletonCircle, Stat } from "@chakra-ui/react";
 import { Chart } from "entity";
+import { BondsChartFilter } from "feature/chart";
 import { useModel } from "./useModel";
 
 export const BondsChart = () => {
-	const { title, dataSet, isLoading } = useModel();
+	const { dataSet, isLoading } = useModel();
 
 	return (
 		<Card.Root minWidth={"xs"} flex={"1"}>
 			<Card.Header>
 				<Stat.Root>
-					<Stat.Label>{title}</Stat.Label>
+					<Stat.Label>
+						<BondsChartFilter />
+					</Stat.Label>
 				</Stat.Root>
 			</Card.Header>
 			<Card.Body>
