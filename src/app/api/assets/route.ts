@@ -1,3 +1,4 @@
+import type { EAssetType } from "@prisma/client";
 import {
 	createAsset,
 	getAllAssets,
@@ -9,15 +10,20 @@ import type {
 	TPutUpdateAssetApiParams,
 } from "shared/api";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
 	try {
-		const assetStates = await getAllAssets();
+		const { searchParams } = new URL(req.url);
+		const type = searchParams.get("type") as EAssetType | null;
+
+		const assetStates = await getAllAssets({
+			type,
+		});
 
 		return NextResponse.json(assetStates, { status: 200 });
 	} catch (error) {
 		return NextResponse.json(
 			{
-				message: "Ошибка при получении всех активов",
+				message: "Ошибка при получении активов",
 				error: error instanceof Error ? error.message : String(error),
 			},
 			{ status: 500 },

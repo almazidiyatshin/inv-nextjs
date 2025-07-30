@@ -7,3 +7,7 @@ export type TAssetDbInput = {
 	quantity: number;
 	price: number;
 };
+
+export type TGetAllAssetsParams = {
+	type?: EAssetType | null;
+};

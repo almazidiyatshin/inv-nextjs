@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { commonApi, tInvestApi } from "shared/api";
-import { allValuesIndicatorFiltersReducer, filtersReducer } from "./slices";
+import {
+	allValuesIndicatorFiltersReducer,
+	filtersReducer,
+	sharesChartReducer,
+} from "./slices";
 
 export const store = configureStore({
 	reducer: {
@@ -9,6 +13,7 @@ export const store = configureStore({
 		[commonApi.reducerPath]: commonApi.reducer,
 		filters: filtersReducer,
 		allValuesIndicatorFilters: allValuesIndicatorFiltersReducer,
+		sharesChartFilters: sharesChartReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()

@@ -21,7 +21,7 @@ export const useModel = () => {
 		useCommonApi.getAssets();
 	const { data: usdExchangeRate = "", isLoading: isUsdExchangeRateLoading } =
 		useCommonApi.getUsdExchangeRate();
-	console.log({ commonAssets });
+
 	const type = useSelector(
 		(state: RootState) => state.allValuesIndicatorFilters.type,
 	);

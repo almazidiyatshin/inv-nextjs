@@ -1,9 +1,23 @@
 import { type EAssetType, ECurrency } from "@prisma/client";
 import type { TPrismaExtendedClient } from "../lib";
-import type { TAssetDbInput } from "../types/assets";
+import type { TAssetDbInput, TGetAllAssetsParams } from "../types/assets";
 
-export async function getAllAssetCurrentStates(prisma: TPrismaExtendedClient) {
+export async function getAllAssetCurrentStates(
+	prisma: TPrismaExtendedClient,
+	options: TGetAllAssetsParams = {},
+) {
+	const { type } = options;
+
+	const whereClause: any = {};
+
+	if (type) {
+		whereClause.asset = {
+			type: type,
+		};
+	}
+
 	const assets = await prisma.assetCurrentState.findMany({
+		where: Object.keys(whereClause).length > 0 ? whereClause : undefined,
 		include: {
 			portfolio: {
 				select: {
@@ -11,13 +25,24 @@ export async function getAllAssetCurrentStates(prisma: TPrismaExtendedClient) {
 				},
 			},
 			asset: {
-				// Добавляем включение данных актива
 				select: {
 					name: true,
 					type: true,
 				},
 			},
 		},
+		orderBy: [
+			{
+				portfolio: {
+					name: "asc",
+				},
+			},
+			{
+				asset: {
+					name: "asc",
+				},
+			},
+		],
 	});
 
 	return assets;
@@ -60,7 +85,6 @@ export async function save(prisma: TPrismaExtendedClient, data: TAssetDbInput) {
 
 	let assetType = type;
 
-	// Если тип не указан, пытаемся получить его из таблицы Asset напрямую
 	if (!assetType) {
 		const existingAsset = await prisma.asset.findUnique({
 			where: { name },
@@ -75,10 +99,8 @@ export async function save(prisma: TPrismaExtendedClient, data: TAssetDbInput) {
 		assetType = existingAsset.type;
 	}
 
-	// Получаем или создаем актив в таблице Asset
 	const asset = await getOrCreateAsset(prisma, name, assetType);
 
-	// Создаем записи в транзакции
 	const [_, newAssetCurrentState] = await prisma.$transaction([
 		// Создаем запись в истории
 		prisma.assetRecord.create({
@@ -91,7 +113,6 @@ export async function save(prisma: TPrismaExtendedClient, data: TAssetDbInput) {
 			},
 		}),
 
-		// Обновляем или создаем текущее состояние
 		prisma.assetCurrentState.upsert({
 			where: {
 				portfolioId_assetId: {
@@ -112,7 +133,7 @@ export async function save(prisma: TPrismaExtendedClient, data: TAssetDbInput) {
 				currency: ECurrency.RUB,
 			},
 			include: {
-				asset: true, // Включаем данные об активе в ответ
+				asset: true,
 			},
 		}),
 	]);

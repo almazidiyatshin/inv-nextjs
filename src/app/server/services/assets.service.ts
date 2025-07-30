@@ -10,19 +10,22 @@ import {
 	getByPortfolioIdAndAssetName,
 	save,
 } from "../repositories/assets.repository";
+import type { TGetAllAssetsParams } from "../types/assets";
 
-export async function getAllAssets() {
+export async function getAllAssets(options: TGetAllAssetsParams = {}) {
 	const session = await getServerSession();
 	const isProd =
 		process.env.NODE_ENV === "production" &&
 		session?.user.email === process.env.ADMIN_EMAIL;
 	const prisma = getPrismaClient(isProd);
 
-	const assets = await getAllAssetCurrentStates(prisma);
+	const assets = await getAllAssetCurrentStates(prisma, options);
 
 	const grouped = assets.reduce<Record<string, TAssetWithDetails[]>>(
 		(acc, asset) => {
-			const portfolioName = asset.portfolio.name;
+			const portfolioName = (asset as any).portfolio?.name || "Unknown";
+			const assetName = (asset as any).asset?.name || "Unknown";
+			const assetType = (asset as any).asset?.type || "SHARE";
 
 			if (!acc[portfolioName]) {
 				acc[portfolioName] = [];
@@ -30,8 +33,8 @@ export async function getAllAssets() {
 
 			acc[portfolioName].push({
 				id: asset.id,
-				name: asset.asset.name,
-				type: asset.asset.type,
+				name: assetName,
+				type: assetType,
 				quantity: asset.quantity,
 				price: asset.price,
 				updatedAt: asset.updatedAt,

@@ -1,3 +1,4 @@
+import type { EAssetType } from "@prisma/client";
 import type { EndpointBuilder } from "@reduxjs/toolkit/query";
 import type {
 	TAppBaseQuery,
@@ -24,8 +25,9 @@ export const getRequests = (
 		query: () => ({ url: "/portfolios" }),
 		providesTags: ["Portfolio"],
 	}),
-	getAssets: builder.query<TGetAssetsApiReturn, void>({
-		query: () => ({ url: "/assets" }),
+	// biome-ignore lint/suspicious/noConfusingVoidType: <void needed>
+	getAssets: builder.query<TGetAssetsApiReturn, { type: EAssetType } | void>({
+		query: (params) => ({ url: "/assets", params: { type: params?.type } }),
 		providesTags: ["Asset"],
 	}),
 	getUsdExchangeRate: builder.query<TGetUsdExchangeRateApiReturn, void>({
