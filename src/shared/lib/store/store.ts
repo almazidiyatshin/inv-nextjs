@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { commonApi, tInvestApi } from "shared/api";
 import {
+	allAssetsChartReducer,
 	allValuesIndicatorFiltersReducer,
 	bondsChartReducer,
 	filtersReducer,
@@ -16,6 +17,7 @@ export const store = configureStore({
 		allValuesIndicatorFilters: allValuesIndicatorFiltersReducer,
 		sharesChartFilters: sharesChartReducer,
 		bondsChartFilters: bondsChartReducer,
+		allAssetsChartFilters: allAssetsChartReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()

@@ -68,7 +68,9 @@ export const useModel = () => {
 							const result = {
 								name: name,
 								value:
-									(price * quantity) / totalPortfolioBondsSums[portfolioName],
+									((price * quantity) /
+										totalPortfolioBondsSums[portfolioName]) *
+									100,
 								color: `teal.${colorIndex}`,
 							};
 

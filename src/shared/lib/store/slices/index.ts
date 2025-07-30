@@ -1,4 +1,5 @@
 export * from "./allValuesIndicatorfiltersSlice";
-export * from "./bondsChartFiltersSlice";
+export * from "./chart/allAssetsChartFiltersSlice";
+export * from "./chart/bondsChartFiltersSlice";
+export * from "./chart/sharesChartFiltersSlice";
 export * from "./filtersSlice";
-export * from "./sharesChartFiltersSlice";
