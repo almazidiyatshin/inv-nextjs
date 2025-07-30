@@ -7,6 +7,7 @@ import {
 	BondsChart,
 	Gold,
 	Indicators,
+	MoneyChart,
 	Shares,
 	SharesChart,
 } from "widget";
@@ -33,6 +34,7 @@ export const DashboardPage = () => {
 				<AllAssetsChart />
 				<SharesChart />
 				<BondsChart />
+				<MoneyChart />
 			</Flex>
 		</Flex>
 	);

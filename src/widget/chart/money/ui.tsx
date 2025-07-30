@@ -2,10 +2,10 @@
 
 import { Card, Flex, SkeletonCircle, Stat } from "@chakra-ui/react";
 import { Chart } from "entity";
-import { AllAssetsChartFilter } from "feature/chart";
+import { MoneyChartFilter } from "feature";
 import { useModel } from "./useModel";
 
-export const AllAssetsChart = () => {
+export const MoneyChart = () => {
 	const { dataSet, isLoading } = useModel();
 
 	return (
@@ -13,7 +13,7 @@ export const AllAssetsChart = () => {
 			<Card.Header>
 				<Stat.Root>
 					<Stat.Label>
-						<AllAssetsChartFilter />
+						<MoneyChartFilter />
 					</Stat.Label>
 				</Stat.Root>
 			</Card.Header>

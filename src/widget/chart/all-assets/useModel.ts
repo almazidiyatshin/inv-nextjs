@@ -21,8 +21,6 @@ export const useModel = () => {
 		useTInvestApi.postPortfolio();
 	const { data: commonAssets = {}, isLoading: isCommonAssetsLoading } =
 		useCommonApi.getAssets();
-	const { data: usdExchangeRate = "", isLoading: isUsdExchangeRateLoading } =
-		useCommonApi.getUsdExchangeRate();
 
 	const type = useSelector(
 		(state: RootState) => state.allAssetsChartFilters.type,
@@ -54,24 +52,22 @@ export const useModel = () => {
 				? Object.entries(stableCommonAssets).reduce<
 						Record<keyof typeof stableCommonAssets, number>
 					>((acc, [portfolioName, assets]) => {
-						acc[portfolioName] = assets.reduce(
-							(sum, { name, price, quantity }) => {
-								return (
-									sum +
-									(name === "USD"
-										? parseFloat(usdExchangeRate.replace(",", "."))
-										: price) *
-										quantity
-								);
-							},
-							0,
-						);
+						acc[portfolioName] = assets.reduce((sum, { price, quantity }) => {
+							return sum + price * quantity;
+						}, 0);
 
 						return acc;
 					}, {})
 				: {},
-		[stableCommonAssets, usdExchangeRate],
+		[stableCommonAssets],
 	);
+
+	const labelsMap: Record<EAssetType, string> = useDeepCompareMemoize({
+		[EAssetType.SHARE]: t("shares"),
+		[EAssetType.BOND]: t("bonds"),
+		[EAssetType.METAL]: t("gold"),
+		[EAssetType.MONEY]: t("money"),
+	});
 
 	const commonDataSets = useMemo(
 		() =>
@@ -82,13 +78,12 @@ export const useModel = () => {
 						let colorIndex = 500;
 
 						const result = assets.reduce<Record<string, TDataSet>>(
-							(acc, { name, type, price, quantity }) => {
+							(acc, { type, price, quantity }) => {
 								const value =
 									((price * quantity) / portfolioTotalSums[portfolioName]) *
 									100;
-								const key = type === EAssetType.MONEY ? name : type;
 
-								if (acc[key]) {
+								if (acc[type]) {
 									acc[type] = {
 										...acc[type],
 										value: acc[type].value + value,
@@ -97,8 +92,8 @@ export const useModel = () => {
 									return acc;
 								}
 
-								acc[key] = {
-									name: key,
+								acc[type] = {
+									name: labelsMap[type],
 									color: `teal.${colorIndex}`,
 									value,
 								};
@@ -109,14 +104,12 @@ export const useModel = () => {
 							{} as Record<EAssetType, TDataSet>,
 						);
 
-						console.log({ result });
-
 						acc[portfolioName] = Object.values(result);
 
 						return acc;
 					}, {})
 				: {},
-		[stableCommonAssets, portfolioTotalSums],
+		[stableCommonAssets, portfolioTotalSums, labelsMap],
 	);
 
 	const dataSets: Record<TAllAssetsChartType, TDataSet[]> = {
@@ -126,7 +119,6 @@ export const useModel = () => {
 
 	return {
 		dataSet: dataSets[type],
-		isLoading:
-			isPortfolioLoading || isCommonAssetsLoading || isUsdExchangeRateLoading,
+		isLoading: isPortfolioLoading || isCommonAssetsLoading,
 	};
 };

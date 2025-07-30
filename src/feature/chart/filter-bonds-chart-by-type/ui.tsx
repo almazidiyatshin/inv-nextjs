@@ -33,7 +33,7 @@ export const BondsChartFilter = () => {
 								<Menu.Item
 									key={value}
 									value={value}
-									disabled={currentType === value}
+									disabled={options.length < 2 || currentType === value}
 								>
 									{name}
 								</Menu.Item>

@@ -6,6 +6,7 @@ import {
 	allValuesIndicatorFiltersReducer,
 	bondsChartReducer,
 	filtersReducer,
+	moneyChartReducer,
 	sharesChartReducer,
 } from "./slices";
 
@@ -18,6 +19,7 @@ export const store = configureStore({
 		sharesChartFilters: sharesChartReducer,
 		bondsChartFilters: bondsChartReducer,
 		allAssetsChartFilters: allAssetsChartReducer,
+		moneyChartFilters: moneyChartReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware()

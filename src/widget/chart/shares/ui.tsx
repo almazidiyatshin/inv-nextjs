@@ -9,7 +9,7 @@ export const SharesChart = () => {
 	const { dataSet, isLoading } = useModel();
 
 	return (
-		<Card.Root minWidth={"xs"} flex={"1"}>
+		<Card.Root minWidth={"xl"} flex={"1"}>
 			<Card.Header>
 				<Stat.Root>
 					<Stat.Label>

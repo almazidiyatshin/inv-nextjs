@@ -17,12 +17,10 @@ export const useModel = () => {
 	});
 	const type = useSelector((state: RootState) => state.sharesChartFilters.type);
 
-	const baseOptions = [
-		{ name: `T ${t("shares").toLowerCase()}`, value: ESharesChartTypes.T },
-	];
+	const baseOptions = [{ name: "T", value: ESharesChartTypes.T }];
 	const commonOptions = Object.entries(commonAssets || {}).map(
 		([portfolioName]) => ({
-			name: `${portfolioName} ${t("shares").toLowerCase()}`,
+			name: `${portfolioName}`,
 			value: portfolioName,
 		}),
 	);

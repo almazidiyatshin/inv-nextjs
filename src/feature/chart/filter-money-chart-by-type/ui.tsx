@@ -2,7 +2,7 @@ import { Button, For, Menu, Portal } from "@chakra-ui/react";
 
 import { useModel } from "./useModel";
 
-export const AllAssetsChartFilter = () => {
+export const MoneyChartFilter = () => {
 	const { title, options, currentType, handleSelect } = useModel();
 
 	return (
