@@ -66,9 +66,7 @@ export const Indicators = () => {
 								transition="opacity 0.2s"
 								alignContent={"center"}
 								justifyItems={"start"}
-							>
-								<LuChevronLeft size="24" />
-							</Box>
+							/>
 						)}
 
 						{isRightGradientVisible && (
@@ -84,9 +82,7 @@ export const Indicators = () => {
 								transition="opacity 0.2s"
 								alignContent={"center"}
 								justifyItems={"end"}
-							>
-								<LuChevronRight size="24" />
-							</Box>
+							/>
 						)}
 					</Box>
 				</Card.Body>
