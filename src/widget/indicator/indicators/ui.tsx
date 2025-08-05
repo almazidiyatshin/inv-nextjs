@@ -1,7 +1,6 @@
 "use client";
 
 import { Box, Card, Flex, Separator } from "@chakra-ui/react";
-import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { AllAssetsValue } from "../all-assets-value";
 import { InflationRate } from "../inflation-rate";
 import { KeyRate } from "../key-rate";
