@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import { Chart as ChakraChart } from "@chakra-ui/charts";
-import { Cell, Pie, PieChart } from "recharts";
-import type { TChartProps } from "./types";
-import { useModel } from "./useModel";
+import { Chart as ChakraChart } from '@chakra-ui/charts';
+import { Cell, Pie, PieChart } from 'recharts';
+import type { TChartProps } from './types';
+import { useModel } from './useModel';
 
 export const Chart = ({ dataSet }: TChartProps) => {
+	console.log({ dataSet });
 	const { chart, buildLabel } = useModel({ dataSet });
 
 	return (
@@ -15,7 +16,7 @@ export const Chart = ({ dataSet }: TChartProps) => {
 					blendStroke
 					isAnimationActive={false}
 					data={chart.data}
-					dataKey={chart.key("value")}
+					dataKey={chart.key('value')}
 					outerRadius={80}
 					innerRadius={0}
 					labelLine={false}
