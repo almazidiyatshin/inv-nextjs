@@ -18,12 +18,20 @@ CREATE TABLE "Portfolio" (
 );
 
 -- CreateTable
+CREATE TABLE "Asset" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "type" "EAssetType" NOT NULL,
+
+    CONSTRAINT "Asset_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "AssetRecord" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "portfolioId" INTEGER NOT NULL,
-    "name" TEXT NOT NULL,
-    "type" "EAssetType" NOT NULL,
+    "assetId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "currency" "ECurrency" NOT NULL,
@@ -36,7 +44,7 @@ CREATE TABLE "AssetCurrentState" (
     "id" SERIAL NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "portfolioId" INTEGER NOT NULL,
-    "name" TEXT NOT NULL,
+    "assetId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "currency" "ECurrency" NOT NULL,
@@ -48,10 +56,19 @@ CREATE TABLE "AssetCurrentState" (
 CREATE UNIQUE INDEX "Portfolio_name_key" ON "Portfolio"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "AssetCurrentState_portfolioId_name_key" ON "AssetCurrentState"("portfolioId", "name");
+CREATE UNIQUE INDEX "Asset_name_key" ON "Asset"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "AssetCurrentState_portfolioId_assetId_key" ON "AssetCurrentState"("portfolioId", "assetId");
 
 -- AddForeignKey
 ALTER TABLE "AssetRecord" ADD CONSTRAINT "AssetRecord_portfolioId_fkey" FOREIGN KEY ("portfolioId") REFERENCES "Portfolio"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "AssetRecord" ADD CONSTRAINT "AssetRecord_assetId_fkey" FOREIGN KEY ("assetId") REFERENCES "Asset"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "AssetCurrentState" ADD CONSTRAINT "AssetCurrentState_portfolioId_fkey" FOREIGN KEY ("portfolioId") REFERENCES "Portfolio"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AssetCurrentState" ADD CONSTRAINT "AssetCurrentState_assetId_fkey" FOREIGN KEY ("assetId") REFERENCES "Asset"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
