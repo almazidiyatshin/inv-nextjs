@@ -22,7 +22,7 @@ export const Chart = ({ dataSet }: TChartProps) => {
 					labelLine={false}
 					label={buildLabel}
 				>
-					{chart.data.map(({ name, color }) => (
+					{chart.data?.map(({ name, color }) => (
 						<Cell key={name} fill={chart.color(color)} />
 					))}
 				</Pie>
